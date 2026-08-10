@@ -16,7 +16,8 @@ class HistoricalEventController extends Controller
     public function index()
     {
         $historicalEvents = HistoricalEvent::with(['period', 'historicalPeople'])->get();
-        return response()->json($historicalEvents);
+        return view('events.index', compact('historicalEvents'));
+
     }
 
     /**
@@ -26,10 +27,7 @@ class HistoricalEventController extends Controller
     {
         $periods = Period::all();
         $historicalPeople = HistoricalPerson::all();
-        return response()->json([   
-            'periods' => $periods,
-            'historicalPeople' => $historicalPeople,
-        ]);
+        return view('events.create', compact('periods', 'historicalPeople'));
     }
 
     /**
@@ -37,7 +35,7 @@ class HistoricalEventController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'year' => 'required|integer',
@@ -47,17 +45,18 @@ class HistoricalEventController extends Controller
             'historical_person_ids.*' => 'exists:historical_people,id',
         ]);
 
+        $data = $request->only(['title', 'description', 'year', 'period_id']);
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('images', 'public');
         }
 
         $historicalEvent = HistoricalEvent::create($data);
 
-        if (!empty($data['historical_person_ids'])) {
-            $historicalEvent->historicalPeople()->sync($data['historical_person_ids']);
+        if (!empty($request->input('historical_person_ids'))) {
+            $historicalEvent->historicalPeople()->attach($request->input('historical_person_ids'));
         }
 
-        return response()->json($historicalEvent, 201);
+        return redirect()->route('events.index')->with('success', 'Historical event created successfully.');
     }
 
     /**
@@ -76,12 +75,7 @@ class HistoricalEventController extends Controller
         $historicalEvent = HistoricalEvent::with(['period', 'historicalPeople'])->findOrFail($id);
         $periods = Period::all();
         $historicalPeople = HistoricalPerson::all();
-
-        return response()->json([
-            'historicalEvent' => $historicalEvent,
-            'periods' => $periods,
-            'historicalPeople' => $historicalPeople,
-        ]);
+        return view('events.edit', compact('historicalEvent', 'periods', 'historicalPeople'));
     }
 
     /**
@@ -91,7 +85,7 @@ class HistoricalEventController extends Controller
     {
         $historicalEvent = HistoricalEvent::findOrFail($id);
 
-        $data = $request->validate([
+        $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'year' => 'required|integer',
@@ -101,19 +95,20 @@ class HistoricalEventController extends Controller
             'historical_person_ids.*' => 'exists:historical_people,id',
         ]);
 
+        $data = $request->only(['title', 'description', 'year', 'period_id']);
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('images', 'public');
         }
 
         $historicalEvent->update($data);
 
-        if (!empty($data['historical_person_ids'])) {
-            $historicalEvent->historicalPeople()->sync($data['historical_person_ids']);
+        if (!empty($request->input('historical_person_ids'))) {
+            $historicalEvent->historicalPeople()->sync($request->input('historical_person_ids'));
         } else {
             $historicalEvent->historicalPeople()->detach();
         }
 
-        return response()->json($historicalEvent);
+        return redirect()->route('events.index')->with('success', 'Historical event updated successfully.');
     }
 
     /**
@@ -123,8 +118,7 @@ class HistoricalEventController extends Controller
     {
         // delete event
         $historicalEvent = HistoricalEvent::findOrFail($id);
-        $historicalEvent->historicalPeople()->detach(); 
-        $historicalEvent->delete();
-        return response()->json(null, 204);        
+        $historicalEvent->historicalPeople()->detach(); // Detach related historical people
+        $historicalEvent->delete();       
     }
 }
