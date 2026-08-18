@@ -51,11 +51,19 @@
 
                         <td class="text-end">
 
+                            {{-- SHOW --}}
+                            <a href="{{ route('periods.show', $period->id) }}"
+                                class="btn btn-outline-light btn-sm me-2">
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                            {{-- EDIT --}}
                             <a href="{{ route('periods.edit', $period->id) }}"
                                 class="btn btn-outline-warning btn-sm me-2">
                                 <i class="bi bi-pencil"></i>
                             </a>
 
+                            {{-- DELETE --}}
                             <form action="{{ route('periods.destroy', $period->id) }}"
                                 method="POST"
                                 class="d-inline">
@@ -69,6 +77,7 @@
                             </form>
 
                         </td>
+
                     </tr>
                     @endforeach
 

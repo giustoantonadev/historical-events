@@ -10,6 +10,6 @@ class Period extends Model
 
     public function historicalEvents()
     {
-        return $this->hasMany(HistoricalEvent::class);
+        return $this->hasMany(HistoricalEvent::class)->orderBy('year', 'asc');
     }
 }

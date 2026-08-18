@@ -15,9 +15,8 @@ class HistoricalEventController extends Controller
      */
     public function index()
     {
-        $historicalEvents = HistoricalEvent::with(['period', 'historicalPeople'])->get();
+        $historicalEvents = HistoricalEvent::orderBy('year', 'asc')->get();
         return view('events.index', compact('historicalEvents'));
-
     }
 
     /**

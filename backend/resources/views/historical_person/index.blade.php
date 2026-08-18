@@ -8,17 +8,16 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="fw-bold text-light">
-                <i class="bi bi-people me-2"></i> Personaggi Storici
+                <i class="bi bi-people-fill me-2"></i> Personaggi Storici
             </h1>
             <p class="text-light opacity-75">
-                Gestisci tutti i personaggi presenti nel tuo archivio storico.
+                Gestisci tutti i personaggi del tuo archivio storico.
             </p>
         </div>
 
         <a href="{{ route('historical-people.create') }}" class="btn btn-primary btn-lg">
             <i class="bi bi-plus-circle me-2"></i> Nuovo Personaggio
         </a>
-
     </div>
 
     {{-- CARD WRAPPER --}}
@@ -29,46 +28,64 @@
             <table class="table table-dark table-hover align-middle rounded-3 overflow-hidden">
                 <thead>
                     <tr class="text-light">
+                        <th style="width: 80px;">Immagine</th>
                         <th>Nome</th>
+                        <th>Anno di nascita</th>
                         <th>Biografia</th>
-                        <th>Ritratto</th>
-                        <th class="text-end">Azioni</th>
+                        <th class="text-end" style="width: 220px;">Azioni</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-                    @foreach ($historical_person as $person)
+                    @foreach ($historicalPeople as $person)
                     <tr>
-                        <td class="fw-bold text-light">{{ $person->name }}</td>
 
-                        <td class="text-light opacity-75" style="max-width: 300px;">
-                            {{ Str::limit($person->biography, 120) }}
-                        </td>
-
+                        {{-- IMAGE --}}
                         <td>
                             @if($person->portrait)
                             <img src="{{ asset('storage/' . $person->portrait) }}"
-                                alt="{{ $person->name }}"
                                 class="rounded"
                                 style="width: 60px; height: 60px; object-fit: cover;">
                             @else
-                            <span class="text-light opacity-50">Nessuna immagine</span>
+                            <div class="bg-secondary rounded d-flex align-items-center justify-content-center"
+                                style="width: 60px; height: 60px;">
+                                <i class="bi bi-person-fill text-light" style="font-size: 1.8rem;"></i>
+                            </div>
                             @endif
                         </td>
 
+                        {{-- NAME --}}
+                        <td class="fw-bold text-light">
+                            {{ $person->name }}
+                        </td>
+
+                        {{-- BIRTH YEAR --}}
+                        <td class="text-light opacity-75">
+                            {{ $person->birth_year }}
+                        </td>
+
+                        {{-- BIOGRAPHY --}}
+                        <td class="text-light opacity-75">
+                            {{ Str::limit($person->biography, 120) }}
+                        </td>
+
+                        {{-- ACTIONS --}}
                         <td class="text-end">
 
+                            {{-- SHOW --}}
                             <a href="{{ route('historical-people.show', $person->id) }}"
                                 class="btn btn-outline-light btn-sm me-2">
                                 <i class="bi bi-eye"></i>
                             </a>
 
+                            {{-- EDIT --}}
                             <a href="{{ route('historical-people.edit', $person->id) }}"
                                 class="btn btn-outline-warning btn-sm me-2">
                                 <i class="bi bi-pencil"></i>
                             </a>
 
+                            {{-- DELETE --}}
                             <form action="{{ route('historical-people.destroy', $person->id) }}"
                                 method="POST"
                                 class="d-inline">
@@ -76,12 +93,13 @@
                                 @method('DELETE')
 
                                 <button class="btn btn-outline-danger btn-sm"
-                                    onclick="return confirm('Vuoi eliminare questo personaggio?')">
+                                    onclick="return confirm('Sei sicuro di voler eliminare questo personaggio?')">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </form>
 
                         </td>
+
                     </tr>
                     @endforeach
 

@@ -12,61 +12,50 @@ class HistoricalPersonController extends Controller
      */
     public function index()
     {
-        $historicalPeople = HistoricalPerson::all();
-        return view('historical-people.index', compact('historicalPeople'));
+        $historicalPeople = HistoricalPerson::orderBy('birth_year', 'asc')->get();
+        return view('historical_person.index', compact('historicalPeople'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('historical-people.create');
+        return view('historical_person.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'biography' => 'nullable|string',
+            'birth_year' => 'nullable|integer',
             'portrait' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $historicalPerson = new HistoricalPerson();
         $historicalPerson->name = $request->input('name');
         $historicalPerson->biography = $request->input('biography');
+        $historicalPerson->birth_year = $request->input('birth_year');
         if ($request->hasFile('portrait')) {
             $historicalPerson->portrait = $request->file('portrait')->store('portraits', 'public');
         }
+
         $historicalPerson->save();
 
-        return redirect()->route('historical-people.index')->with('success', 'Historical person created successfully.');
+        return redirect()->route('historical-people.index')
+            ->with('success', 'Historical person created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $historicalPerson = HistoricalPerson::with('historicalEvents')->findOrFail($id);
-        return view('historical-people.show', compact('historicalPerson'));
+        return view('historical_person.show', compact('historicalPerson'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
-        return view('historical-people.edit', compact('historicalPerson'));
+        return view('historical_person.edit', compact('historicalPerson'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
@@ -74,6 +63,7 @@ class HistoricalPersonController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'biography' => 'nullable|string',
+            'birth_year' => 'nullable|integer',
             'portrait' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -83,16 +73,16 @@ class HistoricalPersonController extends Controller
 
         $historicalPerson->update($data);
 
-        return redirect()->route('historical-people.index')->with('success', 'Historical person updated successfully.');
+        return redirect()->route('historical-people.index')
+            ->with('success', 'Historical person updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
         $historicalPerson->delete();
-        return redirect()->route('historical-people.index')->with('success', 'Historical person deleted successfully.');
+
+        return redirect()->route('historical-people.index')
+            ->with('success', 'Historical person deleted successfully.');
     }
 }

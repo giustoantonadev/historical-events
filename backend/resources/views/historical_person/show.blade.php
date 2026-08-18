@@ -5,91 +5,87 @@
 <div class="container py-4">
 
     {{-- HEADER --}}
-    <div class="mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="fw-bold text-light">
-            <i class="bi bi-person-badge me-2"></i> {{ $historical_person->name }}
+            <i class="bi bi-person-fill me-2"></i> {{ $historicalPerson->name }}
         </h1>
-        <p class="text-light opacity-75">
-            Dettagli completi del personaggio storico selezionato.
-        </p>
+
+        <a href="{{ route('historical-people.index') }}" class="btn btn-outline-light btn-lg">
+            <i class="bi bi-arrow-left me-2"></i> Torna alla Lista
+        </a>
     </div>
 
     {{-- CARD --}}
-    <div class="card bg-dark border-0 shadow-lg rounded-4 p-4">
+    <div class="card bg-dark border-0 shadow-lg rounded-4">
+        <div class="card-body p-4">
 
-        <div class="row g-4 align-items-start">
+            <div class="row">
 
-            {{-- IMMAGINE A SINISTRA --}}
-            <div class="col-md-4">
+                {{-- LEFT COLUMN: IMAGE --}}
+                <div class="col-md-4 d-flex justify-content-center mb-4 mb-md-0">
 
-                @if($historical_person->portrait)
-                    <img src="{{ asset('storage/' . $historical_person->portrait) }}"
-                         class="img-fluid rounded-4 shadow-lg"
-                         style="width: 100%; height: 100%; object-fit: cover;">
-                @else
-                    <div class="text-center py-4 text-light opacity-50 border rounded-4">
-                        <i class="bi bi-image fs-1 d-block mb-2"></i>
-                        Nessun ritratto disponibile
+                    @if($historicalPerson->portrait)
+                    <img src="{{ asset('storage/' . $historicalPerson->portrait) }}"
+                        class="rounded-4 shadow-lg"
+                        style="width: 100%; max-width: 280px; height: auto; object-fit: cover;">
+                    @else
+                    <div class="bg-secondary rounded-4 d-flex align-items-center justify-content-center shadow-lg"
+                        style="width: 100%; max-width: 280px; height: 280px;">
+                        <i class="bi bi-person-fill text-light" style="font-size: 5rem;"></i>
                     </div>
-                @endif
+                    @endif
 
-            </div>
+                </div>
 
-            {{-- TESTO A DESTRA --}}
-            <div class="col-md-8">
+                {{-- RIGHT COLUMN: DETAILS --}}
+                <div class="col-md-8 text-light">
 
-                {{-- BIOGRAFIA --}}
-                <h3 class="text-light mb-3">Biografia</h3>
-                <p class="text-light opacity-75 fs-5">
-                    {{ $historical_person->biography }}
-                </p>
+                    <h3 class="fw-bold mb-3">Biografia</h3>
 
-                {{-- EVENTI COLLEGATI --}}
-                <h4 class="text-light mt-4 mb-3">Eventi Collegati</h4>
+                    <p class="opacity-75 fs-5">
+                        {{ $historicalPerson->biography }}
+                    </p>
 
-                @if($historical_person->historicalEvents->count() > 0)
-                    @foreach ($historical_person->historicalEvents as $event)
-                        <a href="{{ route('events.show', $event->id) }}"
-                           class="badge bg-primary fs-6 me-1 mb-2 text-decoration-none">
-                            {{ $event->title }}
-                        </a>
-                    @endforeach
-                @else
-                    <p class="text-light opacity-50">Nessun evento collegato.</p>
-                @endif
+                    <hr class="border-secondary my-4">
 
-                {{-- BOTTONI --}}
-                <div class="d-flex justify-content-between mt-5">
+                    {{-- BIRTH YEAR --}}
+                    <h3 class="fw-bold text-light mb-3">Anno di nascita</h3>
+                    <p class="opacity-75 fs-5">{{ $historicalPerson->birth_year }}</p>
 
-                    <a href="{{ route('historical-people.index') }}" class="btn btn-outline-light">
-                        <i class="bi bi-arrow-left me-1"></i> Torna ai Personaggi
-                    </a>
 
-                    <div>
-                        <a href="{{ route('historical-people.edit', $historical_person->id) }}"
-                           class="btn btn-warning me-2">
-                            <i class="bi bi-pencil me-1"></i> Modifica
-                        </a>
+                    {{-- RELATED EVENTS --}}
+                    <h4 class="fw-bold mb-3">
+                        <i class="bi bi-calendar-event me-2"></i> Eventi Storici Collegati
+                    </h4>
 
-                        <form action="{{ route('historical-people.destroy', $historical_person->id) }}"
-                              method="POST"
-                              class="d-inline">
-                            @csrf
-                            @method('DELETE')
+                    @if($historicalPerson->historicalEvents->count() > 0)
 
-                            <button class="btn btn-danger"
-                                    onclick="return confirm('Vuoi eliminare questo personaggio?')">
-                                <i class="bi bi-trash me-1"></i> Elimina
-                            </button>
-                        </form>
-                    </div>
+                    <ul class="list-group bg-dark">
+
+                        @foreach($historicalPerson->historicalEvents as $event)
+                        <li class="list-group-item bg-secondary text-light border-0 mb-2 rounded-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">{{ $event->title }}</span>
+
+                                <a href="{{ route('events.show', $event->id) }}"
+                                    class="btn btn-outline-light btn-sm">
+                                    <i class="bi bi-eye"></i> Apri
+                                </a>
+                            </div>
+                        </li>
+                        @endforeach
+
+                    </ul>
+
+                    @else
+                    <p class="opacity-50">Nessun evento collegato.</p>
+                    @endif
 
                 </div>
 
             </div>
 
         </div>
-
     </div>
 
 </div>

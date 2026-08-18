@@ -49,7 +49,8 @@ class PeriodController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $period = Period::with('historicalEvents')->findOrFail($id);
+        return view('period.show', compact('period'));
     }
 
     /**
