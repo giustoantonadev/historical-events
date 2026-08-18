@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/eventlist.css";
+import EventCard from "../components/EventCard";
 
 export default function EventList() {
   const [events, setEvents] = useState([]);
@@ -22,36 +23,11 @@ export default function EventList() {
 
       {/* GRID */}
       <div className="row g-4">
+
         {events.map(event => (
-          <div key={event.id} className="col-md-6 col-lg-4">
-
-            <div className="event-card">
-
-              {/* ICONA */}
-              <div className="event-icon">
-                <i className="bi bi-hourglass-split"></i>
-              </div>
-
-              {/* TITOLO */}
-              <h4 className="event-title">{event.title}</h4>
-
-              {/* ANNO */}
-              <p className="event-year">
-                <strong>Anno:</strong> {event.year}
-              </p>
-
-              {/* BUTTON */}
-              <Link
-                to={`/events/${event.id}`}
-                className="event-btn"
-              >
-                Dettagli
-              </Link>
-
-            </div>
-
-          </div>
+          <EventCard key={event.id} event={event} />
         ))}
+
       </div>
     </div>
   );

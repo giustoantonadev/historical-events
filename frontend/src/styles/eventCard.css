@@ -1,0 +1,74 @@
+.event-card {
+  background: #f4e7c5; /* pergamena chiara */
+  border: 2px solid #cfa34a; /* oro */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px rgba(0,0,0,0.25);
+}
+
+.event-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.event-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.event-icon {
+  font-size: 28px;
+  color: #8b5e2b; /* bronzo */
+}
+
+.event-title {
+  font-size: 24px;
+  color: #5a3e1b; /* marrone storico */
+}
+
+.event-year {
+  margin-top: 8px;
+  color: #8b5e2b;
+  font-size: 18px;
+}
+
+.event-desc {
+  margin-top: 10px;
+  color: #3a2a1a;
+  opacity: 0.9;
+}
+
+.event-people {
+  margin-top: 10px;
+}
+
+.event-person {
+  background: rgba(0,0,0,0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-right: 6px;
+  color: #5a3e1b;
+}
+
+.event-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #4aa3ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.event-link:hover {
+  text-decoration: underline;
+}
