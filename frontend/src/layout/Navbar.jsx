@@ -1,38 +1,58 @@
+import { Link } from "react-router-dom";
+import "../styles/navbar.css";
+
 export default function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg parchment-navbar shadow-sm">
+    <>
+      <nav className="navbar navbar-expand-lg premium-navbar">
+        <div className="container">
 
-      <div className="container-fluid px-4">
+          {/* BRAND */}
+          <Link className="navbar-brand" to="/">
+            <i className="bi bi-hourglass-split brand-icon"></i>
+            Archivio Storico
+          </Link>
 
-        {/* BRAND */}
-        <a className="navbar-brand d-flex align-items-center fw-bold fs-2 parchment-title" href="/">
-          <i className="bi bi-book me-2 fs-2"></i>
-          Historical Events
-        </a>
+          {/* TOGGLER */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-        {/* TOGGLER */}
-        <button
-          className="navbar-toggler parchment-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navMenu"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+          {/* MENU */}
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto">
 
-        {/* MENU */}
-        <div className="collapse navbar-collapse" id="navMenu">
-          <ul className="navbar-nav ms-auto fs-5 parchment-links">
-            <li className="nav-item">
-              <a className="nav-link parchment-link" href="/">Eventi</a>
-            </li>
-          </ul>
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  Eventi
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link className="nav-link" to="/people">
+                  Personaggi
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link className="nav-link" to="/periods">
+                  Periodi Storici
+                </Link>
+              </li>
+
+            </ul>
+          </div>
+
         </div>
+      </nav>
 
-      </div>
-
-      {/* DECORATIVE BORDER */}
-      <div className="parchment-border"></div>
-    </nav>
+      {/* DECORATIVE BAR */}
+      <div className="navbar-decor"></div>
+    </>
   );
 }

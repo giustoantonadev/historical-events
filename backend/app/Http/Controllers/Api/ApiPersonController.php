@@ -10,7 +10,7 @@ class ApiPersonController extends Controller
     public function index()
     {
         return HistoricalPerson::with(['historicalEvents'])
-            ->orderBy('year', 'asc')
+            ->orderBy('birth_year', 'asc')
             ->get();
     }
     public function show($id)

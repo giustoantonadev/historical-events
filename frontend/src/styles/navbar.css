@@ -1,0 +1,78 @@
+/* ================================
+   🌟 NAVBAR PERGAMENA PREMIUM
+   ================================ */
+
+.premium-navbar {
+  background: #f3e7d3;
+  background-image: url("https://raw.githubusercontent.com/justdeleteme/texture-library/main/parchment/parchment-light.jpg");
+  background-size: cover;
+  background-repeat: repeat;
+  border-bottom: 3px solid #c2a878;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  padding: 12px 0;
+}
+
+/* BRAND */
+.navbar-brand {
+  font-family: "Cinzel", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #5a4632 !important;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Icona brand */
+.brand-icon {
+  font-size: 1.8rem;
+  color: #8b6f47;
+}
+
+/* LINK MENU */
+.nav-link {
+  font-family: "Cinzel", serif;
+  font-size: 1.1rem;
+  color: #5a4632 !important;
+  padding: 8px 12px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.nav-link:hover {
+  color: #8b6f47 !important;
+}
+
+/* Linea dorata animata */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #c2a878;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Toggler */
+.navbar-toggler {
+  border-color: #5a4632;
+}
+
+.navbar-toggler-icon {
+  filter: invert(30%) sepia(20%) saturate(300%) hue-rotate(10deg);
+}
+
+/* Barra decorativa */
+.navbar-decor {
+  height: 6px;
+  background: linear-gradient(90deg, #c2a878, #e0c9a6, #c2a878);
+  border-top: 1px solid #b89c6d;
+}

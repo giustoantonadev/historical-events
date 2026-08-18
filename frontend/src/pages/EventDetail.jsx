@@ -38,17 +38,37 @@ export default function EventDetail() {
         {/* PERSONAGGI */}
         <h3 className="section-title">Personaggi Coinvolti</h3>
 
-        {event.historical_people.length === 0 && (
-          <p>Nessun personaggio registrato.</p>
-        )}
+        <div className="person-list">
 
-        {event.historical_people.map(person => (
-          <div key={person.id} className="person-card">
-            <div className="person-name">{person.name}</div>
-            <div className="person-year">Nato nel {person.birth_year}</div>
-            {person.biography && <p>{person.biography}</p>}
-          </div>
-        ))}
+          {event.historical_people.length === 0 && (
+            <p>Nessun personaggio registrato.</p>
+          )}
+
+          {event.historical_people.map(person => (
+            <div key={person.id} className="person-card">
+
+              {/* Icona */}
+              <div className="person-icon">
+                <i className="bi bi-person"></i>
+              </div>
+
+              {/* Nome */}
+              <div className="person-name">{person.name}</div>
+
+              {/* Anno */}
+              <div className="person-year">
+                Nato nel {person.birth_year}
+              </div>
+
+              {/* Biografia */}
+              {person.biography && (
+                <p className="person-bio">{person.biography}</p>
+              )}
+
+            </div>
+          ))}
+
+        </div>
 
         {/* TORNA INDIETRO */}
         <Link to="/" className="back-btn">
