@@ -26,13 +26,13 @@
 
             {{-- ERRORI --}}
             @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
 
             <form action="{{ route('periods.store') }}" method="POST">
@@ -42,25 +42,31 @@
                 <div class="mb-3">
                     <label class="form-label text-light fw-bold">Nome del Periodo</label>
                     <input type="text" name="name"
-                           class="form-control bg-secondary text-light border-0"
-                           required>
+                        class="form-control bg-secondary text-light border-0"
+                        required>
                 </div>
 
                 {{-- START DATE --}}
                 <div class="mb-3">
                     <label class="form-label text-light fw-bold">Data Inizio</label>
                     <input type="date" name="start_date"
-                           class="form-control bg-secondary text-light border-0"
-                           required>
+                        class="form-control bg-secondary text-light border-0"
+                        required>
                 </div>
 
                 {{-- END DATE --}}
                 <div class="mb-3">
                     <label class="form-label text-light fw-bold">Data Fine</label>
                     <input type="date" name="end_date"
-                           class="form-control bg-secondary text-light border-0"
-                           required>
+                        class="form-control bg-secondary text-light border-0"
+                        required>
                 </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-light fw-bold">Descrizione</label>
+                    <textarea name="description" class="form-control bg-secondary text-light border-0" rows="4"></textarea>
+                </div>
+
 
                 {{-- SUBMIT --}}
                 <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">

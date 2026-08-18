@@ -12,7 +12,7 @@ class PeriodController extends Controller
      */
     public function index()
     {
-        $periods = Period::all();
+        $periods = Period::orderBy('start_date', 'asc')->get();
         return view('period.index', compact('periods'));
     }
 
@@ -30,18 +30,21 @@ class PeriodController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'name'        => 'required|string|max:255',
+            'start_date'  => 'required|date',
+            'end_date'    => 'required|date|after_or_equal:start_date',
+            'description' => 'nullable|string'
         ]);
 
-        $period = new \App\Models\Period();
-        $period->name = $request->input('name');
-        $period->start_date = $request->input('start_date');
-        $period->end_date = $request->input('end_date');
-        $period->save();
+        Period::create([
+            'name'        => $request->name,
+            'start_date'  => $request->start_date,
+            'end_date'    => $request->end_date,
+            'description' => $request->description,
+        ]);
 
-        return redirect()->route('periods.index')->with('success', 'Period created successfully.');
+        return redirect()->route('periods.index')
+            ->with('success', 'Periodo creato con successo.');
     }
 
     /**
@@ -49,7 +52,7 @@ class PeriodController extends Controller
      */
     public function show(string $id)
     {
-        $period = Period::with('historicalEvents')->findOrFail($id);
+        $period = Period::with('events')->findOrFail($id);
         return view('period.show', compact('period'));
     }
 
@@ -60,7 +63,6 @@ class PeriodController extends Controller
     {
         return view('period.edit', compact('period'));
     }
-    
 
     /**
      * Update the specified resource in storage.
@@ -68,24 +70,30 @@ class PeriodController extends Controller
     public function update(Request $request, Period $period)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'name'        => 'required|string|max:255',
+            'start_date'  => 'required|date',
+            'end_date'    => 'required|date|after_or_equal:start_date',
+            'description' => 'nullable|string'
         ]);
 
-        $period->name = $request->input('name');
-        $period->start_date = $request->input('start_date');
-        $period->end_date = $request->input('end_date');
-        $period->save();
+        $period->update([
+            'name'        => $request->name,
+            'start_date'  => $request->start_date,
+            'end_date'    => $request->end_date,
+            'description' => $request->description,
+        ]);
 
-        return redirect()->route('periods.index')->with('success', 'Period updated successfully.');
+        return redirect()->route('periods.index')
+            ->with('success', 'Periodo aggiornato con successo.');
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Period $period)
     {
         $period->delete();
-        return redirect()->route('periods.index')->with('success', 'Period deleted successfully.');
+        return redirect()->route('periods.index')
+            ->with('success', 'Periodo eliminato con successo.');
     }
 }

@@ -15,7 +15,7 @@
         </a>
     </div>
 
-    {{-- CARD --}}
+    {{-- CARD INFO PERIODO --}}
     <div class="card bg-dark border-0 shadow-lg rounded-4 mb-4">
         <div class="card-body p-4">
 
@@ -33,6 +33,11 @@
                 <strong>Data Fine:</strong> {{ $period->end_date }}
             </div>
 
+            <div class="text-light fs-5 mb-3">
+                <strong>Descrizione:</strong>
+                <p class="mt-2">{{ $period->description }}</p>
+            </div>
+
         </div>
     </div>
 
@@ -44,7 +49,7 @@
                 <i class="bi bi-calendar-event me-2"></i> Eventi Collegati
             </h3>
 
-            @if($period->historicalEvents->count() > 0)
+            @if($period->events->count() > 0)
 
             <table class="table table-dark table-hover align-middle mb-0">
                 <thead class="table-secondary text-dark">
@@ -57,7 +62,7 @@
                 </thead>
 
                 <tbody>
-                    @foreach($period->historicalEvents as $event)
+                    @foreach($period->events as $event)
                     <tr>
                         <td class="fw-bold text-light">{{ $event->title }}</td>
 
@@ -65,7 +70,7 @@
 
                         <td>
                             @foreach($event->historicalPeople as $person)
-                            <span class="badge bg-primary me-1">{{ $person->name }}</span>
+                                <span class="badge bg-primary me-1">{{ $person->name }}</span>
                             @endforeach
                         </td>
 
@@ -98,7 +103,7 @@
             </table>
 
             @else
-            <p class="text-light opacity-50">Nessun evento collegato a questo periodo.</p>
+                <p class="text-light opacity-50">Nessun evento collegato a questo periodo.</p>
             @endif
 
         </div>

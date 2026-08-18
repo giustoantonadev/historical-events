@@ -1,9 +1,9 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 @section('content')
 
 <div class="container">
-    
+
     {{-- HEADER --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -45,6 +45,12 @@
                     <label class="form-label text-light fw-bold">Data Fine</label>
                     <input type="date" name="end_date" value="{{ $period->end_date }}" class="form-control bg-secondary text-light border-0" required>
                 </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-light fw-bold">Descrizione</label>
+                    <textarea name="description" class="form-control bg-secondary text-light border-0" rows="4">{{ $period->description }}</textarea>
+                </div>
+
 
                 {{-- SUBMIT --}}
                 <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">
