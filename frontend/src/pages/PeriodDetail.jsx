@@ -9,7 +9,10 @@ export default function PeriodDetail() {
   useEffect(() => {
     fetch(`http://localhost:8000/api/periods/${id}`)
       .then(res => res.json())
-      .then(data => setPeriod(data));
+      .then(data => {
+        console.log("PERIOD JSON:", data); // utile per debug
+        setPeriod(data);
+      });
   }, [id]);
 
   if (!period) return <p>Caricamento...</p>;
@@ -29,12 +32,12 @@ export default function PeriodDetail() {
         {/* EVENTI COLLEGATI */}
         <h3 className="section-title">Eventi del Periodo</h3>
 
-        {period.events?.length === 0 && (
+        {period.historical_events?.length === 0 && (
           <p>Nessun evento registrato.</p>
         )}
 
         <ul className="event-list">
-          {period.events?.map(event => (
+          {period.historical_events?.map(event => (
             <li key={event.id}>
               <Link to={`/events/${event.id}`} className="event-link">
                 {event.title} ({event.year})

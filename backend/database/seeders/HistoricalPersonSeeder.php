@@ -15,6 +15,12 @@ class HistoricalPersonSeeder extends Seeder
     {
         $people = [
             [
+                'name' => 'Romolo',
+                'biography' => 'Secondo la tradizione, fondatore di Roma.',
+                'portrait' => 'portraits/romolo.jpg',
+                'birth_year' => -771
+            ],
+            [
                 'name' => 'Giulio Cesare',
                 'biography' => 'Condottiero e politico romano.',
                 'portrait' => 'portraits/giulio_cesare.jpg',

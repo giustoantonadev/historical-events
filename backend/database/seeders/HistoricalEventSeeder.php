@@ -49,7 +49,7 @@ class HistoricalEventSeeder extends Seeder
                 'description' => 'Secondo la tradizione, Romolo fonda Roma.',
                 'year' => -753,
                 'period_id' => Period::where('name', 'Antichità')->first()->id,
-                'people' => ['Giulio Cesare']
+                'people' => ['Romolo']
             ],
             [
                 'title' => 'Assassinio di Giulio Cesare',
