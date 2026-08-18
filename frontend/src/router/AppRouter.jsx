@@ -4,6 +4,8 @@ import EventList from "../pages/EventList";
 import EventDetail from "../pages/EventDetail";
 import PersonList from "../pages/PersonList";
 import PersonDetail from "../pages/PersonDetail";
+import PeriodList from "../pages/PeriodList";
+import PeriodDetail from "../pages/PeriodDetail";
 
 
 
@@ -16,6 +18,8 @@ export default function AppRouter() {
           <Route path="/events/:id" element={<EventDetail />} />
           <Route path="/people" element={<PersonList />} />
           <Route path="/people/:id" element={<PersonDetail />} />
+          <Route path="/periods" element={<PeriodList />} />
+          <Route path="/periods/:id" element={<PeriodDetail />} />
           <Route path="*" element={<p>Pagina non trovata</p>} />
         </Routes>
       </Layout>
