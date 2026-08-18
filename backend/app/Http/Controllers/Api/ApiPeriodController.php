@@ -14,6 +14,6 @@ class ApiPeriodController extends Controller
 
     public function show($id)
     {
-        return Period::with('historicalEvents')->findOrFail($id);
+        return Period::with('events')->findOrFail($id);
     }
 }

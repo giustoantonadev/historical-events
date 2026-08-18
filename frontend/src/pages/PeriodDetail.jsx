@@ -32,12 +32,12 @@ export default function PeriodDetail() {
         {/* EVENTI COLLEGATI */}
         <h3 className="section-title">Eventi del Periodo</h3>
 
-        {period.historical_events?.length === 0 && (
+        {period.events?.length === 0 && (
           <p>Nessun evento registrato.</p>
         )}
 
         <ul className="event-list">
-          {period.historical_events?.map(event => (
+          {period.events?.map(event => (
             <li key={event.id}>
               <Link to={`/events/${event.id}`} className="event-link">
                 {event.title} ({event.year})
