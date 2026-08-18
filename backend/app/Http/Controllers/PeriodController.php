@@ -12,7 +12,8 @@ class PeriodController extends Controller
      */
     public function index()
     {
-        return view('period.index');
+        $periods = Period::all();
+        return view('period.index', compact('periods'));
     }
 
     /**
@@ -40,7 +41,7 @@ class PeriodController extends Controller
         $period->end_date = $request->input('end_date');
         $period->save();
 
-        return redirect()->route('period.index')->with('success', 'Period created successfully.');
+        return redirect()->route('periods.index')->with('success', 'Period created successfully.');
     }
 
     /**
@@ -76,7 +77,7 @@ class PeriodController extends Controller
         $period->end_date = $request->input('end_date');
         $period->save();
 
-        return redirect()->route('period.index')->with('success', 'Period updated successfully.');
+        return redirect()->route('periods.index')->with('success', 'Period updated successfully.');
     }
     /**
      * Remove the specified resource from storage.
@@ -84,6 +85,6 @@ class PeriodController extends Controller
     public function destroy(Period $period)
     {
         $period->delete();
-        return redirect()->route('period.index')->with('success', 'Period deleted successfully.');
+        return redirect()->route('periods.index')->with('success', 'Period deleted successfully.');
     }
 }

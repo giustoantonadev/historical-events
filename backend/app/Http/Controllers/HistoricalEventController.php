@@ -64,7 +64,8 @@ class HistoricalEventController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $historicalEvent = HistoricalEvent::with(['period', 'historicalPeople'])->findOrFail($id);
+        return view('events.show', compact('historicalEvent'));
     }
 
     /**
@@ -119,6 +120,7 @@ class HistoricalEventController extends Controller
         // delete event
         $historicalEvent = HistoricalEvent::findOrFail($id);
         $historicalEvent->historicalPeople()->detach(); // Detach related historical people
-        $historicalEvent->delete();       
+        $historicalEvent->delete();
+        return redirect()->route('events.index')->with('success', 'Historical event deleted successfully.');
     }
 }

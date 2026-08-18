@@ -12,7 +12,8 @@ class HistoricalPersonController extends Controller
      */
     public function index()
     {
-        return view('historical_person.index');
+        $historicalPeople = HistoricalPerson::all();
+        return view('historical-people.index', compact('historicalPeople'));
     }
 
     /**
@@ -20,7 +21,7 @@ class HistoricalPersonController extends Controller
      */
     public function create()
     {
-        return view('historical_person.create');
+        return view('historical-people.create');
     }
 
     /**
@@ -42,7 +43,7 @@ class HistoricalPersonController extends Controller
         }
         $historicalPerson->save();
 
-        return redirect()->route('historical_person.index')->with('success', 'Historical person created successfully.');
+        return redirect()->route('historical-people.index')->with('success', 'Historical person created successfully.');
     }
 
     /**
@@ -50,7 +51,8 @@ class HistoricalPersonController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $historicalPerson = HistoricalPerson::with('historicalEvents')->findOrFail($id);
+        return view('historical-people.show', compact('historicalPerson'));
     }
 
     /**
@@ -59,7 +61,7 @@ class HistoricalPersonController extends Controller
     public function edit(string $id)
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
-        return view('historical_person.edit', compact('historicalPerson'));
+        return view('historical-people.edit', compact('historicalPerson'));
     }
 
     /**
@@ -81,7 +83,7 @@ class HistoricalPersonController extends Controller
 
         $historicalPerson->update($data);
 
-        return redirect()->route('historical_person.index')->with('success', 'Historical person updated successfully.');
+        return redirect()->route('historical-people.index')->with('success', 'Historical person updated successfully.');
     }
 
     /**
@@ -91,6 +93,6 @@ class HistoricalPersonController extends Controller
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
         $historicalPerson->delete();
-        return redirect()->route('historical_person.index')->with('success', 'Historical person deleted successfully.');
+        return redirect()->route('historical-people.index')->with('success', 'Historical person deleted successfully.');
     }
 }

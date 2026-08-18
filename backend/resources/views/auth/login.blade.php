@@ -63,6 +63,14 @@
                                 </a>
                                 @endif
                             </div>
+
+
+                            @if (Route::has('register'))
+                            <a class="btn btn-link" href="{{ route('register') }}">
+                                {{ __('Register') }}
+                            </a>
+                            @endif
+
                         </div>
                     </form>
                 </div>

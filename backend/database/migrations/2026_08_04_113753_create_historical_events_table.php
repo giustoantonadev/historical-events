@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->date('year');
+            $table->integer('year');
             $table->string('image')->nullable();
+
+
             $table->foreignId('period_id')->constrained()->onDelete('cascade');
-            $table->foreignId('historical_person_id')->constrained()->onDelete('cascade');
+
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
