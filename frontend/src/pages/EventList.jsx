@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "../styles/eventlist.css"; 
+import "../styles/eventlist.css";
 
 export default function EventList() {
   const [events, setEvents] = useState([]);
@@ -12,40 +12,38 @@ export default function EventList() {
   }, []);
 
   return (
-    <div className="container py-5">
+    <div className="container eventlist-wrapper">
 
       {/* HEADER */}
-      <div className="text-center mb-5">
-        <h1 className="display-5 fw-bold text-dark">Eventi Storici</h1>
-        <p className="text-muted fs-5">
-          Una selezione dei momenti che hanno cambiato il corso della storia.
-        </p>
-      </div>
+      <h1 className="eventlist-title">Eventi Storici</h1>
+      <p className="eventlist-subtitle">
+        Una selezione dei momenti che hanno segnato la storia.
+      </p>
 
       {/* GRID */}
       <div className="row g-4">
         {events.map(event => (
           <div key={event.id} className="col-md-6 col-lg-4">
 
-            <div className="event-card shadow-lg rounded-4 p-4">
+            <div className="event-card">
 
               {/* ICONA */}
-              <div className="event-icon mb-3">
+              <div className="event-icon">
                 <i className="bi bi-hourglass-split"></i>
               </div>
 
               {/* TITOLO */}
-              <h4 className="fw-bold mb-2">{event.title}</h4>
+              <h4 className="event-title">{event.title}</h4>
 
               {/* ANNO */}
-              <p className="text-muted mb-4">
+              <p className="event-year">
                 <strong>Anno:</strong> {event.year}
               </p>
 
               {/* BUTTON */}
               <Link
                 to={`/events/${event.id}`}
-                className="btn btn-dark w-100 rounded-pill py-2"
+                className="event-btn"
               >
                 Dettagli
               </Link>
