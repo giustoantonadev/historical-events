@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../styles/perioddetail.css";
+import Timeline from "../components/Timeline";
 
 export default function PeriodDetail() {
   const { id } = useParams();
@@ -29,22 +30,9 @@ export default function PeriodDetail() {
         <h3 className="section-title">Descrizione</h3>
         <p>{period.description}</p>
 
-        {/* EVENTI COLLEGATI */}
-        <h3 className="section-title">Eventi del Periodo</h3>
+        <h3 className="section-title">Timeline del Periodo</h3>
+        <Timeline events={period.events} />
 
-        {period.events?.length === 0 && (
-          <p>Nessun evento registrato.</p>
-        )}
-
-        <ul className="event-list">
-          {period.events?.map(event => (
-            <li key={event.id}>
-              <Link to={`/events/${event.id}`} className="event-link">
-                {event.title} ({event.year})
-              </Link>
-            </li>
-          ))}
-        </ul>
 
         {/* TORNA INDIETRO */}
         <Link to="/periods" className="back-btn">
