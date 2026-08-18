@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "../styles/personlist.css";
 
 export default function PersonList() {
   const [people, setPeople] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetch("http://localhost:8000/api/people")
@@ -15,9 +17,9 @@ export default function PersonList() {
     <div className="container personlist-wrapper">
 
       {/* HEADER */}
-      <h1 className="personlist-title">Personaggi Storici</h1>
+      <h1 className="personlist-title">{t("sections.people")}</h1>
       <p className="personlist-subtitle">
-        Le figure che hanno influenzato gli eventi e segnato la storia.
+        {t("people.subtitle")}
       </p>
 
       {/* GRID */}
@@ -45,7 +47,7 @@ export default function PersonList() {
 
               {/* Anno */}
               <p className="person-year">
-                <strong>Nascita:</strong> {person.birth_year}
+                <strong>{t("person.born")}:</strong> {person.birth_year}
               </p>
 
               {/* Pulsante */}
@@ -53,7 +55,7 @@ export default function PersonList() {
                 to={`/people/${person.id}`}
                 className="person-btn"
               >
-                Dettagli
+                {t("event.details")}
               </Link>
 
             </div>

@@ -1,0 +1,48 @@
+{
+  "loading": "Caricamento...",
+  "navbar": {
+    "events": "Eventi",
+    "people": "Personaggi",
+    "periods": "Periodi Storici"
+  },
+  "home": {
+    "title": "Archivio Storico",
+    "subtitle": "Una selezione dei momenti che hanno segnato la storia"
+  },
+  "sections": {
+    "events": "Eventi Storici",
+    "people": "Personaggi Storici",
+    "periods": "Periodi Storici",
+    "timeline": "Timeline del Periodo"
+  },
+  "event": {
+    "year": "Anno",
+    "details": "Dettagli →",
+    "people": "Personaggi coinvolti",
+    "noPeople": "Nessun personaggio registrato.",
+    "relatedEvents": "Eventi collegati",
+    "description": "Descrizione",
+    "back": "Torna agli eventi"
+  },
+  "period": {
+    "start": "Inizio",
+    "end": "Fine",
+    "events": "Eventi del periodo",
+    "description": "Descrizione del periodo",
+    "back": "Torna ai periodi"
+  },
+  "person": {
+    "born": "Nascita",
+    "died": "Morte",
+    "role": "Ruolo",
+    "relatedEvents": "Eventi collegati",
+    "description": "Biografia",
+    "back": "Torna ai personaggi"
+  },
+  "people": {
+    "subtitle": "Le figure che hanno influenzato gli eventi e segnato la storia."
+  },
+  "periods": {
+    "subtitle": "Le grandi epoche che hanno segnato la storia dell’umanità."
+  }
+}

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "../styles/periodlist.css";
 
 export default function PeriodList() {
   const [periods, setPeriods] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetch("http://localhost:8000/api/periods")
@@ -15,9 +17,9 @@ export default function PeriodList() {
     <div className="container periodlist-wrapper">
 
       {/* HEADER */}
-      <h1 className="periodlist-title">Periodi Storici</h1>
+      <h1 className="periodlist-title">{t("sections.periods")}</h1>
       <p className="periodlist-subtitle">
-        Le grandi epoche che hanno segnato la storia dell’umanità.
+        {t("periods.subtitle")}
       </p>
 
       {/* GRID */}
@@ -40,7 +42,7 @@ export default function PeriodList() {
                 to={`/periods/${period.id}`}
                 className="period-btn"
               >
-                Esplora
+                {t("event.details")}
               </Link>
 
             </div>

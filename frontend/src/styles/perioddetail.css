@@ -6,7 +6,7 @@
   padding: 40px 0;
 }
 
-.perioddetail-box {
+.perioddetail-wrapper .period-box {
   background: rgba(255, 248, 230, 0.92);
   border: 2px solid #d6c4a1;
   border-radius: 14px;
@@ -31,6 +31,7 @@
   font-size: 2.4rem;
   font-weight: 700;
   margin-bottom: 20px;
+  color: #5a4632;
 }
 
 .section-title {
@@ -41,21 +42,70 @@
   color: #5a4632;
 }
 
-.event-list {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 25px;
+/* ================================
+   🌟 EVENTI — NUOVA GRAFICA ELEGANTE
+   ================================ */
+
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
 }
 
-.event-link {
+.event-card {
+  background: rgba(255, 248, 230, 0.85);
+  border: 2px solid #d6c4a1;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+.event-icon {
+  font-size: 40px;
   color: #8b6f47;
-  font-size: 1.1rem;
-  text-decoration: none;
+  margin-bottom: 10px;
 }
 
-.event-link:hover {
+.event-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
   color: #5a4632;
 }
+
+.event-year {
+  font-size: 1rem;
+  color: #8b6f47;
+  margin-bottom: 15px;
+}
+
+.event-btn {
+  background: #8b6f47;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-family: "Cinzel", serif;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.event-btn:hover {
+  background: #5a4632;
+  transform: translateY(-2px);
+}
+
+/* ================================
+   🌟 BACK BUTTON
+   ================================ */
 
 .back-btn {
   background: #8b6f47;

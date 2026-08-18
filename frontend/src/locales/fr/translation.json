@@ -1,0 +1,48 @@
+{
+  "loading": "Chargement...",
+  "navbar": {
+    "events": "Événements",
+    "people": "Personnages",
+    "periods": "Périodes Historiques"
+  },
+  "home": {
+    "title": "Archive Historique",
+    "subtitle": "Une sélection des moments qui ont marqué l'histoire"
+  },
+  "sections": {
+    "events": "Événements Historiques",
+    "people": "Personnages Historiques",
+    "periods": "Périodes Historiques",
+    "timeline": "Chronologie de la période"
+  },
+  "event": {
+    "year": "Année",
+    "details": "Détails →",
+    "people": "Personnes impliquées",
+    "noPeople": "Aucun personnage enregistré.",
+    "relatedEvents": "Événements liés",
+    "description": "Description",
+    "back": "Retour aux événements"
+  },
+  "period": {
+    "start": "Début",
+    "end": "Fin",
+    "events": "Événements de la période",
+    "description": "Description de la période",
+    "back": "Retour aux périodes"
+  },
+  "person": {
+    "born": "Naissance",
+    "died": "Mort",
+    "role": "Rôle",
+    "relatedEvents": "Événements liés",
+    "description": "Biographie",
+    "back": "Retour aux personnages"
+  },
+  "people": {
+    "subtitle": "Les figures qui ont influencé les événements et marqué l'histoire."
+  },
+  "periods": {
+    "subtitle": "Les grandes époques qui ont marqué l’histoire de l’humanité."
+  }
+}

@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles/layout.css";
 import App from './App.jsx'
+import './i18n';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
