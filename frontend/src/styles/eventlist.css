@@ -16,3 +16,34 @@
   color: #343a40;
   opacity: 0.8;
 }
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 0 var(--space-md) 0;
+  padding: 0 0 var(--space-sm) 0;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.45rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 76%, #fff 12%), color-mix(in srgb, var(--accent) 52%, #000 8%));
+  color: #1a1206;
+  border-color: color-mix(in srgb, var(--accent) 76%, #000 8%);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}

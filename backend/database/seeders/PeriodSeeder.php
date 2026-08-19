@@ -43,7 +43,10 @@ class PeriodSeeder extends Seeder
         ];
 
         foreach ($periods as $period) {
-            Period::create($period);
+            Period::updateOrCreate(
+                ['name' => $period['name']],
+                $period
+            );
         }
     }
 }

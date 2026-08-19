@@ -10,14 +10,45 @@ class ApiEventController extends Controller
 {
     public function index()
     {
-        return HistoricalEvent::with(['period', 'historicalPeople'])
+        $events = HistoricalEvent::with(['period', 'historicalPeople'])
             ->orderBy('year', 'asc')
-            ->get();
+            ->get()
+            ->map(function ($e) {
+                $people = $e->historicalPeople->map(function ($p) {
+                    return [
+                        'id' => $p->id,
+                        'name' => $p->name,
+                        'birth_year' => $p->birth_year,
+                        'biography' => $p->biography,
+                    ];
+                })->values();
+
+                $arr = $e->toArray();
+                $arr['people'] = $people;
+                $arr['historical_people'] = $people;
+                return $arr;
+            });
+
+        return $events;
     }
 
     public function show($id)
     {
-        return HistoricalEvent::with(['period', 'historicalPeople'])
-            ->findOrFail($id);
+        $e = HistoricalEvent::with(['period', 'historicalPeople'])->findOrFail($id);
+
+        $people = $e->historicalPeople->map(function ($p) {
+            return [
+                'id' => $p->id,
+                'name' => $p->name,
+                'birth_year' => $p->birth_year,
+                'biography' => $p->biography,
+            ];
+        })->values();
+
+        $arr = $e->toArray();
+        $arr['people'] = $people;
+        $arr['historical_people'] = $people;
+
+        return $arr;
     }
 }

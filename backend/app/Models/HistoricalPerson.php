@@ -7,7 +7,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class HistoricalPerson extends Model
 {
-    protected $fillable = ['name', 'biography', 'portrait', 'birth_year'];
+    protected $fillable = [
+        'name',
+        'biography',
+        'portrait',
+        'birth_year',
+        'name_it',
+        'name_en',
+        'name_fr',
+        'biography_it',
+        'biography_en',
+        'biography_fr'
+    ];
 
 
 

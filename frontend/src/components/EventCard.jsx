@@ -13,18 +13,21 @@ function getIconForEvent(title) {
 
 export default function EventCard({ event }) {
   const icon = getIconForEvent(event.title);
+  const imgSrc = event.image ? `http://localhost:8000/storage/${event.image}` : `/images/events/placeholder.svg`;
+
+  function formatYear(y) {
+    if (y === null || y === undefined) return '';
+    const yearNum = Number(y);
+    if (Number.isNaN(yearNum)) return y;
+    if (yearNum < 0) return `${Math.abs(yearNum)} a.C.`;
+    return `${yearNum} d.C.`;
+  }
 
   return (
     <div className="event-card">
 
       {/* IMMAGINE */}
-      {event.image && (
-        <img
-          src={`http://localhost:8000/storage/${event.image}`}
-          alt={event.title}
-          className="event-img"
-        />
-      )}
+      <img src={imgSrc} alt={event.title} className="event-img" />
 
       {/* TITOLO + ICONA */}
       <div className="event-card-header">
@@ -33,7 +36,7 @@ export default function EventCard({ event }) {
       </div>
 
       {/* ANNO */}
-      <p className="event-year">Anno: {event.year}</p>
+      <div className="event-year">{formatYear(event.year)}</div>
 
       {/* DESCRIZIONE BREVE */}
       {event.description && (
@@ -54,8 +57,8 @@ export default function EventCard({ event }) {
       )}
 
       {/* LINK */}
-      <Link to={`/events/${event.id}`} className="event-link">
-        Dettagli →
+      <Link to={`/events/${event.id}`} className="event-cta">
+        Scopri l'evento →
       </Link>
     </div>
   );

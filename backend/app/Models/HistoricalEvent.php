@@ -6,7 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class HistoricalEvent extends Model
 {
-    protected $fillable = ['title', 'description', 'year', 'image', 'period_id'];
+    protected $fillable = [
+        'title',
+        'description',
+        'year',
+        'image',
+        'period_id',
+        'title_it',
+        'title_en',
+        'title_fr',
+        'description_it',
+        'description_en',
+        'description_fr'
+    ];
 
     public function period()
     {

@@ -15,6 +15,16 @@
     "periods": "Periodi Storici",
     "timeline": "Timeline del Periodo"
   },
+  "filters": {
+    "all": "Tutti",
+    "antichita": "Antichità",
+    "medioevo": "Medioevo",
+    "eta_moderna": "Età moderna",
+    "eta_contemporanea": "Età contemporanea"
+  },
+  "hero": {
+    "cta": "Esplora la timeline"
+  },
   "event": {
     "year": "Anno",
     "details": "Dettagli →",

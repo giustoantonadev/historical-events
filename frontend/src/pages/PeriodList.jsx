@@ -6,13 +6,13 @@ import "../styles/periodlist.css";
 export default function PeriodList() {
   const [periods, setPeriods] = useState([]);
   const { i18n, t } = useTranslation();
-  const lang = i18n.language; // it, en, fr
+  const lang = (i18n.language || 'it').split('-')[0]; // normalize e.g. en-US -> en
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/periods")
+    fetch(`http://localhost:8000/api/periods?lang=${lang}`)
       .then(res => res.json())
       .then(data => setPeriods(data));
-  }, []);
+  }, [lang]);
 
   return (
     <div className="container periodlist-wrapper">

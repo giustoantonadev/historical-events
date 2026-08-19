@@ -9,11 +9,33 @@ class ApiPeriodController extends Controller
 {
     public function index()
     {
-        return Period::all();
+        $lang = request()->query('lang') ?? app()->getLocale();
+
+        return Period::all()->map(function ($period) use ($lang) {
+            $suffix = in_array($lang, ['it', 'en', 'fr']) ? $lang : 'it';
+            $nameKey = 'name_' . $suffix;
+            $descKey = 'description_' . $suffix;
+
+            $attrs = $period->toArray();
+            $attrs['name'] = $period->{$nameKey} ?: $period->name;
+            $attrs['description'] = $period->{$descKey} ?: $period->description;
+
+            return $attrs;
+        });
     }
 
     public function show($id)
     {
-        return Period::with('events')->findOrFail($id);
+        $lang = request()->query('lang') ?? app()->getLocale();
+        $suffix = in_array($lang, ['it', 'en', 'fr']) ? $lang : 'it';
+        $nameKey = 'name_' . $suffix;
+        $descKey = 'description_' . $suffix;
+
+        $period = Period::with('events')->findOrFail($id);
+
+        $period->name = $period->{$nameKey} ?: $period->name;
+        $period->description = $period->{$descKey} ?: $period->description;
+
+        return $period->toArray();
     }
 }

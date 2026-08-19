@@ -15,6 +15,16 @@
     "periods": "Historical Periods",
     "timeline": "Period Timeline"
   },
+  "filters": {
+    "all": "All",
+    "antichita": "Antiquity",
+    "medioevo": "Middle Ages",
+    "eta_moderna": "Early Modern",
+    "eta_contemporanea": "Contemporary"
+  },
+  "hero": {
+    "cta": "Explore the timeline"
+  },
   "event": {
     "year": "Year",
     "details": "Details →",

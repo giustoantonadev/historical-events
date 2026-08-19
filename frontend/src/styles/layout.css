@@ -2,90 +2,291 @@
    🌟 EVENT LIST — PERGAMENA PREMIUM
    ================================ */
 
+@import './tokens.css';
+
 .eventlist-wrapper {
-  padding: 40px 0;
+  padding: var(--space-xl) 0;
 }
 
 .eventlist-title {
-  font-family: "Cinzel", serif;
-  font-size: 2.8rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
   font-weight: 700;
-  color: #5a4632;
+  color: var(--brand-dark);
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
 }
 
 .eventlist-subtitle {
-  font-family: "Cinzel", serif;
-  font-size: 1.2rem;
-  color: #8b6f47;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--muted);
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: var(--space-xl);
 }
 
 /* CARD */
 .event-card {
-  background: rgba(255, 248, 230, 0.92);
-  border: 2px solid #d6c4a1;
-  border-radius: 14px;
-  padding: 25px;
-  font-family: "Cinzel", serif;
-  color: #5a4632;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  backdrop-filter: blur(6px);
+  background: color-mix(in srgb, var(--surface) 86%, #fff 14%);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  font-family: var(--font-display);
+  color: var(--brand-dark);
+  transition: transform 0.22s ease, box-shadow 0.28s ease;
+  backdrop-filter: none;
   position: relative;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.16);
 }
 
-/* Cornice decorativa */
+/* Use a vertical flex layout so content can stretch and footer links sit at bottom */
+.event-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+  min-height: var(--card-min-height);
+  padding: calc(var(--space-lg) + 0.25rem);
+}
+
+/* subtle gold accent instead of full dashed frame */
 .event-card::before {
   content: "";
   position: absolute;
-  inset: 0;
-  border: 1px dashed #c2a878;
-  border-radius: 12px;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 8px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 86%, #000 6%), color-mix(in srgb, var(--accent) 64%, #000 12%));
+  border-top-left-radius: calc(var(--radius) - 0.1rem);
+  border-top-right-radius: calc(var(--radius) - 0.1rem);
   pointer-events: none;
 }
 
 .event-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.20);
 }
 
 /* Icona */
 .event-icon {
-  font-size: 2.8rem;
-  color: #8b6f47;
-  opacity: 0.85;
-  margin-bottom: 15px;
+  font-size: 1.8rem;
+  color: var(--muted);
+  opacity: 0.95;
+  margin-bottom: var(--space-md);
 }
 
 /* Titolo */
 .event-title {
   font-weight: 700;
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
 }
 
 /* Anno */
 .event-year {
-  font-size: 1.1rem;
-  color: #8b6f47;
-  margin-bottom: 25px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: var(--space-lg);
 }
 
 /* Pulsante */
 .event-btn {
-  background: #8b6f47;
+  background: var(--muted);
   color: #fff;
   border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-family: "Cinzel", serif;
+  padding: 0.625rem 1.125rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-display);
   transition: background 0.3s ease, transform 0.2s ease;
   display: inline-block;
 }
 
 .event-btn:hover {
-  background: #5a4632;
+  background: var(--brand-dark);
   transform: translateY(-2px);
+}
+
+/* ======================
+   HERO — PARCHMENT BANNER
+   ====================== */
+.hero {
+  margin-bottom: var(--space-lg);
+  border-radius: calc(var(--radius) * 1.2);
+  overflow: hidden;
+  position: relative;
+  min-height: 260px;
+  background-color: rgba(0, 0, 0, 0.18);
+  /* fallback so hero area is visible */
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://raw.githubusercontent.com/justdeleteme/texture-library/main/parchment/parchment-light.jpg');
+  background-size: cover;
+  background-position: center center;
+  transform: translateY(calc(var(--parallax, 0px)));
+  transition: transform 120ms linear;
+  will-change: transform;
+  z-index: 0;
+}
+
+.hero-inner::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 180px;
+  height: 64px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 64'><path d='M0 32 C30 0,60 0,90 32 C120 64,150 64,180 32' stroke='%23b89c6d' stroke-opacity='0.28' fill='none' stroke-width='3' stroke-linecap='round'/></svg>") no-repeat center/contain;
+  opacity: 1;
+  transform: rotate(-4deg) scale(1.05);
+  pointer-events: none;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.08));
+}
+
+/* Dark overlay to increase contrast and mood */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.28));
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  padding: calc(var(--space-xl) + 1rem) var(--space-md);
+  text-align: center;
+  backdrop-filter: none;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: #fff;
+  /* brighter on dark overlay */
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans);
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0 0 1rem 0;
+  font-size: 1.05rem;
+}
+
+.hero-cta {
+  display: inline-block;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 70%, #fff 20%), var(--accent));
+  color: #1a1206;
+  /* dark text on gold for readability */
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.hero-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18)
+}
+
+@media (max-width:600px) {
+  .hero-title {
+    font-size: 1.6rem
+  }
+
+  .hero-inner {
+    padding: calc(var(--space-lg) + 0.5rem) var(--space-sm)
+  }
+}
+
+/* panel that grounds the events grid */
+.content-panel {
+  margin: calc(var(--space-lg) + 0.5rem) auto;
+  padding: var(--space-lg) calc(var(--space-md) + 0.25rem);
+  background-color: color-mix(in srgb, var(--surface) 86%, #fff 14%);
+  background-image: url('https://raw.githubusercontent.com/justdeleteme/texture-library/main/parchment/parchment-light.jpg');
+  background-repeat: repeat;
+  background-size: 650px;
+  border-radius: calc(var(--radius) * 1.05);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid color-mix(in srgb, var(--accent) 50%, #000 6%);
+  position: relative;
+}
+
+@media (max-width:900px) {
+  .content-panel {
+    padding: var(--space-md);
+    margin: var(--space-md)
+  }
+}
+
+/* Decorative ornaments (subtle filigree) */
+.hero-inner::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 180px;
+  height: 64px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 64'><path d='M0 32 C30 0,60 0,90 32 C120 64,150 64,180 32' stroke='%23b89c6d' stroke-opacity='0.36' fill='none' stroke-width='3' stroke-linecap='round'/></svg>") no-repeat center/contain;
+  opacity: 1;
+  transform: rotate(-4deg) scale(1.05);
+  pointer-events: none;
+  z-index: 4;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.08));
+}
+
+.content-panel::before,
+.content-panel::after {
+  content: '';
+  position: absolute;
+  width: 140px;
+  height: 64px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 64'><path d='M0 32 C30 0,60 0,90 32 C120 64,150 64,180 32' stroke='%23b89c6d' stroke-opacity='0.32' fill='none' stroke-width='2.4' stroke-linecap='round'/></svg>") no-repeat center/contain;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 3;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.08));
+}
+
+.content-panel::before {
+  left: 18px;
+  top: 12px;
+  transform: rotate(-10deg) scale(1.02);
+}
+
+.content-panel::after {
+  right: 18px;
+  bottom: 12px;
+  transform: scaleX(-1) rotate(8deg) scale(1.02);
+}
+
+/* stronger vignette */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 34%, rgba(0, 0, 0, 0.14) 100%);
+  mix-blend-mode: multiply;
+  z-index: 6;
+}
+
+/* Hide specific ornaments requested by user (top-left hero and bottom-right panel) */
+.hero-inner::before {
+  display: none !important;
+}
+
+.content-panel::after {
+  display: none !important;
+}
+
+.content-panel::before {
+  display: none !important;
 }

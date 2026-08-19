@@ -157,19 +157,60 @@ class HistoricalEventSeeder extends Seeder
                 'people' => ['Winston Churchill']
             ],
 
+            // ========== MEDIEVAL / MIDDLE AGES ========
+            [
+                'title' => 'Coronazione di Carlo Magno',
+                'description' => 'Carlo Magno viene incoronato imperatore a Roma, rafforzando l\'impero carolingio.',
+                'year' => 800,
+                'period_id' => Period::where('name', 'Medioevo')->first()->id,
+                'people' => ['Carlo Magno']
+            ],
+            [
+                'title' => 'Battaglia di Hastings',
+                'description' => 'Guglielmo il Conquistatore sconfigge il re anglosassone Harold e conquista l\'Inghilterra.',
+                'year' => 1066,
+                'period_id' => Period::where('name', 'Medioevo')->first()->id,
+                'people' => ['Guglielmo il Conquistatore']
+            ],
+            [
+                'title' => 'Prima Crociata',
+                'description' => 'La Prima Crociata porta alla conquista di Gerusalemme da parte dei crociati.',
+                'year' => 1099,
+                'period_id' => Period::where('name', 'Medioevo')->first()->id,
+                'people' => ['Goffredo di Buglione']
+            ],
+            [
+                'title' => 'Magna Carta',
+                'description' => 'La Magna Carta viene firmata e pone limiti al potere del re in Inghilterra.',
+                'year' => 1215,
+                'period_id' => Period::where('name', 'Medioevo')->first()->id,
+                'people' => ['Giovanni Senzaterra']
+            ],
+            [
+                'title' => 'Peste Nera',
+                'description' => 'La pandemia della Peste Nera devasta l\'Europa, causando milioni di vittime.',
+                'year' => 1347,
+                'period_id' => Period::where('name', 'Medioevo')->first()->id,
+                'people' => []
+            ],
+
         ];
 
         foreach ($events as $event) {
-            $historicalEvent = HistoricalEvent::create([
-                'title' => $event['title'],
-                'description' => $event['description'],
-                'year' => $event['year'],
-                'period_id' => $event['period_id'],
-                'image' => null,
-            ]);
+            $historicalEvent = HistoricalEvent::updateOrCreate(
+                ['title' => $event['title']],
+                [
+                    'description' => $event['description'],
+                    'year' => $event['year'],
+                    'period_id' => $event['period_id'],
+                    'image' => null,
+                ]
+            );
 
             $personsIds = HistoricalPerson::whereIn('name', $event['people'])->pluck('id');
-            $historicalEvent->historicalPeople()->sync($personsIds);
+            if ($personsIds->isNotEmpty()) {
+                $historicalEvent->historicalPeople()->sync($personsIds);
+            }
         }
     }
 }

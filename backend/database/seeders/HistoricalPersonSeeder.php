@@ -80,10 +80,37 @@ class HistoricalPersonSeeder extends Seeder
                 'portrait' => 'portraits/albert_einstein.jpg',
                 'birth_year' => 1879
             ],
+            [
+                'name' => 'Carlo Magno',
+                'biography' => 'Re dei Franchi e imperatore del Sacro Romano Impero.',
+                'portrait' => 'portraits/charlemagne.jpg',
+                'birth_year' => 742
+            ],
+            [
+                'name' => 'Guglielmo il Conquistatore',
+                'biography' => 'Duca di Normandia e re d\'Inghilterra dopo il 1066.',
+                'portrait' => 'portraits/william_conqueror.jpg',
+                'birth_year' => 1028
+            ],
+            [
+                'name' => 'Goffredo di Buglione',
+                'biography' => 'Condottiero della Prima Crociata e primo signore di Gerusalemme.',
+                'portrait' => 'portraits/godfrey.jpg',
+                'birth_year' => 1060
+            ],
+            [
+                'name' => 'Giovanni Senzaterra',
+                'biography' => 'Re d\'Inghilterra noto per la firma (forzata) della Magna Carta.',
+                'portrait' => 'portraits/john.jpg',
+                'birth_year' => 1166
+            ],
         ];
 
         foreach ($people as $person) {
-            HistoricalPerson::create($person);
+            HistoricalPerson::updateOrCreate(
+                ['name' => $person['name']],
+                $person
+            );
         }
     }
 }

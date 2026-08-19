@@ -5,14 +5,15 @@ import "../styles/perioddetail.css";
 
 export default function PeriodDetail() {
   const { id } = useParams();
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [period, setPeriod] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/periods/${id}`)
+    const lang = (i18n?.language || 'it').split('-')[0];
+    fetch(`http://localhost:8000/api/periods/${id}?lang=${lang}`)
       .then(res => res.json())
       .then(data => setPeriod(data));
-  }, [id]);
+  }, [id, i18n?.language]);
 
   if (!period) return <p>{t("loading")}</p>;
 

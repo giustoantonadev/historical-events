@@ -13,10 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       $this->call([
+        $this->call([
             PeriodSeeder::class,
+            PeriodsMultilangSeeder::class,
             HistoricalPersonSeeder::class,
+            PeopleMultilangSeeder::class,
             HistoricalEventSeeder::class,
+            EventsMultilangSeeder::class,
         ]);
     }
 }
