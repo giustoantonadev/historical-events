@@ -46,26 +46,33 @@ export default function Navbar() {
               </li>
 
               {/* SWITCH LINGUA */}
-              <li className="nav-item">
+              <div className="lang-switcher">
+
                 <button
-                  className="lang-btn"
+                  className={`lang-btn ${i18n.language === "it" ? "active" : ""}`}
                   onClick={() => i18n.changeLanguage("it")}
                 >
-                  🇮🇹
+                  <span className="fi fi-it"></span>
+                  IT
                 </button>
+
                 <button
-                  className="lang-btn"
+                  className={`lang-btn ${i18n.language === "en" ? "active" : ""}`}
                   onClick={() => i18n.changeLanguage("en")}
                 >
-                  🇬🇧
+                  <span className="fi fi-gb"></span>
+                  EN
                 </button>
+
                 <button
-                  className="lang-btn"
+                  className={`lang-btn ${i18n.language === "fr" ? "active" : ""}`}
                   onClick={() => i18n.changeLanguage("fr")}
                 >
-                  🇫🇷
+                  <span className="fi fi-fr"></span>
+                  FR
                 </button>
-              </li>
+
+              </div>
 
             </ul>
           </div>
