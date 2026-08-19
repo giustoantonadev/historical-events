@@ -76,3 +76,36 @@
   background: linear-gradient(90deg, #c2a878, #e0c9a6, #c2a878);
   border-top: 1px solid #b89c6d;
 }
+
+.lang-switcher {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.lang-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid #d4c7b0; /* colore pergamena */
+  background: #f5e9d6;       /* pergamena chiara */
+  color: #5a4632;            /* marrone storico */
+  transition: all 0.25s ease;
+}
+
+.lang-btn:hover {
+  background: #e8dcc7;
+  border-color: #b8a88f;
+  transform: translateY(-2px);
+}
+
+.lang-btn.active {
+  background: #5a4632;   /* marrone scuro */
+  color: #f5e9d6;        /* pergamena chiara */
+  border-color: #5a4632;
+  transform: scale(1.05);
+}
+

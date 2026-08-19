@@ -5,7 +5,8 @@ import "../styles/periodlist.css";
 
 export default function PeriodList() {
   const [periods, setPeriods] = useState([]);
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
+  const lang = i18n.language; // it, en, fr
 
   useEffect(() => {
     fetch("http://localhost:8000/api/periods")
@@ -16,13 +17,11 @@ export default function PeriodList() {
   return (
     <div className="container periodlist-wrapper">
 
-      {/* HEADER */}
+      {/* TITOLO PAGINA */}
       <h1 className="periodlist-title">{t("sections.periods")}</h1>
-      <p className="periodlist-subtitle">
-        {t("periods.subtitle")}
-      </p>
+      <p className="periodlist-subtitle">{t("periods.subtitle")}</p>
 
-      {/* GRID */}
+      {/* GRID PERIODI */}
       <div className="row g-4">
         {periods.map(period => (
           <div key={period.id} className="col-md-6 col-lg-4">
@@ -34,8 +33,10 @@ export default function PeriodList() {
                 <i className="bi bi-hourglass-split"></i>
               </div>
 
-              {/* Nome */}
-              <h4 className="period-name">{period.name}</h4>
+              {/* Nome multilingua con fallback */}
+              <h4 className="period-name">
+                {period[`name_${lang}`] || period.name}
+              </h4>
 
               {/* Pulsante */}
               <Link
