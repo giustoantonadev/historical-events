@@ -20,6 +20,7 @@ class ApiEventController extends Controller
                         'name' => $p->name,
                         'birth_year' => $p->birth_year,
                         'biography' => $p->biography,
+                        'image' => $p->image,
                     ];
                 })->values();
 
@@ -42,6 +43,7 @@ class ApiEventController extends Controller
                 'name' => $p->name,
                 'birth_year' => $p->birth_year,
                 'biography' => $p->biography,
+                'image' => $p->image,
             ];
         })->values();
 

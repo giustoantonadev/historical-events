@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import "../styles/eventCard.css";
 
 function getIconForEvent(title) {
@@ -14,6 +15,7 @@ function getIconForEvent(title) {
 export default function EventCard({ event }) {
   const icon = getIconForEvent(event.title);
   const imgSrc = event.image ? `http://localhost:8000/storage/${event.image}` : `/images/events/placeholder.svg`;
+  const [loaded, setLoaded] = useState(false);
 
   function formatYear(y) {
     if (y === null || y === undefined) return '';
@@ -27,7 +29,15 @@ export default function EventCard({ event }) {
     <div className="event-card">
 
       {/* IMMAGINE */}
-      <img src={imgSrc} alt={event.title} className="event-img" />
+      <div className="event-img-wrap">
+        <img
+          src={imgSrc}
+          alt={event.title}
+          className={`event-img ${loaded ? 'loaded' : 'loading'}`}
+          onLoad={() => setLoaded(true)}
+          loading="lazy"
+        />
+      </div>
 
       {/* TITOLO + ICONA */}
       <div className="event-card-header">

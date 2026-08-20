@@ -47,12 +47,75 @@
     "role": "Rôle",
     "relatedEvents": "Événements liés",
     "description": "Biographie",
-    "back": "Retour aux personnages"
+    "back": "Retour aux personnages",
+    "viewProfile": "Ouvrir le profil complet"
+  },
+  "contact": {
+    "subtitle": "Envoyez-nous un message et nous vous répondrons.",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "message": "Message",
+      "send": "Envoyer le message"
+    },
+    "sent": "Message envoyé — merci !"
+  },
+  "support": {
+    "title": "Support",
+    "subtitle": "Besoin d'aide ? Décrivez le problème et notre équipe répondra.",
+    "email": "Votre email",
+    "note": "Décrivez le problème",
+    "steps": "Étapes pour reproduire (optionnel)",
+    "attachment": "Joindre une capture d'écran (optionnel)",
+    "typeLabel": "Type",
+    "typeOptions": {
+      "bug": "Bug",
+      "feature": "Demande de fonctionnalité",
+      "question": "Question"
+    },
+    "priorityLabel": "Priorité",
+    "priorityOptions": {
+      "low": "Faible",
+      "medium": "Moyenne",
+      "high": "Élevée",
+      "urgent": "Urgent"
+    },
+    "send": "Envoyer la demande",
+    "sent": "Demande envoyée — nous vous contacterons."
   },
   "people": {
     "subtitle": "Les figures qui ont influencé les événements et marqué l'histoire."
   },
   "periods": {
     "subtitle": "Les grandes époques qui ont marqué l’histoire de l’humanité."
+  },
+  "about": {
+    "title": "À propos",
+    "missionTitle": "Notre mission",
+    "missionText": "Nous collectons, documentons et présentons des événements historiques et des biographies avec rigueur et soin, afin de les rendre accessibles à tous.",
+    "teamTitle": "L'équipe",
+    "teamText": "Une équipe pluridisciplinaire d'historiens, de chercheurs et de développeurs.",
+    "contactTitle": "Contact",
+    "contactText": "Pour les partenariats, la presse ou la collaboration, utilisez la page Contact."
+  },
+  "terms": {
+    "title": "Conditions & Confidentialité",
+    "usageTitle": "Conditions d'utilisation",
+    "usageText": "En utilisant ce site, vous acceptez nos conditions d'utilisation. Le contenu est fourni à titre informatif et ne constitue pas un conseil professionnel.",
+    "privacyTitle": "Confidentialité",
+    "privacyText": "Nous collectons les données minimales nécessaires pour fournir le service. Consultez notre politique de confidentialité pour les détails sur le traitement des données et vos droits.",
+    "cookiesTitle": "Cookies",
+    "cookiesText": "Le site peut utiliser des cookies et des technologies similaires pour l'analytics et les fonctionnalités. Vous pouvez contrôler les cookies via les paramètres de votre navigateur."
+  },
+  "footer": {
+    "title": "Archive Historique Numérique",
+    "subtitle": "Un voyage à travers les événements et les personnages qui ont marqué l'histoire.",
+    "contact": "Contact",
+    "support": "Support",
+    "about": "À propos",
+    "terms": "Conditions & Confidentialité",
+    "followUs": "Suivez-nous",
+    "followSubtitle": "Restez informé via nos canaux",
+    "copyright": "© {{year}} Archive Historique — Tous droits réservés"
   }
 }

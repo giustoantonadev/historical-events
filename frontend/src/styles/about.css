@@ -1,0 +1,32 @@
+.about-page {
+    padding: 36px 12px;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.about-page h1 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.about-page h2 {
+    font-size: 1.2rem;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    color: #5a4632;
+}
+
+.about-page p {
+    color: #4d3928;
+    line-height: 1.6;
+}
+
+.about-page .mission,
+.about-page .team,
+.about-page .about-contact {
+    background: #fffdf8;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+}

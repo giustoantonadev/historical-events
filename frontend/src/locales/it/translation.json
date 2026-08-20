@@ -47,12 +47,75 @@
     "role": "Ruolo",
     "relatedEvents": "Eventi collegati",
     "description": "Biografia",
-    "back": "Torna ai personaggi"
+    "back": "Torna ai personaggi",
+    "viewProfile": "Apri profilo completo"
+  },
+  "contact": {
+    "subtitle": "Inviaci un messaggio e ti risponderemo al più presto.",
+    "form": {
+      "name": "Nome",
+      "email": "Email",
+      "message": "Messaggio",
+      "send": "Invia messaggio"
+    },
+    "sent": "Messaggio inviato — grazie!"
+  },
+  "support": {
+    "title": "Supporto",
+    "subtitle": "Hai bisogno di aiuto? Descrivi il problema e il nostro team risponderà.",
+    "email": "La tua email",
+    "note": "Descrivi il problema",
+    "steps": "Passi per riprodurre (opzionale)",
+    "attachment": "Allega screenshot (opzionale)",
+    "typeLabel": "Tipo",
+    "typeOptions": {
+      "bug": "Bug",
+      "feature": "Richiesta funzionalità",
+      "question": "Domanda"
+    },
+    "priorityLabel": "Priorità",
+    "priorityOptions": {
+      "low": "Bassa",
+      "medium": "Media",
+      "high": "Alta",
+      "urgent": "Urgente"
+    },
+    "send": "Invia richiesta",
+    "sent": "Richiesta inviata — ti contatteremo presto."
   },
   "people": {
     "subtitle": "Le figure che hanno influenzato gli eventi e segnato la storia."
   },
   "periods": {
     "subtitle": "Le grandi epoche che hanno segnato la storia dell’umanità."
+  },
+  "about": {
+    "title": "Chi siamo",
+    "missionTitle": "La nostra missione",
+    "missionText": "Raccogliamo, documentiamo e presentiamo eventi storici e biografie con rigore e cura, rendendoli accessibili a tutti.",
+    "teamTitle": "Il team",
+    "teamText": "Un team multidisciplinare di storici, ricercatori e sviluppatori.",
+    "contactTitle": "Contatti",
+    "contactText": "Per partnership, stampa o collaborazioni, usa la pagina Contatti."
+  },
+  "terms": {
+    "title": "Termini & Privacy",
+    "usageTitle": "Termini di utilizzo",
+    "usageText": "Usando questo sito accetti i nostri termini di utilizzo. I contenuti sono forniti a scopo informativo e non costituiscono consulenza professionale.",
+    "privacyTitle": "Privacy",
+    "privacyText": "Raccogliamo i dati minimi necessari per fornire il servizio. Consulta la nostra informativa sulla privacy per i dettagli sul trattamento dei dati e sui tuoi diritti.",
+    "cookiesTitle": "Cookie",
+    "cookiesText": "Il sito può utilizzare cookie e tecnologie simili per analytics e funzionalità. Puoi gestire i cookie tramite le impostazioni del browser."
+  },
+  "footer": {
+    "title": "Archivio Storico Digitale",
+    "subtitle": "Un viaggio attraverso gli eventi e i personaggi che hanno segnato la storia.",
+    "contact": "Contatti",
+    "support": "Supporto",
+    "about": "Chi siamo",
+    "terms": "Termini & Privacy",
+    "followUs": "Seguici",
+    "followSubtitle": "Resta aggiornato sui nostri canali",
+    "copyright": "© {{year}} Archivio Storico — Tutti i diritti riservati"
   }
 }
