@@ -1,0 +1,42 @@
+name: PHPStan
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  phpstan:
+    name: PHPStan (level 7)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Composer cache
+        uses: actions/cache@v4
+        with:
+          path: backend/vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('backend/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          composer install --prefer-dist --no-progress --no-suggest --no-interaction
+
+      - name: Run PHPStan
+        run: |
+          cd backend
+          vendor/bin/phpstan analyse -c phpstan.neon -l 7
