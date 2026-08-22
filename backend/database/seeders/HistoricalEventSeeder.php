@@ -201,15 +201,276 @@ class HistoricalEventSeeder extends Seeder
 
         ];
 
+        $translations = [
+            "Scoperta dell'America" => [
+                'en' => [
+                    'title' => "Discovery of America",
+                    'description' => 'In 1492 Christopher Columbus, a Genoese navigator in the service of the Crown of Castile, reached the shores of a new continent while seeking a western route to the Indies. The expedition of three caravels marked the start of European expansion into the New World, forever changing global economic, cultural and geopolitical balances.'
+                ],
+                'fr' => [
+                    'title' => 'Découverte de l’Amérique',
+                    'description' => 'En 1492, Christophe Colomb, navigateur génois au service de la Couronne de Castille, atteignit les côtes d’un nouveau continent en cherchant une route occidentale vers les Indes. L’expédition de trois caravelles marqua le début de l’expansion européenne dans le Nouveau Monde, modifiant à jamais les équilibres économiques, culturels et géopolitiques.'
+                ]
+            ],
+            'Rinascimento Italiano' => [
+                'en' => [
+                    'title' => 'Italian Renaissance',
+                    'description' => 'The Italian Renaissance, flourishing between the 15th and 16th centuries, represents a period of great artistic, cultural and scientific achievement. Cities like Florence, Rome and Milan became centers of innovation where artists, scientists and philosophers redefined beauty, proportion and knowledge.'
+                ],
+                'fr' => [
+                    'title' => 'Renaissance italienne',
+                    'description' => 'La Renaissance italienne, qui prospéra entre les XVe et XVIe siècles, représente une période de grand essor artistique, culturel et scientifique. Des villes comme Florence, Rome et Milan devinrent des centres d’innovation où artistes, scientifiques et philosophes redéfinirent la beauté, la proportion et le savoir.'
+                ]
+            ],
+            'Pittura della Cappella Sistina' => [
+                'en' => [
+                    'title' => 'Painting of the Sistine Chapel',
+                    'description' => 'Between 1508 and 1512 Michelangelo Buonarroti painted the ceiling of the Sistine Chapel, one of the masterpieces of Western art. Commissioned by Pope Julius II, the work presents a monumental vision of creation and humanity with expressive figures and complex composition.'
+                ],
+                'fr' => [
+                    'title' => 'Peinture de la chapelle Sixtine',
+                    'description' => 'Entre 1508 et 1512, Michel-Ange réalisa le plafond de la chapelle Sixtine, un des chefs-d’œuvre de l’art occidental. Commandée par le pape Jules II, l’œuvre offre une vision monumentale de la création et de l’humanité, avec des figures expressives et une composition complexe.'
+                ]
+            ],
+            'Ultima Cena' => [
+                'en' => [
+                    'title' => 'The Last Supper',
+                    'description' => 'Painted between 1494 and 1498 in Milan, Leonardo da Vinci’s Last Supper is one of the most studied masterpieces. Leonardo revolutionized iconography by capturing the dramatic moment when Christ announces the betrayal.'
+                ],
+                'fr' => [
+                    'title' => 'La Cène',
+                    'description' => 'Peinte entre 1494 et 1498 à Milan, La Cène de Léonard de Vinci est l’un des chefs-d’œuvre les plus étudiés. Léonard révolutionna l’iconographie en saisissant le moment dramatique où le Christ annonce la trahison.'
+                ]
+            ],
+            'Progetto della Macchina Volante' => [
+                'en' => [
+                    'title' => 'Design of the Flying Machine',
+                    'description' => 'In the early 16th century Leonardo studied human flight, analyzing birds and designing machines to imitate their dynamics. His drawings, including ornithopters and prototype aircraft, anticipated concepts developed centuries later.'
+                ],
+                'fr' => [
+                    'title' => 'Projet de machine volante',
+                    'description' => 'Au début du XVIe siècle, Léonard étudia le vol humain, analysa les oiseaux et conçut des machines pour imiter leurs dynamiques. Ses dessins, dont l’ornithoptère, anticipèrent des concepts développés des siècles plus tard.'
+                ]
+            ],
+            'Viaggio verso le Indie' => [
+                'en' => [
+                    'title' => 'Voyage to the Indies',
+                    'description' => 'In 1492 Columbus undertook his first voyage to the Indies under Queen Isabella’s patronage. Believing a western route to Asia was possible, he crossed the Atlantic and reached Caribbean islands, initiating systematic contact between Europe and the Americas.'
+                ],
+                'fr' => [
+                    'title' => 'Voyage vers les Indes',
+                    'description' => 'En 1492, Colomb entreprit son premier voyage vers les Indes sous le patronage de la reine Isabelle. Convaincu qu’une route occidentale vers l’Asie était possible, il traversa l’Atlantique et atteignit les îles des Caraïbes, initiant le contact systématique entre l’Europe et les Amériques.'
+                ]
+            ],
+            'Invenzione del telescopio' => [
+                'en' => [
+                    'title' => 'Invention of the Telescope',
+                    'description' => 'In 1609 Galileo Galilei refined the telescope, allowing unprecedented observations of the sky. His discoveries, like lunar mountains and Venus phases, revolutionized astronomy and challenged the geocentric view.'
+                ],
+                'fr' => [
+                    'title' => 'Invention du télescope',
+                    'description' => 'En 1609, Galilée perfectionna le télescope, permettant des observations célestes sans précédent. Ses découvertes, comme les montagnes lunaires et les phases de Vénus, révolutionnèrent l’astronomie et contestèrent la vision géocentrique.'
+                ]
+            ],
+            'Scoperta dei satelliti di Giove' => [
+                'en' => [
+                    'title' => 'Discovery of Jupiter’s Satellites',
+                    'description' => 'In 1610 Galileo observed four satellites orbiting Jupiter, now known as the Galilean moons. This observation provided strong evidence against the Aristotelian geocentric model.'
+                ],
+                'fr' => [
+                    'title' => 'Découverte des satellites de Jupiter',
+                    'description' => 'En 1610, Galilée observa quatre satellites en orbite autour de Jupiter, aujourd’hui appelés lunes galiléennes. Cette observation donna un argument fort contre le modèle géocentrique aristotélicien.'
+                ]
+            ],
+            "Campagna d'Egitto" => [
+                'en' => [
+                    'title' => 'Egypt Campaign',
+                    'description' => 'In 1798 Napoleon led an expedition to Egypt aiming to weaken British power and open new trade routes. The campaign led to the discovery of the Rosetta Stone and inaugurated modern Egyptology.'
+                ],
+                'fr' => [
+                    'title' => 'Campagne d’Égypte',
+                    'description' => 'En 1798, Napoléon mena une expédition en Égypte visant à affaiblir la puissance britannique et ouvrir de nouvelles voies commerciales. La campagne conduisit à la découverte de la pierre de Rosette et inaugura l’égyptologie moderne.'
+                ]
+            ],
+            'Battaglia di Waterloo' => [
+                'en' => [
+                    'title' => 'Battle of Waterloo',
+                    'description' => 'On June 18, 1815, near Waterloo, Napoleon’s forces faced the Anglo-Dutch army under the Duke of Wellington and Prussian troops. Napoleon’s defeat ended his era and ushered a new European order.'
+                ],
+                'fr' => [
+                    'title' => 'Bataille de Waterloo',
+                    'description' => 'Le 18 juin 1815, près de Waterloo, les forces de Napoléon affrontèrent l’armée anglo-néerlandaise dirigée par le duc de Wellington et les troupes prussiennes. La défaite de Napoléon mit fin à son époque et ouvrit la voie à un nouvel ordre européen.'
+                ]
+            ],
+            'Fondazione di Roma' => [
+                'en' => [
+                    'title' => 'Founding of Rome',
+                    'description' => 'According to tradition, in 753 BC Romulus founded the city of Rome on the Palatine Hill. While wrapped in myth, the founding marks the beginning of a civilization that would dominate the Mediterranean for centuries.'
+                ],
+                'fr' => [
+                    'title' => 'Fondation de Rome',
+                    'description' => 'Selon la tradition, en 753 av. J.-C., Romulus fonda la ville de Rome sur le mont Palatin. Bien que le récit soit mythique, la fondation marque le début d’une civilisation destinée à dominer la Méditerranée pendant des siècles.'
+                ]
+            ],
+            'Assassinio di Giulio Cesare' => [
+                'en' => [
+                    'title' => 'Assassination of Julius Caesar',
+                    'description' => 'On March 15, 44 BC, during a Senate session Julius Caesar was murdered by conspirators led by Brutus and Cassius. The event, the Ides of March, signaled the end of the Roman Republic and the rise of the Empire.'
+                ],
+                'fr' => [
+                    'title' => 'Assassinat de Jules César',
+                    'description' => 'Le 15 mars 44 av. J.-C., lors d’une séance du Sénat, Jules César fut assassiné par des conjurés conduits par Brutus et Cassius. L’événement, les Ides de mars, signa la fin de la République romaine et l’essor de l’Empire.'
+                ]
+            ],
+            'Campagne di Alessandro Magno' => [
+                'en' => [
+                    'title' => 'Campaigns of Alexander the Great',
+                    'description' => 'Between 334 and 323 BC Alexander led campaigns that conquered the Persian Empire and created one of the largest empires of antiquity, spreading Hellenistic culture across the Mediterranean and Near East.'
+                ],
+                'fr' => [
+                    'title' => 'Campagnes d’Alexandre le Grand',
+                    'description' => 'Entre 334 et 323 av. J.-C., Alexandre mena des campagnes qui conquirent l’Empire perse et créèrent l’un des plus vastes empires de l’Antiquité, diffusant la culture hellénistique à travers la Méditerranée et le Proche-Orient.'
+                ]
+            ],
+            'Regno di Cleopatra' => [
+                'en' => [
+                    'title' => "Reign of Cleopatra",
+                    'description' => 'Cleopatra VII ruled during a period of great political instability. A cultured and skilled strategist, she sought alliances with Julius Caesar and Mark Antony to preserve her kingdom’s independence.'
+                ],
+                'fr' => [
+                    'title' => 'Règne de Cléopâtre',
+                    'description' => 'Cléopâtre VII régna durant une période d’importante instabilité politique. Femme lettrée et stratège, elle chercha des alliances avec Jules César et Marc Antoine pour préserver l’indépendance de son royaume.'
+                ]
+            ],
+            'Battaglia di Alesia' => [
+                'en' => [
+                    'title' => 'Battle of Alesia',
+                    'description' => 'In 52 BC Julius Caesar faced Vercingetorix at Alesia. Through fortifications and strategy, Caesar achieved a decisive victory that consolidated Roman control over Gaul.'
+                ],
+                'fr' => [
+                    'title' => 'Bataille d’Alesia',
+                    'description' => 'En 52 av. J.-C., Jules César affronta Vercingétorix à Alésia. Grâce à des fortifications et une stratégie maîtrisée, César remporta une victoire décisive qui consolida la domination romaine sur la Gaule.'
+                ]
+            ],
+            'Fondazione di Alessandria' => [
+                'en' => [
+                    'title' => 'Founding of Alexandria',
+                    'description' => 'In 331 BC Alexander the Great founded Alexandria in Egypt, destined to become a major cultural center with the famous Library of Alexandria and a crossroads for scientific and commercial exchange.'
+                ],
+                'fr' => [
+                    'title' => 'Fondation d’Alexandrie',
+                    'description' => 'En 331 av. J.-C., Alexandre le Grand fonda Alexandrie en Égypte, destinée à devenir un grand centre culturel avec la fameuse bibliothèque et un carrefour d’échanges scientifiques et commerciaux.'
+                ]
+            ],
+            'Scoperta della Relatività' => [
+                'en' => [
+                    'title' => 'Discovery of Relativity',
+                    'description' => 'In 1905 Albert Einstein published the theory of special relativity, revolutionizing physics by proposing that space and time are relative and interconnected.'
+                ],
+                'fr' => [
+                    'title' => 'Découverte de la relativité',
+                    'description' => 'En 1905, Albert Einstein publia la théorie de la relativité restreinte, révolutionnant la physique en proposant que l’espace et le temps soient relatifs et interdépendants.'
+                ]
+            ],
+            'Relatività Generale' => [
+                'en' => [
+                    'title' => 'General Relativity',
+                    'description' => 'In 1915 Einstein presented the general theory of relativity, describing gravity as the curvature of spacetime caused by mass and predicting phenomena like gravitational waves.'
+                ],
+                'fr' => [
+                    'title' => 'Relativité générale',
+                    'description' => 'En 1915, Einstein présenta la théorie générale de la relativité, décrivant la gravité comme la courbure de l’espace-temps causée par la masse et prédisant des phénomènes tels que les ondes gravitationnelles.'
+                ]
+            ],
+            'Seconda Guerra Mondiale' => [
+                'en' => [
+                    'title' => 'Second World War',
+                    'description' => 'From 1939 to 1945 the world was engulfed in the largest conflict in history. Leaders like Winston Churchill played central roles in the Allied resistance and wartime governance.'
+                ],
+                'fr' => [
+                    'title' => 'Seconde Guerre mondiale',
+                    'description' => 'De 1939 à 1945, le monde fut plongé dans le plus grand conflit de l’histoire. Des dirigeants comme Winston Churchill jouèrent des rôles centraux dans la résistance alliée et la gestion de la guerre.'
+                ]
+            ],
+            "Battaglia d'Inghilterra" => [
+                'en' => [
+                    'title' => 'Battle of Britain',
+                    'description' => 'In 1940 the RAF faced the Luftwaffe in the Battle of Britain, a pivotal aerial conflict where British pilots defended the country and secured a crucial strategic victory.'
+                ],
+                'fr' => [
+                    'title' => 'Bataille d’Angleterre',
+                    'description' => 'En 1940, la RAF affronta la Luftwaffe lors de la bataille d’Angleterre, un affrontement aérien décisif où les pilotes britanniques défendirent le pays et obtinrent une victoire stratégique cruciale.'
+                ]
+            ],
+            'Coronazione di Carlo Magno' => [
+                'en' => [
+                    'title' => 'Coronation of Charlemagne',
+                    'description' => 'On December 25, year 800, Charlemagne was crowned Emperor by Pope Leo III, marking the revival of imperial authority in Western Europe and the beginning of the Carolingian Renaissance.'
+                ],
+                'fr' => [
+                    'title' => 'Couronnement de Charlemagne',
+                    'description' => 'Le 25 décembre 800, Charlemagne fut couronné empereur par le pape Léon III, marquant la renaissance de l’autorité impériale en Occident et le début de la Renaissance carolingienne.'
+                ]
+            ],
+            'Battaglia di Hastings' => [
+                'en' => [
+                    'title' => 'Battle of Hastings',
+                    'description' => 'In 1066 William the Conqueror defeated King Harold II at Hastings, leading to the Norman conquest of England and profound social and political changes.'
+                ],
+                'fr' => [
+                    'title' => 'Bataille de Hastings',
+                    'description' => 'En 1066, Guillaume le Conquérant vainquit le roi Harold II à Hastings, conduisant à la conquête normande de l’Angleterre et à d’importants changements sociaux et politiques.'
+                ]
+            ],
+            'Prima Crociata' => [
+                'en' => [
+                    'title' => 'First Crusade',
+                    'description' => 'In 1099 the First Crusade culminated with the capture of Jerusalem by crusaders, marking the beginning of Latin presence in the Holy Land and a dramatic episode of medieval history.'
+                ],
+                'fr' => [
+                    'title' => 'Première croisade',
+                    'description' => 'En 1099, la Première croisade aboutit à la prise de Jérusalem par les croisés, marquant le début de la présence latine en Terre Sainte et un épisode dramatique de l’histoire médiévale.'
+                ]
+            ],
+            'Magna Carta' => [
+                'en' => [
+                    'title' => 'Magna Carta',
+                    'description' => 'In 1215 King John of England was forced to sign the Magna Carta, a document limiting royal power and protecting certain baronial rights, becoming a milestone in the development of constitutional law.'
+                ],
+                'fr' => [
+                    'title' => 'Magna Carta',
+                    'description' => 'En 1215, le roi Jean d’Angleterre fut contraint de signer la Magna Carta, document limitant le pouvoir royal et protégeant certains droits des barons, devenant une étape importante du droit constitutionnel.'
+                ]
+            ],
+            'Peste Nera' => [
+                'en' => [
+                    'title' => 'Black Death',
+                    'description' => 'From 1347 the Black Death spread across Europe, causing massive mortality and profound demographic, economic and social consequences. Entire villages were abandoned and production systems collapsed.'
+                ],
+                'fr' => [
+                    'title' => 'Peste noire',
+                    'description' => 'À partir de 1347, la peste noire se répandit à travers l’Europe, causant une mortalité massive et des conséquences démographiques, économiques et sociales profondes. Des villages entiers furent abandonnés et les systèmes de production s’effondrèrent.'
+                ]
+            ],
+        ];
+
         foreach ($events as $event) {
+            $data = [
+                'description' => $event['description'],
+                'year' => $event['year'],
+                'period_id' => $event['period_id'],
+                'image' => null,
+                'title_it' => $event['title'],
+                'description_it' => $event['description'],
+                'title_en' => isset($translations[$event['title']]) ? $translations[$event['title']]['en']['title'] : $event['title'],
+                'description_en' => isset($translations[$event['title']]) ? $translations[$event['title']]['en']['description'] : $event['description'],
+                'title_fr' => isset($translations[$event['title']]) ? $translations[$event['title']]['fr']['title'] : $event['title'],
+                'description_fr' => isset($translations[$event['title']]) ? $translations[$event['title']]['fr']['description'] : $event['description'],
+            ];
+
             $historicalEvent = HistoricalEvent::updateOrCreate(
                 ['title' => $event['title']],
-                [
-                    'description' => $event['description'],
-                    'year' => $event['year'],
-                    'period_id' => $event['period_id'],
-                    'image' => null,
-                ]
+                $data
             );
 
             $personsIds = HistoricalPerson::whereIn('name', $event['people'])->pluck('id');

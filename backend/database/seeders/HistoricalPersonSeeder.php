@@ -103,10 +103,180 @@ class HistoricalPersonSeeder extends Seeder
             ],
         ];
 
+        $translations = [
+            'Romolo' => [
+                'en' => [
+                    'name' => 'Romulus',
+                    'biography' => 'Legendary figure of Roman tradition, Romulus is considered the founder of Rome in 753 BC. According to myth, together with his brother Remus he was raised by a she-wolf after being abandoned on the banks of the Tiber. He embodies the archetype of the warrior-king and the mythical origin of a civilization destined to dominate the Mediterranean. Although his historical existence is uncertain, Romulus remains a central identity symbol of Roman culture.'
+                ],
+                'fr' => [
+                    'name' => 'Romulus',
+                    'biography' => 'Figure légendaire de la tradition romaine, Romulus est considéré comme le fondateur de Rome en 753 av. J.-C. Selon le mythe, avec son frère Rémus, il fut élevé par une louve après avoir été abandonné sur les rives du Tibre. Il incarne l’archétype du souverain-guerrier et l’origine mythique d’une civilisation destinée à dominer la Méditerranée. Bien que son existence historique soit incertaine, Romulus reste un symbole identitaire central de la culture romaine.'
+                ]
+            ],
+            'Giulio Cesare' => [
+                'en' => [
+                    'name' => 'Julius Caesar',
+                    'biography' => 'Gaius Julius Caesar was one of the most influential commanders and politicians in Roman history. A skilled strategist, he conquered Gaul and greatly expanded the Republic’s borders. His legacy includes political, social and administrative reforms that transformed Rome. His death on the Ides of March in 44 BC marked the end of the Republic and paved the way for the Empire.'
+                ],
+                'fr' => [
+                    'name' => 'Jules César',
+                    'biography' => 'Gaius Jules César fut l’un des commandants et hommes politiques les plus influents de l’histoire romaine. Stratège habile, il conquit la Gaule et étendit largement les frontières de la République. Son héritage comprend des réformes politiques, sociales et administratives ayant transformé Rome. Sa mort aux Ides de mars en 44 av. J.-C. marqua la fin de la République et ouvrit la voie à l’Empire.'
+                ]
+            ],
+            'Cleopatra' => [
+                'en' => [
+                    'name' => 'Cleopatra',
+                    'biography' => 'Cleopatra VII Philopator was the last ruler of the Ptolemaic Kingdom of Egypt. Educated, multilingual and politically astute, she sought to preserve her kingdom’s independence through strategic alliances with Julius Caesar and Mark Antony. Her death in 30 BC marked the end of independent Egypt and the start of Roman rule.'
+                ],
+                'fr' => [
+                    'name' => 'Cléopâtre',
+                    'biography' => 'Cléopâtre VII Philopator fut la dernière souveraine du royaume lagide d’Égypte. Éduquée, polyglotte et politiquement avisée, elle chercha à préserver l’indépendance de son royaume par des alliances stratégiques avec Jules César et Marc Antoine. Sa mort en 30 av. J.-C. marqua la fin de l’Égypte indépendante et le début de la domination romaine.'
+                ]
+            ],
+            'Leonardo da Vinci' => [
+                'en' => [
+                    'name' => 'Leonardo da Vinci',
+                    'biography' => 'Leonardo da Vinci was one of the greatest geniuses of the Renaissance. Painter, sculptor, inventor, anatomist and engineer, he embodied the ideal of the universal man. His works, including the Mona Lisa and The Last Supper, are considered masterpieces. His scientific studies, from anatomy to flight, show boundless curiosity and extraordinary observational skills.'
+                ],
+                'fr' => [
+                    'name' => 'Léonard de Vinci',
+                    'biography' => 'Léonard de Vinci fut l’un des plus grands génies de la Renaissance. Peintre, sculpteur, inventeur, anatomiste et ingénieur, il incarnait l’idéal de l’homme universel. Ses œuvres, dont la Joconde et La Cène, sont considérées comme des chefs-d’œuvre. Ses études scientifiques, de l’anatomie au vol, témoignent d’une curiosité inépuisable et d’une capacité d’observation extraordinaire.'
+                ]
+            ],
+            'Napoleone Bonaparte' => [
+                'en' => [
+                    'name' => 'Napoleon Bonaparte',
+                    'biography' => 'Napoleon Bonaparte was a leading political and military figure of modern history. Born in Corsica, he rose during the French Revolution and later became Emperor of the French. His campaigns reshaped Europe and introduced lasting reforms such as the Napoleonic Code.'
+                ],
+                'fr' => [
+                    'name' => 'Napoléon Bonaparte',
+                    'biography' => 'Napoléon Bonaparte fut un dirigeant politique et militaire majeur de l’histoire moderne. Né en Corse, il s’éleva pendant la Révolution française puis devint empereur des Français. Ses campagnes remodelèrent l’Europe et introduisirent des réformes durables telles que le Code Napoléon.'
+                ]
+            ],
+            'Galileo Galilei' => [
+                'en' => [
+                    'name' => 'Galileo Galilei',
+                    'biography' => 'Galileo Galilei, a scientist from Pisa, is considered the father of modern science. His astronomical observations, enabled by the telescope, revolutionized the understanding of the universe. A defender of the experimental method, his trial with the Inquisition marks a dramatic conflict between science and religious authority.'
+                ],
+                'fr' => [
+                    'name' => 'Galilée (Galileo Galilei)',
+                    'biography' => 'Galileo Galilei, scientifique de Pise, est considéré comme le père de la science moderne. Ses observations astronomiques, rendues possibles par le télescope, révolutionnèrent la compréhension de l’univers. Défenseur de la méthode expérimentale, son procès devant l’Inquisition marque un conflit dramatique entre la science et l’autorité religieuse.'
+                ]
+            ],
+            'Cristoforo Colombo' => [
+                'en' => [
+                    'name' => 'Christopher Columbus',
+                    'biography' => 'Christopher Columbus was a Genoese navigator and explorer in the service of the Crown of Castile. In 1492 he reached the Americas while searching for a western route to the Indies, opening a new era of exploration and exchanges between the Old and New Worlds.'
+                ],
+                'fr' => [
+                    'name' => 'Christophe Colomb',
+                    'biography' => 'Christophe Colomb était un navigateur génois au service de la Couronne de Castille. En 1492, il atteignit les Amériques alors qu’il cherchait une route occidentale vers les Indes, ouvrant une nouvelle ère d’exploration et d’échanges entre l’Ancien et le Nouveau Monde.'
+                ]
+            ],
+            'Michelangelo' => [
+                'en' => [
+                    'name' => 'Michelangelo',
+                    'biography' => 'Michelangelo Buonarroti was one of the greatest artists of the Renaissance. Sculptor, painter, architect and poet, he created masterpieces such as David, the Pietà and the Sistine Chapel ceiling.'
+                ],
+                'fr' => [
+                    'name' => 'Michel-Ange',
+                    'biography' => 'Michel-Ange Buonarroti fut l’un des plus grands artistes de la Renaissance. Sculpteur, peintre, architecte et poète, il créa des chefs-d’œuvre comme le David, la Pietà et le plafond de la chapelle Sixtine.'
+                ]
+            ],
+            'Alessandro Magno' => [
+                'en' => [
+                    'name' => 'Alexander the Great',
+                    'biography' => 'Alexander III of Macedon, known as Alexander the Great, was one of history’s greatest conquerors. In less than a decade he built an empire from Greece to India, spreading Hellenistic culture across the Mediterranean and Near East.'
+                ],
+                'fr' => [
+                    'name' => 'Alexandre le Grand',
+                    'biography' => 'Alexandre III de Macédoine, dit Alexandre le Grand, fut l’un des plus grands conquérants de l’histoire. En moins d’une décennie, il créa un empire allant de la Grèce à l’Inde, diffusant la culture hellénistique dans tout le bassin méditerranéen et le Proche-Orient.'
+                ]
+            ],
+            'Winston Churchill' => [
+                'en' => [
+                    'name' => 'Winston Churchill',
+                    'biography' => 'Winston Churchill was one of the most important statesmen of the 20th century. As British Prime Minister during World War II, his leadership and speeches were crucial in sustaining national morale.'
+                ],
+                'fr' => [
+                    'name' => 'Winston Churchill',
+                    'biography' => 'Winston Churchill fut l’un des grands hommes d’Etat du XXe siècle. En tant que Premier ministre britannique pendant la Seconde Guerre mondiale, son leadership et ses discours furent essentiels pour maintenir le moral national.'
+                ]
+            ],
+            'Albert Einstein' => [
+                'en' => [
+                    'name' => 'Albert Einstein',
+                    'biography' => 'Albert Einstein was one of the most influential physicists in history. Author of the theories of special and general relativity, he revolutionized our understanding of space, time and gravity.'
+                ],
+                'fr' => [
+                    'name' => 'Albert Einstein',
+                    'biography' => 'Albert Einstein fut l’un des physiciens les plus influents de l’histoire. Auteur des théories de la relativité restreinte et générale, il révolutionna notre compréhension de l’espace, du temps et de la gravité.'
+                ]
+            ],
+            'Carlo Magno' => [
+                'en' => [
+                    'name' => 'Charlemagne',
+                    'biography' => 'Charlemagne, king of the Franks and later Emperor of the Holy Roman Empire, was one of the most influential rulers of the Middle Ages. He promoted administrative, cultural and religious reforms that helped shape medieval Europe.'
+                ],
+                'fr' => [
+                    'name' => 'Charlemagne',
+                    'biography' => 'Charlemagne, roi des Francs puis empereur du Saint-Empire romain, fut l’un des souverains les plus influents du Moyen Âge. Il promut des réformes administratives, culturelles et religieuses qui contribuèrent à façonner l’Europe médiévale.'
+                ]
+            ],
+            'Guglielmo il Conquistatore' => [
+                'en' => [
+                    'name' => 'William the Conqueror',
+                    'biography' => 'William I of England, known as the Conqueror, was Duke of Normandy who led the Norman conquest of England in 1066. His victory at Hastings transformed English society and governance.'
+                ],
+                'fr' => [
+                    'name' => 'Guillaume le Conquérant',
+                    'biography' => 'Guillaume Ier d’Angleterre, dit le Conquérant, fut duc de Normandie qui mena la conquête normande de l’Angleterre en 1066. Sa victoire à Hastings transforma la société et le gouvernement anglais.'
+                ]
+            ],
+            'Goffredo di Buglione' => [
+                'en' => [
+                    'name' => 'Godfrey of Bouillon',
+                    'biography' => 'Godfrey of Bouillon was one of the principal leaders of the First Crusade. After the conquest of Jerusalem in 1099 he became the first ruler of the new Latin Kingdom, taking the title Defender of the Holy Sepulchre.'
+                ],
+                'fr' => [
+                    'name' => 'Godefroy de Bouillon',
+                    'biography' => 'Godefroy de Bouillon fut l’un des principaux leaders de la Première croisade. Après la conquête de Jérusalem en 1099, il devint le premier souverain du nouveau Royaume latin, portant le titre de Défenseur du Saint-Sépulcre.'
+                ]
+            ],
+            'Giovanni Senzaterra' => [
+                'en' => [
+                    'name' => 'John Lackland',
+                    'biography' => 'John of England, known as Lackland, was a controversial ruler whose reign was marked by conflicts with the nobility and France. In 1215 he was forced to accept the Magna Carta, a document limiting royal power and guaranteeing certain baronial rights.'
+                ],
+                'fr' => [
+                    'name' => 'Jean sans Terre',
+                    'biography' => 'Jean d’Angleterre, dit Sans Terre, fut un souverain controversé dont le règne fut marqué par des conflits avec la noblesse et la France. En 1215, il fut contraint d’accepter la Magna Carta, document limitant le pouvoir royal et garantissant certains droits des barons.'
+                ]
+            ],
+        ];
+
         foreach ($people as $person) {
+            $personData = $person;
+            $personData['name_it'] = $person['name'];
+            $personData['biography_it'] = $person['biography'];
+
+            $key = $person['name'];
+            if (isset($translations[$key])) {
+                $personData['name_en'] = $translations[$key]['en']['name'] ?? $person['name'];
+                $personData['biography_en'] = $translations[$key]['en']['biography'] ?? $person['biography'];
+                $personData['name_fr'] = $translations[$key]['fr']['name'] ?? $person['name'];
+                $personData['biography_fr'] = $translations[$key]['fr']['biography'] ?? $person['biography'];
+            } else {
+                $personData['name_en'] = $person['name'];
+                $personData['biography_en'] = $person['biography'];
+                $personData['name_fr'] = $person['name'];
+                $personData['biography_fr'] = $person['biography'];
+            }
+
             HistoricalPerson::updateOrCreate(
                 ['name' => $person['name']],
-                $person
+                $personData
             );
         }
     }
