@@ -25,25 +25,32 @@ class AssignEventImagesSeeder extends Seeder
         foreach ($files as $file) {
             $name = pathinfo($file, PATHINFO_FILENAME); // slug like 'fondazione-roma'
 
-            // try to find an event whose title slug matches
+            // try to find an event whose title slug matches any title field
             $event = HistoricalEvent::all()->first(function ($e) use ($name) {
-                $slug = Str::slug($e->title_it ?? $e->title);
-                // exact match
-                if ($slug === $name) return true;
-                // filename is substring of slug or vice-versa (covers "assassinio-giulio-cesare" vs "assassinio-di-giulio-cesare")
-                if (Str::contains($slug, $name) || Str::contains($name, $slug)) return true;
-                // try match by removing common short words from slug
-                $normalized = str_replace(['-di-', '-del-', '-della-', '-dello-'], '-', $slug);
-                if (Str::contains($normalized, $name)) return true;
+                $possibleTitles = array_filter([
+                    $e->title_it ?? null,
+                    $e->title ?? null,
+                    $e->title_en ?? null,
+                    $e->title_fr ?? null,
+                ]);
+
+                foreach ($possibleTitles as $title) {
+                    $slug = Str::slug($title);
+                    if ($slug === $name) return true;
+                    if (Str::contains($slug, $name) || Str::contains($name, $slug)) return true;
+                    $normalized = str_replace(['-di-', '-del-', '-della-', '-dello-'], '-', $slug);
+                    if (Str::contains($normalized, $name)) return true;
+                }
+
                 return false;
             });
 
             if ($event) {
                 $event->image = 'events/' . $file;
                 $event->save();
-                $this->command->info("Assigned image {$file} to event id={$event->id} title='{$event->title}'");
+                $this->command->info("Assigned image {$file} to event id={$event->id} title='" . ($event->title ?? $event->title_it ?? $event->title_en ?? $event->title_fr) . "'");
             } else {
-                $this->command->warn("No matching event for file: {$file}");
+                $this->command->warn("No matching event for file: {$file} (slug: {$name})");
             }
         }
     }
