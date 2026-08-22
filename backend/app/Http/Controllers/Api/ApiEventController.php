@@ -52,19 +52,37 @@ class ApiEventController extends Controller
 
     public function show($id)
     {
+        $lang = request()->query('lang') ?? app()->getLocale();
+        $suffix = in_array($lang, ['it', 'en', 'fr']) ? $lang : 'it';
+
         $e = HistoricalEvent::with(['period', 'historicalPeople'])->findOrFail($id);
 
-        $people = $e->historicalPeople->map(function ($p) {
+        $people = $e->historicalPeople->map(function ($p) use ($suffix) {
+            $nameKey = 'name_' . $suffix;
+            $bioKey = 'biography_' . $suffix;
             return [
                 'id' => $p->id,
-                'name' => $p->name,
+                'name' => $p->{$nameKey} ?: $p->name,
                 'birth_year' => $p->birth_year,
-                'biography' => $p->biography,
+                'biography' => $p->{$bioKey} ?: $p->biography,
                 'image' => $p->image,
             ];
         })->values();
 
         $arr = $e->toArray();
+        $titleKey = 'title_' . $suffix;
+        $descKey = 'description_' . $suffix;
+
+        $arr['title'] = $e->{$titleKey} ?: $e->title;
+        $arr['description'] = $e->{$descKey} ?: $e->description;
+
+        // period localized
+        if ($e->period) {
+            $pNameKey = 'name_' . $suffix;
+            $e->period->name = $e->period->{$pNameKey} ?: $e->period->name;
+            $arr['period'] = $e->period->toArray();
+        }
+
         $arr['people'] = $people;
         $arr['historical_people'] = $people;
 

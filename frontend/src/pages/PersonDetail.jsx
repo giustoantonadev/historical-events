@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "../styles/persondetail.css";
 
 export default function PersonDetail() {
   const { id } = useParams();
   const [person, setPerson] = useState(null);
+  const { t, i18n } = useTranslation();
+  const lang = (i18n.language || 'it').split('-')[0];
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/people/${id}`)
+    fetch(`http://localhost:8000/api/people/${id}?lang=${lang}`)
       .then(res => res.json())
       .then(data => setPerson(data));
-  }, [id]);
+  }, [id, lang]);
 
-  if (!person) return <p>Caricamento...</p>;
+  if (!person) return <p>{t ? t('loading') : 'Caricamento...'}</p>;
 
   return (
     <div className="container persondetail-wrapper">
@@ -39,13 +42,13 @@ export default function PersonDetail() {
             <strong>Nascita:</strong> {person.birth_year}
           </p>
 
-          <h3 className="section-title">Biografia</h3>
+          <h3 className="section-title">{t('person.biography', { defaultValue: 'Biografia' })}</h3>
           <p>{person.biography}</p>
 
           <h3 className="section-title">Eventi Collegati</h3>
 
           {person.historical_events?.length === 0 && (
-            <p>Nessun evento collegato.</p>
+            <p>{t('person.noEvents', { defaultValue: 'Nessun evento collegato.' })}</p>
           )}
 
           <ul className="event-list">

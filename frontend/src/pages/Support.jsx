@@ -14,16 +14,36 @@ export default function Support() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        const payload = { email, issueType, priority, note, steps, attachmentName: attachment?.name ?? null };
-        console.log("Support request", payload);
-        setSent(true);
-        setEmail("");
-        setNote("");
-        setIssueType("bug");
-        setPriority("medium");
-        setSteps("");
-        setAttachment(null);
-        setTimeout(() => setSent(false), 4000);
+        const fd = new FormData();
+        fd.append('email', email);
+        fd.append('issueType', issueType);
+        fd.append('priority', priority);
+        fd.append('note', note);
+        fd.append('steps', steps || '');
+        if (attachment) fd.append('attachment', attachment);
+
+        fetch('http://localhost:8000/api/support', {
+            method: 'POST',
+            body: fd
+        })
+            .then(res => {
+                if (!res.ok) throw new Error('Network error');
+                return res.json();
+            })
+            .then(() => {
+                setSent(true);
+                setEmail("");
+                setNote("");
+                setIssueType("bug");
+                setPriority("medium");
+                setSteps("");
+                setAttachment(null);
+                setTimeout(() => setSent(false), 4000);
+            })
+            .catch(err => {
+                console.error('Failed to send support request', err);
+                alert(t('support.error', { defaultValue: "Failed to send request" }));
+            });
     }
 
     function handleFile(e) {

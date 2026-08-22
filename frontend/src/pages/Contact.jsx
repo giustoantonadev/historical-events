@@ -14,11 +14,24 @@ export default function Contact() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // For now, just simulate send and clear form
-        console.log("Contact form submitted", form);
-        setSent(true);
-        setForm({ name: "", email: "", message: "" });
-        setTimeout(() => setSent(false), 4000);
+        fetch('http://localhost:8000/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(form)
+        })
+            .then(res => {
+                if (!res.ok) throw new Error('Network error');
+                return res.json();
+            })
+            .then(() => {
+                setSent(true);
+                setForm({ name: "", email: "", message: "" });
+                setTimeout(() => setSent(false), 4000);
+            })
+            .catch(err => {
+                console.error('Failed to send contact', err);
+                alert(t('contact.error', { defaultValue: 'Failed to send message' }));
+            });
     }
 
     return (

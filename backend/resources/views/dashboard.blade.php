@@ -20,7 +20,7 @@
         {{-- Periodi --}}
         <div class="col-md-4">
             <div class="p-4 rounded-4 shadow-lg"
-                 style="background: linear-gradient(135deg, #1f1f1f, #292929); border: 1px solid rgba(255,255,255,0.06);">
+                style="background: linear-gradient(135deg, #1f1f1f, #292929); border: 1px solid rgba(255,255,255,0.06);">
                 <h4 class="text-light fw-bold mb-2">
                     <i class="bi bi-calendar-event me-2"></i> Periodi Storici
                 </h4>
@@ -36,7 +36,7 @@
         {{-- Personaggi --}}
         <div class="col-md-4">
             <div class="p-4 rounded-4 shadow-lg"
-                 style="background: linear-gradient(135deg, #1f1f1f, #292929); border: 1px solid rgba(255,255,255,0.06);">
+                style="background: linear-gradient(135deg, #1f1f1f, #292929); border: 1px solid rgba(255,255,255,0.06);">
                 <h4 class="text-light fw-bold mb-2">
                     <i class="bi bi-people-fill me-2"></i> Personaggi Storici
                 </h4>
@@ -52,7 +52,7 @@
         {{-- Eventi --}}
         <div class="col-md-4">
             <div class="p-4 rounded-4 shadow-lg"
-                 style="background: linear-gradient(135deg, #1f1f1f, #292929); border: 1px solid rgba(255,255,255,0.06);">
+                style="background: linear-gradient(135deg, #1f1f1f, #292929); border: 1px solid rgba(255,255,255,0.06);">
                 <h4 class="text-light fw-bold mb-2">
                     <i class="bi bi-flag me-2"></i> Eventi Storici
                 </h4>
@@ -80,6 +80,15 @@
                 periodi, personaggi ed eventi, con un’interfaccia moderna e coerente.
             </p>
 
+        </div>
+    </div>
+
+    {{-- MESSAGES QUICK ACCESS --}}
+    <div class="mt-4">
+        <div class="p-3 rounded-3" style="background: linear-gradient(135deg, #121212, #1b1b1b); border:1px solid rgba(255,255,255,0.04)">
+            <h5 class="text-light mb-2"><i class="bi bi-envelope-fill me-2"></i> Messaggi</h5>
+            <p class="text-light opacity-75 mb-2">Visualizza le richieste di contatto e supporto inviate dagli utenti.</p>
+            <a href="{{ route('admin.messages.index') }}" class="btn btn-outline-light">Apri Messages</a>
         </div>
     </div>
 

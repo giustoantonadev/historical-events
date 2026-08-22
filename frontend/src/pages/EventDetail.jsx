@@ -5,12 +5,11 @@ import "../styles/eventdetail.css";
 
 export default function EventDetail() {
   const { id } = useParams();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [event, setEvent] = useState(null);
   const [imgLoaded, setImgLoaded] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState(null);
 
-  const { i18n } = useTranslation();
   const lang = (i18n.language || 'it').split('-')[0];
 
   useEffect(() => {

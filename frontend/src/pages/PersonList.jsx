@@ -5,13 +5,14 @@ import "../styles/personlist.css";
 
 export default function PersonList() {
   const [people, setPeople] = useState([]);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = (i18n.language || 'it').split('-')[0];
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/people")
+    fetch(`http://localhost:8000/api/people?lang=${lang}`)
       .then(res => res.json())
       .then(data => setPeople(data));
-  }, []);
+  }, [lang]);
 
   return (
     <div className="container personlist-wrapper">

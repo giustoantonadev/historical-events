@@ -6,10 +6,9 @@ import EventCard from "../components/EventCard";
 export default function EventList() {
   const [events, setEvents] = useState([]);
   const [era, setEra] = useState('all');
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const heroRef = useRef(null);
 
-  const { i18n } = useTranslation();
   const lang = (i18n.language || 'it').split('-')[0];
 
   useEffect(() => {
