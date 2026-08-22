@@ -89,7 +89,7 @@ export default function EventList() {
 
         <div id="events" className="row g-4 container">
           {filteredEvents.map(event => (
-            <div key={event.id} className="col-sm-6 col-md-6 col-lg-4">
+            <div key={event.id} className="col-sm-12 col-md-6 col-lg-4">
               <EventCard event={event} />
             </div>
           ))}
