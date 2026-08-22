@@ -14,7 +14,15 @@ function getIconForEvent(title) {
 
 export default function EventCard({ event }) {
   const icon = getIconForEvent(event.title);
-  const imgSrc = event.image ? `http://localhost:8000/storage/${event.image}` : `/images/events/placeholder.svg`;
+  // Prefer thumbnail, then image, then placeholder. If value is already a full URL, use it.
+  const resolveStorage = (path) => {
+    if (!path) return null;
+    if (path.startsWith('http')) return path;
+    // ensure images stored under storage/events are referenced correctly
+    const normalized = path.startsWith('events/') ? path : `events/${path}`;
+    return `http://localhost:8000/storage/${normalized}`;
+  };
+  const imgSrc = resolveStorage(event.thumbnail) || resolveStorage(event.image) || `/images/events/placeholder.svg`;
   const [loaded, setLoaded] = useState(false);
 
   function formatYear(y) {
@@ -35,6 +43,22 @@ export default function EventCard({ event }) {
           alt={event.title}
           className={`event-img ${loaded ? 'loaded' : 'loading'}`}
           onLoad={() => setLoaded(true)}
+          onError={(e) => {
+            const img = e.currentTarget;
+            if (!img.dataset.retry) {
+              img.dataset.retry = '1';
+              const src = img.getAttribute('src') || '';
+              if (src.endsWith('.jpg')) {
+                img.src = src.replace(/\.jpg$/, '.png');
+                return;
+              }
+              if (src.endsWith('.png')) {
+                img.src = src.replace(/\.png$/, '.jpg');
+                return;
+              }
+            }
+            img.src = '/images/events/placeholder.svg';
+          }}
           loading="lazy"
         />
       </div>
