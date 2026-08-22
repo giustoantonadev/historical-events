@@ -74,8 +74,8 @@ class ContactController extends Controller
             'attachment' => $attachmentPath,
         ]);
 
-        // Queue email notification
-        $to = config('mail.from.address');
+        // Queue email notification to support-specific recipient (or fallback)
+        $to = config('support.email');
         if ($to) {
             try {
                 $payload = array_merge(['type' => 'support', 'id' => $msg->id], [

@@ -5,7 +5,7 @@
     <a href="{{ route('admin.messages.index') }}" class="btn btn-sm btn-secondary mb-3">Back to messages</a>
 
     <div class="card bg-dark border-light">
-        <div class="card-body">
+        <div class="card-body text-light">
             <h4 class="card-title">Message #{{ $m->id }} — {{ ucfirst($m->type) }}</h4>
             <p><strong>From:</strong> {{ $m->name ?? '-' }} &lt;{{ $m->email }}&gt;</p>
             @if($m->subject)
@@ -28,7 +28,7 @@
             <p><strong>Attachment:</strong> <a href="{{ asset('storage/' . $m->attachment) }}" target="_blank">Download</a></p>
             @endif
 
-            <p class="text-muted"><small>Received: {{ $m->created_at }}</small></p>
+            <p class="text-white-50"><small>Received: {{ $m->created_at }}</small></p>
 
             <form action="{{ route('admin.messages.destroy', $m->id) }}" method="POST" onsubmit="return confirm('Delete message?');">
                 @csrf
