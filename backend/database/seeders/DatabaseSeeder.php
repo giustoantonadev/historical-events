@@ -13,13 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Seed core data only. Multilang copies and dedupe scripts are one-time maintenance
+        // and were removed to simplify seeders.
         $this->call([
             PeriodSeeder::class,
-            PeriodsMultilangSeeder::class,
             HistoricalPersonSeeder::class,
-            PeopleMultilangSeeder::class,
             HistoricalEventSeeder::class,
-            EventsMultilangSeeder::class,
         ]);
     }
 }
