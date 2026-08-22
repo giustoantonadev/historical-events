@@ -13,7 +13,7 @@ class HistoricalEventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         $historicalEvents = HistoricalEvent::orderBy('year', 'asc')->get();
         return view('events.index', compact('historicalEvents'));
@@ -22,7 +22,7 @@ class HistoricalEventController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): \Illuminate\Contracts\View\View
     {
         $periods = Period::all();
         $historicalPeople = HistoricalPerson::all();
@@ -32,7 +32,7 @@ class HistoricalEventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -61,7 +61,7 @@ class HistoricalEventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): \Illuminate\Contracts\View\View
     {
         $historicalEvent = HistoricalEvent::with(['period', 'historicalPeople'])->findOrFail($id);
         return view('events.show', compact('historicalEvent'));
@@ -70,7 +70,7 @@ class HistoricalEventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): \Illuminate\Contracts\View\View
     {
         $historicalEvent = HistoricalEvent::with(['period', 'historicalPeople'])->findOrFail($id);
         $periods = Period::all();
@@ -81,7 +81,7 @@ class HistoricalEventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $historicalEvent = HistoricalEvent::findOrFail($id);
 
@@ -114,7 +114,7 @@ class HistoricalEventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): \Illuminate\Http\RedirectResponse
     {
         // delete event
         $historicalEvent = HistoricalEvent::findOrFail($id);

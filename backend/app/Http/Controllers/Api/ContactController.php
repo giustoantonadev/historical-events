@@ -12,7 +12,7 @@ use App\Models\Message;
 
 class ContactController extends Controller
 {
-    public function contact(Request $request)
+    public function contact(Request $request): \Illuminate\Http\JsonResponse
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
@@ -43,7 +43,7 @@ class ContactController extends Controller
         return response()->json(['ok' => true, 'id' => $msg->id]);
     }
 
-    public function support(Request $request)
+    public function support(Request $request): \Illuminate\Http\JsonResponse
     {
         $data = $request->validate([
             'email' => 'required|email|max:255',

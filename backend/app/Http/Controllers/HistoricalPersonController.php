@@ -10,18 +10,18 @@ class HistoricalPersonController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         $historicalPeople = HistoricalPerson::orderBy('birth_year', 'asc')->get();
         return view('historical_person.index', compact('historicalPeople'));
     }
 
-    public function create()
+    public function create(): \Illuminate\Contracts\View\View
     {
         return view('historical_person.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -35,7 +35,10 @@ class HistoricalPersonController extends Controller
         $historicalPerson->biography = $request->input('biography');
         $historicalPerson->birth_year = $request->input('birth_year');
         if ($request->hasFile('portrait')) {
-            $historicalPerson->portrait = $request->file('portrait')->store('portraits', 'public');
+            $path = $request->file('portrait')->store('portraits', 'public');
+            if (is_string($path)) {
+                $historicalPerson->portrait = $path;
+            }
         }
 
         $historicalPerson->save();
@@ -44,19 +47,19 @@ class HistoricalPersonController extends Controller
             ->with('success', 'Historical person created successfully.');
     }
 
-    public function show(string $id)
+    public function show(string $id): \Illuminate\Contracts\View\View
     {
         $historicalPerson = HistoricalPerson::with('historicalEvents')->findOrFail($id);
         return view('historical_person.show', compact('historicalPerson'));
     }
 
-    public function edit(string $id)
+    public function edit(string $id): \Illuminate\Contracts\View\View
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
         return view('historical_person.edit', compact('historicalPerson'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
 
@@ -68,7 +71,10 @@ class HistoricalPersonController extends Controller
         ]);
 
         if ($request->hasFile('portrait')) {
-            $data['portrait'] = $request->file('portrait')->store('portraits', 'public');
+            $path = $request->file('portrait')->store('portraits', 'public');
+            if (is_string($path)) {
+                $data['portrait'] = $path;
+            }
         }
 
         $historicalPerson->update($data);
@@ -77,7 +83,7 @@ class HistoricalPersonController extends Controller
             ->with('success', 'Historical person updated successfully.');
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): \Illuminate\Http\RedirectResponse
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
         $historicalPerson->delete();

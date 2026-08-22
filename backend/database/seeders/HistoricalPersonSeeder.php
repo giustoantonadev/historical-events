@@ -10,6 +10,9 @@ class HistoricalPersonSeeder extends Seeder
 {
     public function run(): void
     {
+        /**
+         * @var array<int, array{name: string, biography: string, portrait?: string, birth_year?: int}> $people
+         */
         $people = [
             [
                 'name' => 'Romolo',
@@ -103,6 +106,9 @@ class HistoricalPersonSeeder extends Seeder
             ],
         ];
 
+        /**
+         * @var array<string, array{en?: array{name?: string, biography?: string}, fr?: array{name?: string, biography?: string}}> $translations
+         */
         $translations = [
             'Romolo' => [
                 'en' => [
@@ -257,16 +263,21 @@ class HistoricalPersonSeeder extends Seeder
         ];
 
         foreach ($people as $person) {
+            /** @var array{name: string, biography: string, portrait?: string, birth_year?: int} $person */
             $personData = $person;
             $personData['name_it'] = $person['name'];
             $personData['biography_it'] = $person['biography'];
 
             $key = $person['name'];
-            if (isset($translations[$key])) {
-                $personData['name_en'] = $translations[$key]['en']['name'] ?? $person['name'];
-                $personData['biography_en'] = $translations[$key]['en']['biography'] ?? $person['biography'];
-                $personData['name_fr'] = $translations[$key]['fr']['name'] ?? $person['name'];
-                $personData['biography_fr'] = $translations[$key]['fr']['biography'] ?? $person['biography'];
+            if (array_key_exists($key, $translations)) {
+                $t = $translations[$key];
+                $en = is_array($t['en'] ?? null) ? $t['en'] : [];
+                $fr = is_array($t['fr'] ?? null) ? $t['fr'] : [];
+
+                $personData['name_en'] = $en['name'] ?? $person['name'];
+                $personData['biography_en'] = $en['biography'] ?? $person['biography'];
+                $personData['name_fr'] = $fr['name'] ?? $person['name'];
+                $personData['biography_fr'] = $fr['biography'] ?? $person['biography'];
             } else {
                 $personData['name_en'] = $person['name'];
                 $personData['biography_en'] = $person['biography'];

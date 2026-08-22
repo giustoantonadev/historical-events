@@ -462,10 +462,10 @@ class HistoricalEventSeeder extends Seeder
                 'image' => null,
                 'title_it' => $event['title'],
                 'description_it' => $event['description'],
-                'title_en' => isset($translations[$event['title']]) ? $translations[$event['title']]['en']['title'] : $event['title'],
-                'description_en' => isset($translations[$event['title']]) ? $translations[$event['title']]['en']['description'] : $event['description'],
-                'title_fr' => isset($translations[$event['title']]) ? $translations[$event['title']]['fr']['title'] : $event['title'],
-                'description_fr' => isset($translations[$event['title']]) ? $translations[$event['title']]['fr']['description'] : $event['description'],
+                'title_en' => array_key_exists($event['title'], $translations) ? $translations[$event['title']]['en']['title'] : $event['title'],
+                'description_en' => array_key_exists($event['title'], $translations) ? $translations[$event['title']]['en']['description'] : $event['description'],
+                'title_fr' => array_key_exists($event['title'], $translations) ? $translations[$event['title']]['fr']['title'] : $event['title'],
+                'description_fr' => array_key_exists($event['title'], $translations) ? $translations[$event['title']]['fr']['description'] : $event['description'],
             ];
 
             $historicalEvent = HistoricalEvent::updateOrCreate(

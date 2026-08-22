@@ -11,14 +11,14 @@ class MessageReceived extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $messageModel;
+    public Message $messageModel;
 
     public function __construct(Message $message)
     {
         $this->messageModel = $message;
     }
 
-    public function build()
+    public function build(): self
     {
         $m = $this->subject('Website message: ' . ($this->messageModel->type ?? 'message'))
             ->view('emails.message_received')

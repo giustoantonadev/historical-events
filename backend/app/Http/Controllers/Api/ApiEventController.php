@@ -5,70 +5,81 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\HistoricalEvent;
+use App\Models\HistoricalPerson;
+use App\Models\Period;
 
 class ApiEventController extends Controller
 {
-    public function index()
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function index(): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();
         $suffix = in_array($lang, ['it', 'en', 'fr']) ? $lang : 'it';
 
-        $events = HistoricalEvent::with(['period', 'historicalPeople'])
+        $eventsCollection = HistoricalEvent::with(['period', 'historicalPeople'])
             ->orderBy('year', 'asc')
-            ->get()
-            ->map(function ($e) use ($suffix) {
-                $people = $e->historicalPeople->map(function ($p) use ($suffix) {
-                    $nameKey = 'name_' . $suffix;
-                    $bioKey = 'biography_' . $suffix;
-                    return [
-                        'id' => $p->id,
-                        'name' => $p->{$nameKey} ?: $p->name,
-                        'birth_year' => $p->birth_year,
-                        'biography' => $p->{$bioKey} ?: $p->biography,
-                        'image' => $p->image,
-                    ];
-                })->values();
+            ->get();
 
-                $arr = $e->toArray();
-                $titleKey = 'title_' . $suffix;
-                $descKey = 'description_' . $suffix;
+        $events = [];
+        foreach ($eventsCollection as $e) {
+            $people = [];
+            foreach ($e->historicalPeople as $p) {
+                $nameKey = 'name_' . $suffix;
+                $bioKey = 'biography_' . $suffix;
+                $people[] = [
+                    'id' => $p->id,
+                    'name' => $p->{$nameKey} ?: $p->name,
+                    'birth_year' => $p->birth_year,
+                    'biography' => $p->{$bioKey} ?: $p->biography,
+                    'image' => $p->portrait ?? null,
+                ];
+            }
 
-                $arr['title'] = $e->{$titleKey} ?: $e->title;
-                $arr['description'] = $e->{$descKey} ?: $e->description;
+            $arr = $e->toArray();
+            $titleKey = 'title_' . $suffix;
+            $descKey = 'description_' . $suffix;
 
-                // period localized
-                if ($e->period) {
-                    $pNameKey = 'name_' . $suffix;
-                    $e->period->name = $e->period->{$pNameKey} ?: $e->period->name;
-                }
+            $arr['title'] = $e->{$titleKey} ?: $e->title;
+            $arr['description'] = $e->{$descKey} ?: $e->description;
 
-                $arr['people'] = $people;
-                $arr['historical_people'] = $people;
-                return $arr;
-            });
+            if ($e->period) {
+                $pNameKey = 'name_' . $suffix;
+                $e->period->name = $e->period->{$pNameKey} ?: $e->period->name;
+                $arr['period'] = $e->period->toArray();
+            }
+
+            $arr['people'] = $people;
+            $arr['historical_people'] = $people;
+            $events[] = $arr;
+        }
 
         return $events;
     }
 
-    public function show($id)
+    /**
+     * @return array<string, mixed>
+     */
+    public function show(int|string $id): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();
         $suffix = in_array($lang, ['it', 'en', 'fr']) ? $lang : 'it';
 
         $e = HistoricalEvent::with(['period', 'historicalPeople'])->findOrFail($id);
 
-        $people = $e->historicalPeople->map(function ($p) use ($suffix) {
+        $people = [];
+        foreach ($e->historicalPeople as $p) {
             $nameKey = 'name_' . $suffix;
             $bioKey = 'biography_' . $suffix;
-            return [
+            $people[] = [
                 'id' => $p->id,
                 'name' => $p->{$nameKey} ?: $p->name,
                 'birth_year' => $p->birth_year,
                 'biography' => $p->{$bioKey} ?: $p->biography,
-                'image' => $p->image,
+                'image' => $p->portrait ?? null,
             ];
-        })->values();
-
+        }
         $arr = $e->toArray();
         $titleKey = 'title_' . $suffix;
         $descKey = 'description_' . $suffix;

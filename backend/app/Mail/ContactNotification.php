@@ -10,14 +10,18 @@ class ContactNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
+    /** @var array<string, mixed> */
+    public array $data;
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function __construct(array $data)
     {
         $this->data = $data;
     }
 
-    public function build()
+    public function build(): self
     {
         $m = $this->subject('Website contact/support message')
             ->view('emails.contact_notification')

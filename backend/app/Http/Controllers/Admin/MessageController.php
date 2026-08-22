@@ -8,19 +8,19 @@ use App\Models\Message;
 
 class MessageController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\Contracts\View\View
     {
         $messages = Message::orderBy('created_at', 'desc')->paginate(20);
         return view('admin.messages.index', compact('messages'));
     }
 
-    public function show($id)
+    public function show(int|string $id): \Illuminate\Contracts\View\View
     {
         $m = Message::findOrFail($id);
         return view('admin.messages.show', compact('m'));
     }
 
-    public function destroy($id)
+    public function destroy(int|string $id): \Illuminate\Http\RedirectResponse
     {
         $m = Message::findOrFail($id);
         // remove attachment file if exists
