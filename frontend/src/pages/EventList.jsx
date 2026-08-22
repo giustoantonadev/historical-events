@@ -9,11 +9,14 @@ export default function EventList() {
   const { t } = useTranslation();
   const heroRef = useRef(null);
 
+  const { i18n } = useTranslation();
+  const lang = (i18n.language || 'it').split('-')[0];
+
   useEffect(() => {
-    fetch("http://localhost:8000/api/events")
+    fetch(`http://localhost:8000/api/events?lang=${lang}`)
       .then(res => res.json())
       .then(data => setEvents(data));
-  }, []);
+  }, [lang]);
 
   useEffect(() => {
     const el = heroRef.current;

@@ -10,11 +10,14 @@ export default function EventDetail() {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState(null);
 
+  const { i18n } = useTranslation();
+  const lang = (i18n.language || 'it').split('-')[0];
+
   useEffect(() => {
-    fetch(`http://localhost:8000/api/events/${id}`)
+    fetch(`http://localhost:8000/api/events/${id}?lang=${lang}`)
       .then(res => res.json())
       .then(data => setEvent(data));
-  }, [id]);
+  }, [id, lang]);
 
   if (!event) return <p>{t("loading")}</p>;
 
