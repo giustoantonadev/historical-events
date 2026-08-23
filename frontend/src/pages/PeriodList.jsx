@@ -11,7 +11,7 @@ const FALLBACK_PERIODS = [
   { id: "contemporanea", name: "Età Contemporanea", desc: "Globalizzazione, innovazione tecnologica e pluralità di narrazioni.", cls: "period-card--eta-contemporanea" },
 ];
 
-function detectClassFromItem(item, name = "", index = -1){
+function detectClassFromItem(item, name = "", index = -1) {
   // Prefer stable, non-localized identifiers (slug/key/code/id) when available.
   const stable = (item.slug || item.key || item.code || (item.id && item.id.toString()) || "").toString().toLowerCase();
 
@@ -37,25 +37,25 @@ function detectClassFromItem(item, name = "", index = -1){
   };
 
   // Check stable keys first
-  for(const k in MAP){
-    if(stable.includes(k)) return MAP[k];
+  for (const k in MAP) {
+    if (stable.includes(k)) return MAP[k];
   }
 
   // Then try localized name heuristics
   const lname = (name || '').toString().toLowerCase();
-  for(const k in MAP){
-    if(lname.includes(k)) return MAP[k];
+  for (const k in MAP) {
+    if (lname.includes(k)) return MAP[k];
   }
 
   // Fallback to index-based mapping to keep order consistent if API returns locales in different orders
-  const INDEX_MAP = ['period-card--antichita','period-card--medioevo','period-card--rinascimento','period-card--eta-moderna','period-card--eta-contemporanea'];
-  if(typeof index === 'number' && index >= 0) return INDEX_MAP[Math.min(index, INDEX_MAP.length - 1)];
+  const INDEX_MAP = ['period-card--antichita', 'period-card--medioevo', 'period-card--rinascimento', 'period-card--eta-moderna', 'period-card--eta-contemporanea'];
+  if (typeof index === 'number' && index >= 0) return INDEX_MAP[Math.min(index, INDEX_MAP.length - 1)];
 
   // Default
   return 'period-card--eta-contemporanea';
 }
 
-export default function PeriodList(){
+export default function PeriodList() {
   const [periods, setPeriods] = useState(FALLBACK_PERIODS);
   const { i18n, t } = useTranslation();
   const lang = (i18n.language || 'it').split('-')[0];
@@ -66,12 +66,12 @@ export default function PeriodList(){
 
     fetch(`http://localhost:8000/api/periods?lang=${lang}`, { signal: ac.signal })
       .then(res => {
-        if(!res.ok) throw new Error('Network error');
+        if (!res.ok) throw new Error('Network error');
         return res.json();
       })
       .then(data => {
-        if(!mounted) return;
-        if(Array.isArray(data) && data.length){
+        if (!mounted) return;
+        if (Array.isArray(data) && data.length) {
           const mapped = data.map((item, idx) => {
             const name = item[`name_${lang}`] || item.name || item.title || '';
             const desc = item[`description_${lang}`] || item.description || item.excerpt || '';
@@ -84,21 +84,21 @@ export default function PeriodList(){
         }
       })
       .catch(err => {
-        if(err.name !== 'AbortError') setPeriods(FALLBACK_PERIODS);
+        if (err.name !== 'AbortError') setPeriods(FALLBACK_PERIODS);
       });
 
-    return ()=>{ mounted = false; ac.abort(); };
-  },[lang]);
+    return () => { mounted = false; ac.abort(); };
+  }, [lang]);
 
   return (
     <main className="pe-container" role="main">
       <header className="pe-hero" aria-labelledby="page-title">
-        <p className="pe-hero-sub">{t('periods.museumLabel','Sezione museale · Percorso cronologico')}</p>
-        <h1 id="page-title" className="pe-hero-title">{t('sections.periods','Periodi Storici')}</h1>
-        <p className="pe-hero-evoke">{t('periods.evoke','Un percorso visivo che raccoglie gesti, forme e trasformazioni del tempo.')}</p>
+        <p className="pe-hero-sub">{t('periods.museumLabel', 'Sezione museale · Percorso cronologico')}</p>
+        <h1 id="page-title" className="pe-hero-title">{t('sections.periods', 'Periodi Storici')}</h1>
+        <p className="pe-hero-evoke">{t('periods.evoke', 'Un percorso visivo che raccoglie gesti, forme e trasformazioni del tempo.')}</p>
       </header>
 
-      <section className="pe-grid" aria-label={t('periods.listLabel','Elenco dei periodi storici')}>
+      <section className="pe-grid" aria-label={t('periods.listLabel', 'Elenco dei periodi storici')}>
         {periods.map(p => (
           <article key={p.id} className={`period-card ${p.cls}`} aria-labelledby={`${p.id}-title`}>
             <div className="period-head">
@@ -129,13 +129,13 @@ export default function PeriodList(){
             <p className="period-desc">{p.desc}</p>
 
             <div className="card-actions">
-              <Link className="cta" to={`/periods/${p.id}`} aria-label={t('periods.detailsAria',`Dettagli ${p.name}`)}>{t('event.details','Dettagli →')}</Link>
+              <Link className="cta" to={`/periods/${p.id}`} aria-label={t('periods.detailsAria', `Dettagli ${p.name}`)}>{t('event.details', 'Dettagli →')}</Link>
             </div>
           </article>
         ))}
       </section>
 
-      <nav className="pe-timeline" aria-label={t('periods.timelineAria','Timeline dei periodi storici')}>
+      <nav className="pe-timeline" aria-label={t('periods.timelineAria', 'Timeline dei periodi storici')}>
         {periods.map(p => (
           <div key={p.id} className="timeline-point" aria-hidden="true">
             <div className="timeline-dot" />
