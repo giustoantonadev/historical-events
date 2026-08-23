@@ -91,7 +91,7 @@ export default function PeriodList() {
   }, [lang]);
 
   return (
-    <main className="pe-container" role="main">
+    <div className="pe-container">
       <header className="pe-hero" aria-labelledby="page-title">
         <p className="pe-hero-sub">{t('periods.museumLabel', 'Sezione museale · Percorso cronologico')}</p>
         <h1 id="page-title" className="pe-hero-title">{t('sections.periods', 'Periodi Storici')}</h1>
@@ -143,6 +143,6 @@ export default function PeriodList() {
           </div>
         ))}
       </nav>
-    </main>
+    </div>
   );
 }

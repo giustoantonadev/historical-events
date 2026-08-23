@@ -46,7 +46,7 @@ export default function Navbar() {
               </li>
 
               {/* SWITCH LINGUA */}
-              <div className="lang-switcher">
+              <li className="nav-item lang-switcher">
 
                 <button
                   className={`lang-btn ${i18n.language === "it" ? "active" : ""}`}
@@ -72,7 +72,7 @@ export default function Navbar() {
                   FR
                 </button>
 
-              </div>
+              </li>
 
             </ul>
           </div>
