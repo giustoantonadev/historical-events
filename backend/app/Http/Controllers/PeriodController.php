@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StorePeriodRequest;
+use App\Http\Requests\UpdatePeriodRequest;
 use App\Models\Period;
 
 class PeriodController extends Controller
@@ -27,15 +28,8 @@ class PeriodController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(StorePeriodRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $request->validate([
-            'name'        => 'required|string|max:255',
-            'start_date'  => 'required|date',
-            'end_date'    => 'required|date|after_or_equal:start_date',
-            'description' => 'nullable|string'
-        ]);
-
         Period::create([
             'name'        => $request->name,
             'start_date'  => $request->start_date,
@@ -67,15 +61,8 @@ class PeriodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Period $period): \Illuminate\Http\RedirectResponse
+    public function update(UpdatePeriodRequest $request, Period $period): \Illuminate\Http\RedirectResponse
     {
-        $request->validate([
-            'name'        => 'required|string|max:255',
-            'start_date'  => 'required|date',
-            'end_date'    => 'required|date|after_or_equal:start_date',
-            'description' => 'nullable|string'
-        ]);
-
         $period->update([
             'name'        => $request->name,
             'start_date'  => $request->start_date,

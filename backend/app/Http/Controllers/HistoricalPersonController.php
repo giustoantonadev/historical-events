@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreHistoricalPersonRequest;
+use App\Http\Requests\UpdateHistoricalPersonRequest;
 use App\Models\HistoricalPerson;
 
 class HistoricalPersonController extends Controller
@@ -21,15 +22,8 @@ class HistoricalPersonController extends Controller
         return view('historical_person.create');
     }
 
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(StoreHistoricalPersonRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'biography' => 'nullable|string',
-            'birth_year' => 'nullable|integer',
-            'portrait' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
         $historicalPerson = new HistoricalPerson();
         $historicalPerson->name = $request->input('name');
         $historicalPerson->biography = $request->input('biography');
@@ -59,16 +53,11 @@ class HistoricalPersonController extends Controller
         return view('historical_person.edit', compact('historicalPerson'));
     }
 
-    public function update(Request $request, string $id): \Illuminate\Http\RedirectResponse
+    public function update(UpdateHistoricalPersonRequest $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
 
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'biography' => 'nullable|string',
-            'birth_year' => 'nullable|integer',
-            'portrait' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('portrait')) {
             $path = $request->file('portrait')->store('portraits', 'public');

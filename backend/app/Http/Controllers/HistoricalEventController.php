@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreHistoricalEventRequest;
+use App\Http\Requests\UpdateHistoricalEventRequest;
 use App\Models\HistoricalEvent;
 use App\Models\HistoricalPerson;
 use App\Models\Period;
@@ -32,18 +33,8 @@ class HistoricalEventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(StoreHistoricalEventRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'year' => 'required|integer',
-            'image' => 'nullable|image',
-            'period_id' => 'required|exists:periods,id',
-            'historical_person_ids' => 'nullable|array',
-            'historical_person_ids.*' => 'exists:historical_people,id',
-        ]);
-
         $data = $request->only(['title', 'description', 'year', 'period_id']);
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('images', 'public');
@@ -81,19 +72,9 @@ class HistoricalEventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): \Illuminate\Http\RedirectResponse
+    public function update(UpdateHistoricalEventRequest $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $historicalEvent = HistoricalEvent::findOrFail($id);
-
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'year' => 'required|integer',
-            'image' => 'nullable|image',
-            'period_id' => 'required|exists:periods,id',
-            'historical_person_ids' => 'nullable|array',
-            'historical_person_ids.*' => 'exists:historical_people,id',
-        ]);
 
         $data = $request->only(['title', 'description', 'year', 'period_id']);
         if ($request->hasFile('image')) {
