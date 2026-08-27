@@ -51,6 +51,54 @@
                         placeholder="Inserisci una descrizione storica del periodo..."></textarea>
                 </div>
 
+                {{-- TRANSLATIONS (TABS) --}}
+                <div class="mb-3">
+                    <label class="form-label text-light fw-bold">Traduzioni</label>
+                    <ul class="nav nav-tabs" id="periodTranslationTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="it-tab" data-bs-toggle="tab" data-bs-target="#it" type="button" role="tab" aria-controls="it" aria-selected="true">Italiano</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="en-tab" data-bs-toggle="tab" data-bs-target="#en" type="button" role="tab" aria-controls="en" aria-selected="false">English</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="fr-tab" data-bs-toggle="tab" data-bs-target="#fr" type="button" role="tab" aria-controls="fr" aria-selected="false">Français</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content p-3 bg-secondary rounded-3">
+                        <div class="tab-pane fade show active" id="it" role="tabpanel" aria-labelledby="it-tab">
+                            <div class="mb-3">
+                                <label class="form-label text-light fw-bold">Nome (IT)</label>
+                                <input type="text" name="name_it" value="{{ old('name_it') }}" class="form-control bg-dark text-light border-0">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-light fw-bold">Descrizione (IT)</label>
+                                <textarea name="description_it" rows="3" class="form-control bg-dark text-light border-0">{{ old('description_it') }}</textarea>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="en" role="tabpanel" aria-labelledby="en-tab">
+                            <div class="mb-3">
+                                <label class="form-label text-light fw-bold">Name (EN)</label>
+                                <input type="text" name="name_en" value="{{ old('name_en') }}" class="form-control bg-dark text-light border-0">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-light fw-bold">Description (EN)</label>
+                                <textarea name="description_en" rows="3" class="form-control bg-dark text-light border-0">{{ old('description_en') }}</textarea>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="fr" role="tabpanel" aria-labelledby="fr-tab">
+                            <div class="mb-3">
+                                <label class="form-label text-light fw-bold">Nom (FR)</label>
+                                <input type="text" name="name_fr" value="{{ old('name_fr') }}" class="form-control bg-dark text-light border-0">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-light fw-bold">Description (FR)</label>
+                                <textarea name="description_fr" rows="3" class="form-control bg-dark text-light border-0">{{ old('description_fr') }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- SUBMIT --}}
                 <button type="submit" class="btn btn-success btn-lg mt-3">
                     <i class="bi bi-check-circle me-2"></i> Crea Periodo

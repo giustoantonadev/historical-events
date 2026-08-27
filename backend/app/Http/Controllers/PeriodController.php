@@ -35,6 +35,12 @@ class PeriodController extends Controller
             'start_date'  => $request->start_date,
             'end_date'    => $request->end_date,
             'description' => $request->description,
+            'name_it' => $request->input('name_it'),
+            'name_en' => $request->input('name_en'),
+            'name_fr' => $request->input('name_fr'),
+            'description_it' => $request->input('description_it'),
+            'description_en' => $request->input('description_en'),
+            'description_fr' => $request->input('description_fr'),
         ]);
 
         return redirect()->route('periods.index')
@@ -68,6 +74,12 @@ class PeriodController extends Controller
             'start_date'  => $request->start_date,
             'end_date'    => $request->end_date,
             'description' => $request->description,
+            'name_it' => $request->input('name_it'),
+            'name_en' => $request->input('name_en'),
+            'name_fr' => $request->input('name_fr'),
+            'description_it' => $request->input('description_it'),
+            'description_en' => $request->input('description_en'),
+            'description_fr' => $request->input('description_fr'),
         ]);
 
         return redirect()->route('periods.index')
