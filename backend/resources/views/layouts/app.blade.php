@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -78,6 +79,29 @@
 
     {{-- CONTENUTO DELLE PAGINE --}}
     <main>
+        <div class="container py-4">
+            @if(session('success'))
+            <div class="bg-dark text-light border-start border-4 border-success p-3 rounded mb-3 d-flex align-items-start">
+                <i class="bi bi-check-circle-fill text-success me-2" style="font-size:1.25rem;margin-top:3px;"></i>
+                <div>{{ session('success') }}</div>
+            </div>
+            @endif
+
+            @if($errors->any())
+            <div class="bg-dark text-light border-start border-4 border-danger p-3 rounded mb-3">
+                <div class="d-flex align-items-start mb-2">
+                    <i class="bi bi-exclamation-triangle-fill text-danger me-2" style="font-size:1.25rem;margin-top:3px;"></i>
+                    <strong class="text-light">Ci sono errori nel form:</strong>
+                </div>
+                <ul class="mb-0">
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        </div>
+
         @yield('content')
     </main>
 
@@ -90,4 +114,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
