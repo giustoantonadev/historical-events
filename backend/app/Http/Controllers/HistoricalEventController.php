@@ -35,7 +35,18 @@ class HistoricalEventController extends Controller
      */
     public function store(StoreHistoricalEventRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $data = $request->only(['title', 'description', 'year', 'period_id']);
+        $data = $request->only([
+            'title',
+            'description',
+            'year',
+            'period_id',
+            'title_it',
+            'title_en',
+            'title_fr',
+            'description_it',
+            'description_en',
+            'description_fr',
+        ]);
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('images', 'public');
         }
@@ -76,7 +87,18 @@ class HistoricalEventController extends Controller
     {
         $historicalEvent = HistoricalEvent::findOrFail($id);
 
-        $data = $request->only(['title', 'description', 'year', 'period_id']);
+        $data = $request->only([
+            'title',
+            'description',
+            'year',
+            'period_id',
+            'title_it',
+            'title_en',
+            'title_fr',
+            'description_it',
+            'description_en',
+            'description_fr',
+        ]);
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('images', 'public');
         }

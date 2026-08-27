@@ -77,6 +77,54 @@
                                 required></textarea>
                         </div>
 
+                        {{-- TRANSLATIONS (TABS) --}}
+                        <div class="mb-3">
+                            <label class="form-label text-light fw-bold">Traduzioni</label>
+                            <ul class="nav nav-tabs" id="personTranslationTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="it-person-tab" data-bs-toggle="tab" data-bs-target="#it-person" type="button" role="tab" aria-controls="it-person" aria-selected="true">Italiano</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="en-person-tab" data-bs-toggle="tab" data-bs-target="#en-person" type="button" role="tab" aria-controls="en-person" aria-selected="false">English</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="fr-person-tab" data-bs-toggle="tab" data-bs-target="#fr-person" type="button" role="tab" aria-controls="fr-person" aria-selected="false">Français</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content p-3 bg-secondary rounded-3">
+                                <div class="tab-pane fade show active" id="it-person" role="tabpanel" aria-labelledby="it-person-tab">
+                                    <div class="mb-3">
+                                        <label class="form-label text-light fw-bold">Nome (IT)</label>
+                                        <input type="text" name="name_it" value="{{ old('name_it') }}" class="form-control bg-dark text-light border-0">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-light fw-bold">Biografia (IT)</label>
+                                        <textarea name="biography_it" rows="4" class="form-control bg-dark text-light border-0">{{ old('biography_it') }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="en-person" role="tabpanel" aria-labelledby="en-person-tab">
+                                    <div class="mb-3">
+                                        <label class="form-label text-light fw-bold">Name (EN)</label>
+                                        <input type="text" name="name_en" value="{{ old('name_en') }}" class="form-control bg-dark text-light border-0">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-light fw-bold">Biography (EN)</label>
+                                        <textarea name="biography_en" rows="4" class="form-control bg-dark text-light border-0">{{ old('biography_en') }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="fr-person" role="tabpanel" aria-labelledby="fr-person-tab">
+                                    <div class="mb-3">
+                                        <label class="form-label text-light fw-bold">Nom (FR)</label>
+                                        <input type="text" name="name_fr" value="{{ old('name_fr') }}" class="form-control bg-dark text-light border-0">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-light fw-bold">Biographie (FR)</label>
+                                        <textarea name="biography_fr" rows="4" class="form-control bg-dark text-light border-0">{{ old('biography_fr') }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         {{-- BIRTH YEAR --}}
                         <div class="mb-3">
                             <label class="form-label text-light fw-bold">Anno di nascita</label>
