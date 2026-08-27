@@ -24,25 +24,16 @@ class HistoricalPersonController extends Controller
 
     public function store(StoreHistoricalPersonRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $historicalPerson = new HistoricalPerson();
-        $historicalPerson->name = $request->input('name');
-        $historicalPerson->biography = $request->input('biography');
-        // translations
-        $historicalPerson->name_it = $request->input('name_it');
-        $historicalPerson->name_en = $request->input('name_en');
-        $historicalPerson->name_fr = $request->input('name_fr');
-        $historicalPerson->biography_it = $request->input('biography_it');
-        $historicalPerson->biography_en = $request->input('biography_en');
-        $historicalPerson->biography_fr = $request->input('biography_fr');
-        $historicalPerson->birth_year = $request->input('birth_year');
+        $data = $request->validated();
+
         if ($request->hasFile('portrait')) {
             $path = $request->file('portrait')->store('portraits', 'public');
             if (is_string($path)) {
-                $historicalPerson->portrait = $path;
+                $data['portrait'] = $path;
             }
         }
 
-        $historicalPerson->save();
+        HistoricalPerson::create($data);
 
         return redirect()->route('historical-people.index')
             ->with('success', 'Historical person created successfully.');
@@ -65,13 +56,6 @@ class HistoricalPersonController extends Controller
         $historicalPerson = HistoricalPerson::findOrFail($id);
 
         $data = $request->validated();
-        // include translation fields even if not validated explicitly
-        $data['name_it'] = $request->input('name_it');
-        $data['name_en'] = $request->input('name_en');
-        $data['name_fr'] = $request->input('name_fr');
-        $data['biography_it'] = $request->input('biography_it');
-        $data['biography_en'] = $request->input('biography_en');
-        $data['biography_fr'] = $request->input('biography_fr');
 
         if ($request->hasFile('portrait')) {
             $path = $request->file('portrait')->store('portraits', 'public');

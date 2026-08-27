@@ -18,6 +18,12 @@ class UpdateHistoricalPersonRequest extends FormRequest
             'biography' => 'nullable|string',
             'birth_year' => 'nullable|integer',
             'portrait' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'name_it' => 'nullable|string|max:255',
+            'name_en' => 'nullable|string|max:255',
+            'name_fr' => 'nullable|string|max:255',
+            'biography_it' => 'nullable|string',
+            'biography_en' => 'nullable|string',
+            'biography_fr' => 'nullable|string',
         ];
     }
 }
