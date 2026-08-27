@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Message;
+use Illuminate\Support\Facades\Storage;
 
 class MessageController extends Controller
 {
@@ -25,9 +26,8 @@ class MessageController extends Controller
         $m = Message::findOrFail($id);
         // remove attachment file if exists
         if ($m->attachment) {
-            $path = storage_path('app/public/' . $m->attachment);
-            if (file_exists($path)) {
-                @unlink($path);
+            if (Storage::disk('public')->exists($m->attachment)) {
+                Storage::disk('public')->delete($m->attachment);
             }
         }
         $m->delete();
