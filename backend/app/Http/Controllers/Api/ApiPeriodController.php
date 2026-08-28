@@ -7,11 +7,16 @@ use App\Models\Period;
 
 class ApiPeriodController extends Controller
 {
-    public function index()
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function index(): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();
+        $periods = Period::all();
 
-        return Period::all()->map(function ($period) use ($lang) {
+        $result = [];
+        foreach ($periods as $period) {
             $suffix = in_array($lang, ['it', 'en', 'fr']) ? $lang : 'it';
             $nameKey = 'name_' . $suffix;
             $descKey = 'description_' . $suffix;
@@ -20,11 +25,16 @@ class ApiPeriodController extends Controller
             $attrs['name'] = $period->{$nameKey} ?: $period->name;
             $attrs['description'] = $period->{$descKey} ?: $period->description;
 
-            return $attrs;
-        });
+            $result[] = $attrs;
+        }
+
+        return $result;
     }
 
-    public function show($id)
+    /**
+     * @return array<string, mixed>
+     */
+    public function show(int|string $id): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();
         $suffix = in_array($lang, ['it', 'en', 'fr']) ? $lang : 'it';

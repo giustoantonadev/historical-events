@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreHistoricalEventRequest;
+use App\Http\Requests\UpdateHistoricalEventRequest;
 use App\Models\HistoricalEvent;
 use App\Models\HistoricalPerson;
 use App\Models\Period;
@@ -13,7 +14,7 @@ class HistoricalEventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         $historicalEvents = HistoricalEvent::orderBy('year', 'asc')->get();
         return view('events.index', compact('historicalEvents'));
@@ -22,7 +23,7 @@ class HistoricalEventController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): \Illuminate\Contracts\View\View
     {
         $periods = Period::all();
         $historicalPeople = HistoricalPerson::all();
@@ -32,19 +33,20 @@ class HistoricalEventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreHistoricalEventRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'year' => 'required|integer',
-            'image' => 'nullable|image',
-            'period_id' => 'required|exists:periods,id',
-            'historical_person_ids' => 'nullable|array',
-            'historical_person_ids.*' => 'exists:historical_people,id',
+        $data = $request->only([
+            'title',
+            'description',
+            'year',
+            'period_id',
+            'title_it',
+            'title_en',
+            'title_fr',
+            'description_it',
+            'description_en',
+            'description_fr',
         ]);
-
-        $data = $request->only(['title', 'description', 'year', 'period_id']);
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('images', 'public');
         }
@@ -61,7 +63,7 @@ class HistoricalEventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): \Illuminate\Contracts\View\View
     {
         $historicalEvent = HistoricalEvent::with(['period', 'historicalPeople'])->findOrFail($id);
         return view('events.show', compact('historicalEvent'));
@@ -70,7 +72,7 @@ class HistoricalEventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): \Illuminate\Contracts\View\View
     {
         $historicalEvent = HistoricalEvent::with(['period', 'historicalPeople'])->findOrFail($id);
         $periods = Period::all();
@@ -81,21 +83,22 @@ class HistoricalEventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateHistoricalEventRequest $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $historicalEvent = HistoricalEvent::findOrFail($id);
 
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'year' => 'required|integer',
-            'image' => 'nullable|image',
-            'period_id' => 'required|exists:periods,id',
-            'historical_person_ids' => 'nullable|array',
-            'historical_person_ids.*' => 'exists:historical_people,id',
+        $data = $request->only([
+            'title',
+            'description',
+            'year',
+            'period_id',
+            'title_it',
+            'title_en',
+            'title_fr',
+            'description_it',
+            'description_en',
+            'description_fr',
         ]);
-
-        $data = $request->only(['title', 'description', 'year', 'period_id']);
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('images', 'public');
         }
@@ -114,7 +117,7 @@ class HistoricalEventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): \Illuminate\Http\RedirectResponse
     {
         // delete event
         $historicalEvent = HistoricalEvent::findOrFail($id);

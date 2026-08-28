@@ -40,8 +40,7 @@ export default function Support() {
                 setAttachment(null);
                 setTimeout(() => setSent(false), 4000);
             })
-            .catch(err => {
-                console.error('Failed to send support request', err);
+            .catch(() => {
                 alert(t('support.error', { defaultValue: "Failed to send request" }));
             });
     }

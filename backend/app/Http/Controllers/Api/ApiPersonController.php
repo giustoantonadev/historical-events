@@ -5,41 +5,52 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\HistoricalPerson;
+use App\Models\HistoricalEvent;
 
 class ApiPersonController extends Controller
 {
-    public function index()
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function index(): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();
         $suffix = in_array($lang, ['it', 'en', 'fr']) ? $lang : 'it';
 
-        $people = HistoricalPerson::with(['historicalEvents'])
+        $peopleCollection = HistoricalPerson::with(['historicalEvents'])
             ->orderBy('birth_year', 'asc')
-            ->get()
-            ->map(function ($p) use ($suffix) {
-                $nameKey = 'name_' . $suffix;
-                $bioKey = 'biography_' . $suffix;
+            ->get();
 
-                $events = $p->historicalEvents->map(function ($e) use ($suffix) {
-                    $titleKey = 'title_' . $suffix;
-                    return [
-                        'id' => $e->id,
-                        'title' => $e->{$titleKey} ?: $e->title,
-                        'year' => $e->year,
-                        'image' => $e->image,
-                    ];
-                })->values();
+        $people = [];
+        foreach ($peopleCollection as $p) {
+            $nameKey = 'name_' . $suffix;
+            $bioKey = 'biography_' . $suffix;
 
-                $arr = $p->toArray();
-                $arr['name'] = $p->{$nameKey} ?: $p->name;
-                $arr['biography'] = $p->{$bioKey} ?: $p->biography;
-                $arr['historical_events'] = $events;
-                return $arr;
-            });
+            $events = [];
+            foreach ($p->historicalEvents as $e) {
+                $titleKey = 'title_' . $suffix;
+                $events[] = [
+                    'id' => $e->id,
+                    'title' => $e->{$titleKey} ?: $e->title,
+                    'year' => $e->year,
+                    'image' => $e->image,
+                ];
+            }
+
+            $arr = $p->toArray();
+            $arr['name'] = $p->{$nameKey} ?: $p->name;
+            $arr['biography'] = $p->{$bioKey} ?: $p->biography;
+            $arr['historical_events'] = $events;
+            $arr['image'] = $p->portrait ?? null;
+            $people[] = $arr;
+        }
 
         return $people;
     }
-    public function show($id)
+    /**
+     * @return array<string, mixed>
+     */
+    public function show(int|string $id): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();
         $suffix = in_array($lang, ['it', 'en', 'fr']) ? $lang : 'it';
@@ -49,7 +60,7 @@ class ApiPersonController extends Controller
         $nameKey = 'name_' . $suffix;
         $bioKey = 'biography_' . $suffix;
 
-        $events = $p->historicalEvents->map(function ($e) use ($suffix) {
+        $events = $p->historicalEvents->map(function (HistoricalEvent $e) use ($suffix) {
             $titleKey = 'title_' . $suffix;
             return [
                 'id' => $e->id,
@@ -63,6 +74,8 @@ class ApiPersonController extends Controller
         $arr['name'] = $p->{$nameKey} ?: $p->name;
         $arr['biography'] = $p->{$bioKey} ?: $p->biography;
         $arr['historical_events'] = $events;
+
+        $arr['image'] = $p->portrait ?? null;
 
         return $arr;
     }

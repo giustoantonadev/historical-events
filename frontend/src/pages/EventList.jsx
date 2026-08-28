@@ -5,6 +5,8 @@ import EventCard from "../components/EventCard";
 
 export default function EventList() {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [era, setEra] = useState('all');
   const { t, i18n } = useTranslation();
   const heroRef = useRef(null);
@@ -12,9 +14,26 @@ export default function EventList() {
   const lang = (i18n.language || 'it').split('-')[0];
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/events?lang=${lang}`)
-      .then(res => res.json())
-      .then(data => setEvents(data));
+    const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+    const url = `${API_BASE}/api/events?lang=${lang}`;
+    const controller = new AbortController();
+
+    setLoading(true);
+    setError(null);
+
+    fetch(url, { signal: controller.signal })
+      .then((res) => {
+        if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+        return res.json();
+      })
+      .then((data) => setEvents(data))
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
+        setError(err.message || 'Failed to load events.');
+      })
+      .finally(() => setLoading(false));
+
+    return () => controller.abort();
   }, [lang]);
 
   useEffect(() => {
@@ -87,9 +106,28 @@ export default function EventList() {
           ))}
         </div>
 
+        {/* Error message */}
+        {error && (
+          <div className="container my-4">
+            <div className="bg-dark text-light border-start border-4 border-danger p-3 rounded">
+              <strong className="text-danger me-2">Errore:</strong>
+              <span>{error}</span>
+            </div>
+          </div>
+        )}
+
+        {/* Loading indicator (only when no events yet) */}
+        {loading && events.length === 0 && (
+          <div className="d-flex justify-content-center my-4">
+            <div className="spinner-border text-light" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
+
         <div id="events" className="row g-4 container">
           {filteredEvents.map(event => (
-            <div key={event.id} className="col-sm-6 col-md-6 col-lg-4">
+            <div key={event.id} className="col-sm-12 col-md-6 col-lg-4">
               <EventCard event={event} />
             </div>
           ))}

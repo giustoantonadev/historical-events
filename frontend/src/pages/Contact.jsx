@@ -28,8 +28,7 @@ export default function Contact() {
                 setForm({ name: "", email: "", message: "" });
                 setTimeout(() => setSent(false), 4000);
             })
-            .catch(err => {
-                console.error('Failed to send contact', err);
+            .catch(() => {
                 alert(t('contact.error', { defaultValue: 'Failed to send message' }));
             });
     }

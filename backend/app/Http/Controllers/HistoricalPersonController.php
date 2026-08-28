@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreHistoricalPersonRequest;
+use App\Http\Requests\UpdateHistoricalPersonRequest;
 use App\Models\HistoricalPerson;
 
 class HistoricalPersonController extends Controller
@@ -10,65 +11,57 @@ class HistoricalPersonController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         $historicalPeople = HistoricalPerson::orderBy('birth_year', 'asc')->get();
         return view('historical_person.index', compact('historicalPeople'));
     }
 
-    public function create()
+    public function create(): \Illuminate\Contracts\View\View
     {
         return view('historical_person.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreHistoricalPersonRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'biography' => 'nullable|string',
-            'birth_year' => 'nullable|integer',
-            'portrait' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        $data = $request->validated();
 
-        $historicalPerson = new HistoricalPerson();
-        $historicalPerson->name = $request->input('name');
-        $historicalPerson->biography = $request->input('biography');
-        $historicalPerson->birth_year = $request->input('birth_year');
         if ($request->hasFile('portrait')) {
-            $historicalPerson->portrait = $request->file('portrait')->store('portraits', 'public');
+            $path = $request->file('portrait')->store('portraits', 'public');
+            if (is_string($path)) {
+                $data['portrait'] = $path;
+            }
         }
 
-        $historicalPerson->save();
+        HistoricalPerson::create($data);
 
         return redirect()->route('historical-people.index')
             ->with('success', 'Historical person created successfully.');
     }
 
-    public function show(string $id)
+    public function show(string $id): \Illuminate\Contracts\View\View
     {
         $historicalPerson = HistoricalPerson::with('historicalEvents')->findOrFail($id);
         return view('historical_person.show', compact('historicalPerson'));
     }
 
-    public function edit(string $id)
+    public function edit(string $id): \Illuminate\Contracts\View\View
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
         return view('historical_person.edit', compact('historicalPerson'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateHistoricalPersonRequest $request, string $id): \Illuminate\Http\RedirectResponse
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
 
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'biography' => 'nullable|string',
-            'birth_year' => 'nullable|integer',
-            'portrait' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        $data = $request->validated();
 
         if ($request->hasFile('portrait')) {
-            $data['portrait'] = $request->file('portrait')->store('portraits', 'public');
+            $path = $request->file('portrait')->store('portraits', 'public');
+            if (is_string($path)) {
+                $data['portrait'] = $path;
+            }
         }
 
         $historicalPerson->update($data);
@@ -77,7 +70,7 @@ class HistoricalPersonController extends Controller
             ->with('success', 'Historical person updated successfully.');
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): \Illuminate\Http\RedirectResponse
     {
         $historicalPerson = HistoricalPerson::findOrFail($id);
         $historicalPerson->delete();
