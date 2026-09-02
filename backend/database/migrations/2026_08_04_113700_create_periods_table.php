@@ -13,13 +13,29 @@ return new class extends Migration
     {
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
+
+            // Nome originale
             $table->string('name');
+
+            // Nomi multilingua
+            $table->string('name_it')->nullable();
+            $table->string('name_en')->nullable();
+            $table->string('name_fr')->nullable();
+
+            // Descrizione originale
+            $table->text('description')->nullable();
+
+            // Descrizioni multilingua
+            $table->text('description_it')->nullable();
+            $table->text('description_en')->nullable();
+            $table->text('description_fr')->nullable();
+
             $table->date('start_date');
             $table->date('end_date');
+
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

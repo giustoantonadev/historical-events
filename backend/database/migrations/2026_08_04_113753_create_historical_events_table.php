@@ -13,18 +13,36 @@ return new class extends Migration
     {
         Schema::create('historical_events', function (Blueprint $table) {
             $table->id();
+
+            // Titolo originale
             $table->string('title');
+
+            // Titoli multilingua
+            $table->string('title_it')->nullable();
+            $table->string('title_en')->nullable();
+            $table->string('title_fr')->nullable();
+
+            // Descrizione originale
             $table->text('description');
+
+            // Descrizioni multilingua
+            $table->text('description_it')->nullable();
+            $table->text('description_en')->nullable();
+            $table->text('description_fr')->nullable();
+
             $table->integer('year');
+
+            // Immagine evento
             $table->string('image')->nullable();
 
-
-            $table->foreignId('period_id')->constrained()->onDelete('cascade');
+            // Relazione con periods
+            $table->foreignId('period_id')
+                ->constrained()
+                ->onDelete('cascade');
 
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

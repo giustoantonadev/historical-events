@@ -13,9 +13,22 @@ return new class extends Migration
     {
         Schema::create('event_person', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('historical_event_id')->constrained()->onDelete('cascade');
-            $table->foreignId('historical_person_id')->constrained('historical_people')->onDelete('cascade');
-            $table->unique(['historical_event_id', 'historical_person_id']);
+
+            $table->foreignId('historical_event_id')
+                ->constrained()
+                ->onDelete('cascade');
+
+            $table->foreignId('historical_person_id')
+                ->constrained('historical_people')
+                ->onDelete('cascade');
+
+            // Impedisce di associare due volte
+            // la stessa persona allo stesso evento
+            $table->unique([
+                'historical_event_id',
+                'historical_person_id'
+            ]);
+
             $table->timestamps();
         });
     }
