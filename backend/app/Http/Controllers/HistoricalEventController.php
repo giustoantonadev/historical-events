@@ -98,11 +98,14 @@ class HistoricalEventController extends Controller
             'description_it',
             'description_en',
             'description_fr',
+            'image',
         ]);
         if ($request->hasFile('image')) {
+            if ($historicalEvent->image) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($historicalEvent->image);
+            }
             $data['image'] = $request->file('image')->store('events', 'public');
         }
-
         $historicalEvent->update($data);
 
         if (!empty($request->input('historical_person_ids'))) {
@@ -121,6 +124,9 @@ class HistoricalEventController extends Controller
     {
         // delete event
         $historicalEvent = HistoricalEvent::findOrFail($id);
+        if ($historicalEvent->image) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($historicalEvent->image);
+        }
         $historicalEvent->historicalPeople()->detach(); // Detach related historical people
         $historicalEvent->delete();
         return redirect()->route('events.index')->with('success', 'Historical event deleted successfully.');
