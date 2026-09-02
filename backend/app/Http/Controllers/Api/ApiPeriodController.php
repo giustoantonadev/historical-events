@@ -7,9 +7,6 @@ use App\Models\Period;
 
 class ApiPeriodController extends Controller
 {
-    /**
-     * @return array<int, array<string, mixed>>
-     */
     public function index(): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();
@@ -31,9 +28,6 @@ class ApiPeriodController extends Controller
         return $result;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function show(int|string $id): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();

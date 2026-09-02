@@ -10,9 +10,6 @@ use App\Models\Period;
 
 class ApiEventController extends Controller
 {
-    /**
-     * @return array<int, array<string, mixed>>
-     */
     public function index(): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();
@@ -58,9 +55,6 @@ class ApiEventController extends Controller
         return $events;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function show(int|string $id): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();

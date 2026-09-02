@@ -9,9 +9,6 @@ use App\Models\HistoricalEvent;
 
 class ApiPersonController extends Controller
 {
-    /**
-     * @return array<int, array<string, mixed>>
-     */
     public function index(): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();
@@ -47,9 +44,7 @@ class ApiPersonController extends Controller
 
         return $people;
     }
-    /**
-     * @return array<string, mixed>
-     */
+
     public function show(int|string $id): array
     {
         $lang = request()->query('lang') ?? app()->getLocale();
