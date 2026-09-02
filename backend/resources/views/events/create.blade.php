@@ -39,6 +39,12 @@
                     <textarea name="description" rows="4" class="form-control bg-secondary text-light border-0" required></textarea>
                 </div>
 
+                {{-- IMAGE --}}
+                <div class="mb-3">
+                    <label class="form-label text-light fw-bold">Immagine</label>
+                    <input type="file" name="image" class="form-control bg-secondary text-light border-0">
+                </div>
+
                 {{-- TRANSLATIONS (TABS) --}}
                 <div class="mb-3">
                     <label class="form-label text-light fw-bold">Traduzioni</label>

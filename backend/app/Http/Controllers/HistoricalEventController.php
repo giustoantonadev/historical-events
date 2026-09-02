@@ -48,7 +48,7 @@ class HistoricalEventController extends Controller
             'description_fr',
         ]);
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images', 'public');
+            $data['image'] = $request->file('image')->store('events', 'public');
         }
 
         $historicalEvent = HistoricalEvent::create($data);
@@ -100,7 +100,7 @@ class HistoricalEventController extends Controller
             'description_fr',
         ]);
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('images', 'public');
+            $data['image'] = $request->file('image')->store('events', 'public');
         }
 
         $historicalEvent->update($data);
