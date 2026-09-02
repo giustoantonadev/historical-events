@@ -1,66 +1,133 @@
-<section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
+<section>
+
+    <header class="mb-4">
+
+        <h2 class="text-danger">
             {{ __('Delete Account') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="text">
             {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
         </p>
+
     </header>
 
-    <!-- Modal trigger button -->
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-account">
-        {{__('Delete Account')}}
+    {{-- MODAL TRIGGER --}}
+    <button
+        type="button"
+        class="btn btn-danger"
+        data-bs-toggle="modal"
+        data-bs-target="#deleteAccountModal">
+        {{ __('Delete Account') }}
     </button>
 
-    <!-- Modal Body -->
-    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-    <div class="modal fade" id="delete-account" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="delete-account" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+
+    {{-- MODAL --}}
+    <div
+        class="modal fade"
+        id="deleteAccountModal"
+        tabindex="-1"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-labelledby="deleteAccountModalLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+
             <div class="modal-content">
+
+                {{-- HEADER --}}
                 <div class="modal-header">
-                    <h5 class="modal-title" id="delete-account">Delete Account</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <h5
+                        class="modal-title"
+                        id="deleteAccountModalLabel">
+                        {{ __('Delete Account') }}
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+
                 </div>
-                <div class="modal-body">
-                    <h2 class="text-lg font-medium text-gray-900">
-                        {{ __('Are you sure you want to delete your account?') }}
-                    </h2>
-                    <p class="mt-1 text-sm text-gray-600">
-                        {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-
-                    <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
-                        @csrf
-                        @method('delete')
 
 
-                        <div class="input-group">
+                {{-- FORM --}}
+                <form
+                    method="POST"
+                    action="{{ route('profile.destroy') }}">
 
-                            <input id="password" name="password" type="password" class="form-control" placeholder="{{ __('Password') }}" />
+                    @csrf
+                    @method('DELETE')
 
-                            @error('password')
-                            <span class="invalid-feedback mt-2" role="alert">
-                                <strong>{{ $errors->userDeletion->get('password')}}</strong>
-                            </span>
+
+                    {{-- BODY --}}
+                    <div class="modal-body">
+
+                        <h5>
+                            {{ __('Are you sure you want to delete your account?') }}
+                        </h5>
+
+                        <p class="text-muted">
+                            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                        </p>
+
+
+                        <div class="mt-3">
+
+                            <label
+                                for="delete_password"
+                                class="form-label">
+                                {{ __('Password') }}
+                            </label>
+
+                            <input
+                                id="delete_password"
+                                name="password"
+                                type="password"
+                                class="form-control
+                                @error('password', 'userDeletion') is-invalid @enderror"
+                                placeholder="{{ __('Password') }}">
+
+                            @error('password', 'userDeletion')
+
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+
                             @enderror
 
-
-
-                            <button type="submit" class="btn btn-danger">
-                                {{ __('Delete Account') }}
-                            </button>
-                            <!--  -->
                         </div>
-                    </form>
 
-                </div>
+                    </div>
+
+
+                    {{-- FOOTER --}}
+                    <div class="modal-footer">
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                            {{ __('Cancel') }}
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger">
+                            {{ __('Delete Account') }}
+                        </button>
+
+                    </div>
+
+                </form>
+
             </div>
+
         </div>
+
     </div>
 
 </section>
