@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../styles/personlist.css";
+import { API_BASE } from "../api/api";
+
 
 export default function PersonList() {
   const [people, setPeople] = useState([]);
@@ -9,7 +11,7 @@ export default function PersonList() {
   const lang = (i18n.language || 'it').split('-')[0];
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/people?lang=${lang}`)
+    fetch(`${API_BASE}/api/people?lang=${lang}`)
       .then(res => res.json())
       .then(data => setPeople(data));
   }, [lang]);
@@ -33,7 +35,7 @@ export default function PersonList() {
               {/* IMMAGINE */}
               {person.portrait ? (
                 <img
-                  src={`http://localhost:8000/storage/${person.portrait}`}
+                  src={`${API_BASE}/storage/${person.portrait}`}
                   alt={person.name}
                   className="person-img"
                 />

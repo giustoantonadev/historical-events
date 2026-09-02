@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../styles/perioddetail.css";
+import { API_BASE } from "../api/api";
 
 export default function PeriodDetail() {
   const { id } = useParams();
@@ -10,7 +11,7 @@ export default function PeriodDetail() {
 
   useEffect(() => {
     const lang = (i18n?.language || 'it').split('-')[0];
-    fetch(`http://localhost:8000/api/periods/${id}?lang=${lang}`)
+    fetch(`${API_BASE}/api/periods/${id}?lang=${lang}`)
       .then(res => res.json())
       .then(data => setPeriod(data));
   }, [id, i18n?.language]);

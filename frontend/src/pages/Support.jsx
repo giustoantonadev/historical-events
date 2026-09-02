@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../styles/contact.css";
+import { API_BASE } from "../api/api";
+
 
 export default function Support() {
     const { t } = useTranslation();
@@ -22,7 +24,7 @@ export default function Support() {
         fd.append('steps', steps || '');
         if (attachment) fd.append('attachment', attachment);
 
-        fetch('http://localhost:8000/api/support', {
+        fetch(`${API_BASE}/api/support`, {
             method: 'POST',
             body: fd
         })

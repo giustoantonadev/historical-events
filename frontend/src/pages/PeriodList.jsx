@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../styles/periodi-storici.css";
+import { API_BASE } from "../api/api";
 
 const FALLBACK_PERIODS = [
   { id: "antichita", name: "Antichità", desc: "Civiltà classiche, miti e architetture che hanno scolpito le fondamenta del mondo.", cls: "period-card--antichita" },
@@ -64,7 +65,7 @@ export default function PeriodList() {
     const ac = new AbortController();
     let mounted = true;
 
-    fetch(`http://localhost:8000/api/periods?lang=${lang}`, { signal: ac.signal })
+    fetch(`${API_BASE}/api/periods?lang=${lang}`, { signal: ac.signal })
       .then(res => {
         if (!res.ok) throw new Error('Network error');
         return res.json();
