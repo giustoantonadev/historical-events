@@ -7,39 +7,55 @@ import { API_BASE } from "../api/api";
 export default function EventDetail() {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
+
   const [event, setEvent] = useState(null);
   const [imgLoaded, setImgLoaded] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState(null);
 
-  const lang = (i18n.language || 'it').split('-')[0];
+  // NEW
+  const [imageOpen, setImageOpen] = useState(false);
+
+  const lang = (i18n.language || "it").split("-")[0];
 
   useEffect(() => {
     fetch(`${API_BASE}/api/events/${id}?lang=${lang}`)
-      .then(res => res.json())
-      .then(data => setEvent(data));
+      .then((res) => res.json())
+      .then((data) => setEvent(data));
   }, [id, lang]);
 
   if (!event) return <p>{t("loading")}</p>;
+
+  const eventImage = event.image
+    ? `${API_BASE}/storage/${event.image}`
+    : "/images/events/placeholder.svg";
 
   return (
     <div className="container eventdetail-wrapper">
 
       <div className="event-box">
 
-        {/* IMAGE PANEL (left) */}
+        {/* IMAGE PANEL */}
         <aside className="event-image-panel">
           <div className="event-img-wrap">
             <img
-              src={event.image ? `${API_BASE}/storage/${event.image}` : `/images/events/placeholder.svg`}
+              src={eventImage}
               alt={event.title}
-              className={`event-img ${imgLoaded ? 'loaded' : 'loading'}`}
+              className={`event-img ${imgLoaded ? "loaded" : "loading"}`}
               onLoad={() => setImgLoaded(true)}
               loading="lazy"
+              onClick={() => setImageOpen(true)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  setImageOpen(true);
+                }
+              }}
             />
           </div>
         </aside>
 
-        {/* CONTENT (right) */}
+        {/* CONTENT */}
         <div className="event-content">
 
           <h1 className="eventdetail-title">{event.title}</h1>
@@ -61,16 +77,22 @@ export default function EventDetail() {
               <p>{t("event.noPeople")}</p>
             )}
 
-            {event.historical_people.map(person => (
+            {event.historical_people.map((person) => (
               <div
                 key={person.id}
                 className="person-card"
                 role="button"
                 tabIndex={0}
                 onClick={() => setSelectedPerson(person)}
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setSelectedPerson(person); }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    setSelectedPerson(person);
+                  }
+                }}
               >
-                <span className="person-name only-name">{person.name}</span>
+                <span className="person-name only-name">
+                  {person.name}
+                </span>
               </div>
             ))}
           </div>
@@ -80,42 +102,104 @@ export default function EventDetail() {
           </Link>
 
         </div>
-
       </div>
+
+      {/* EVENT IMAGE LIGHTBOX */}
+      {imageOpen && (
+        <div
+          className="image-lightbox"
+          onClick={() => setImageOpen(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <img
+            src={eventImage}
+            alt={event.title}
+            className="image-lightbox-img"
+          />
+        </div>
+      )}
+
+      {/* PERSON MODAL */}
       {selectedPerson && (
-        <div className="person-modal" role="dialog" aria-modal="true">
-          <div className="person-modal-backdrop" onClick={() => setSelectedPerson(null)}></div>
+        <div
+          className="person-modal"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="person-modal-backdrop"
+            onClick={() => setSelectedPerson(null)}
+          ></div>
+
           <div className="person-modal-inner">
-            <button className="person-modal-close" aria-label="Close" onClick={() => setSelectedPerson(null)}>×</button>
+
+            <button
+              className="person-modal-close"
+              aria-label="Close"
+              onClick={() => setSelectedPerson(null)}
+            >
+              ×
+            </button>
+
             <div className="person-modal-grid">
+
               <div className="person-modal-left">
+
                 {selectedPerson.image ? (
-                  <img src={`${API_BASE}/storage/${selectedPerson.image}`} alt={selectedPerson.name} className="person-modal-avatar" />
+                  <img
+                    src={`${API_BASE}/storage/${selectedPerson.image}`}
+                    alt={selectedPerson.name}
+                    className="person-modal-avatar"
+                  />
                 ) : (
                   <div className="person-modal-avatar placeholder" />
                 )}
+
                 {selectedPerson.birth_year && (
-                  <div className="person-modal-year">{selectedPerson.birth_year < 0 ? `${Math.abs(selectedPerson.birth_year)} a.C.` : `${selectedPerson.birth_year} d.C.`}</div>
+                  <div className="person-modal-year">
+                    {selectedPerson.birth_year < 0
+                      ? `${Math.abs(selectedPerson.birth_year)} a.C.`
+                      : `${selectedPerson.birth_year} d.C.`}
+                  </div>
                 )}
+
               </div>
+
               <div className="person-modal-right">
-                <h3 className="person-modal-title">{selectedPerson.name}</h3>
+
+                <h3 className="person-modal-title">
+                  {selectedPerson.name}
+                </h3>
+
                 {selectedPerson.biography ? (
-                  <p className="person-modal-bio">{selectedPerson.biography}</p>
+                  <p className="person-modal-bio">
+                    {selectedPerson.biography}
+                  </p>
                 ) : (
-                  <p className="person-modal-bio muted">Nessuna biografia disponibile.</p>
+                  <p className="person-modal-bio muted">
+                    Nessuna biografia disponibile.
+                  </p>
                 )}
 
                 <div className="person-modal-actions">
-                  <Link to={`/people/${selectedPerson.id}`} className="person-modal-view-btn" onClick={() => setSelectedPerson(null)}>
-                    {t("person.viewProfile", { defaultValue: 'Open full profile' })}
+                  <Link
+                    to={`/people/${selectedPerson.id}`}
+                    className="person-modal-view-btn"
+                    onClick={() => setSelectedPerson(null)}
+                  >
+                    {t("person.viewProfile", {
+                      defaultValue: "Open full profile",
+                    })}
                   </Link>
                 </div>
+
               </div>
             </div>
           </div>
         </div>
       )}
+
     </div>
   );
 }

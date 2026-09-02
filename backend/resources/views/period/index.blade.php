@@ -10,7 +10,7 @@
             <i class="bi bi-flag-fill me-2"></i> Periodi Storici
         </h1>
 
-        <a href="{{ route('periods.create') }}" class="btn btn-success btn-lg">
+        <a href="{{ route('periods.create') }}" class="btn btn-primary btn-lg">
             <i class="bi bi-plus-circle me-2"></i> Nuovo Periodo
         </a>
     </div>
@@ -22,7 +22,7 @@
             @if($periods->count() > 0)
 
             <table class="table table-dark table-hover align-middle mb-0">
-                <thead class="table-secondary text-dark">
+                <thead class="table-dark text-dark">
                     <tr>
                         <th>Nome</th>
                         <th>Inizio</th>

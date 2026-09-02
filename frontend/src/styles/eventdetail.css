@@ -17,20 +17,17 @@
   backdrop-filter: blur(6px);
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
   position: relative;
-}
 
-/* Layout: content + image panel */
-.event-box {
   display: flex;
   gap: 32px;
   align-items: flex-start;
 }
 
+/* Layout: content + image panel */
 .event-image-panel {
   flex: 0 0 40%;
   min-width: 260px;
   order: 0;
-  /* ensure left side */
 }
 
 .event-image-panel .event-img-wrap {
@@ -40,14 +37,21 @@
   border-radius: 10px;
 }
 
+/* EVENT IMAGE */
 .event-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: opacity 300ms ease, transform 350ms ease;
+
+  transition:
+    opacity 300ms ease,
+    transform 350ms ease;
+
   opacity: 0;
   transform: scale(1.02);
+
+  cursor: zoom-in;
 }
 
 .event-img.loaded {
@@ -55,12 +59,17 @@
   transform: scale(1);
 }
 
+.event-img:hover {
+  transform: scale(1.02);
+}
+
+/* CONTENT */
 .event-content {
   flex: 1 1 60%;
   order: 1;
-  /* ensure right side */
 }
 
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .event-box {
     flex-direction: column;
@@ -111,6 +120,86 @@
   color: #5a4632;
 }
 
+
+/* ================================
+   🔍 EVENT IMAGE LIGHTBOX
+   ================================ */
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: rgba(0, 0, 0, 0.9);
+
+  z-index: 9999;
+
+  cursor: zoom-out;
+
+  animation: lightboxFadeIn 0.2s ease;
+}
+
+.image-lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+
+  border-radius: 12px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+
+  animation: lightboxZoomIn 0.25s ease;
+
+  cursor: zoom-out;
+}
+
+/* Lightbox fade */
+@keyframes lightboxFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Lightbox image zoom */
+@keyframes lightboxZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Mobile lightbox */
+@media (max-width: 768px) {
+  .image-lightbox {
+    padding: 15px;
+  }
+
+  .image-lightbox-img {
+    max-width: 96vw;
+    max-height: 90vh;
+    border-radius: 8px;
+  }
+}
+
+
 /* ================================
    🌟 PERSONAGGI — PERGAMENA PREMIUM
    ================================ */
@@ -125,10 +214,16 @@
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
+
   font-family: "Cinzel", serif;
   color: #5a4632;
+
   position: relative;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
   cursor: pointer;
 }
 
@@ -172,65 +267,93 @@
 .person-name-btn {
   background: transparent;
   border: none;
+
   color: #4a3524;
+
   font-family: "Cinzel", serif;
   font-size: 1.2rem;
   font-weight: 700;
+
   cursor: pointer;
+
   padding: 0;
   margin: 0.1rem 0 0.2rem 0;
+
   text-align: left;
 }
 
-/* Modal used when clicking a person name */
+
+/* ================================
+   👤 PERSON MODAL
+   ================================ */
+
 .person-modal {
   position: fixed;
   inset: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   z-index: 1200;
 }
 
 .person-modal-backdrop {
   position: absolute;
   inset: 0;
+
   background: rgba(0, 0, 0, 0.45);
 }
 
 .person-modal-inner {
   position: relative;
+
   background: #fff;
+
   border-radius: 12px;
+
   padding: 18px;
+
   max-width: 760px;
   width: calc(100% - 40px);
+
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+
   z-index: 2;
 }
 
 .person-modal-close {
   position: absolute;
+
   top: 8px;
   right: 8px;
+
   background: transparent;
   border: none;
+
   font-size: 1.6rem;
+
   cursor: pointer;
 }
 
 .person-modal-grid {
   display: grid;
+
   grid-template-columns: 160px 1fr;
+
   gap: 18px;
+
   align-items: start;
 }
 
 .person-modal-avatar {
   width: 160px;
   height: 220px;
+
   object-fit: cover;
+
   border-radius: 8px;
+
   background: #f3f0eb;
 }
 
@@ -256,17 +379,33 @@
 
 .person-modal-view-btn {
   display: inline-block;
+
   background: #8b6f47;
   color: #fff;
+
   padding: 8px 12px;
+
   border-radius: 8px;
+
   text-decoration: none;
+
   font-weight: 700;
+
+  transition:
+    background 0.25s ease,
+    transform 0.2s ease;
 }
 
 .person-modal-view-btn:hover {
   background: #5a4632;
+
+  transform: translateY(-2px);
 }
+
+
+/* ================================
+   👤 PERSON DETAILS
+   ================================ */
 
 /* Nome */
 .person-name {
@@ -297,20 +436,55 @@
   line-height: 1.4;
 }
 
-/* Pulsante torna indietro */
+
+/* ================================
+   🔙 BACK BUTTON
+   ================================ */
+
 .back-btn {
   background: #8b6f47;
+
   color: #fff;
+
   border: none;
+
   padding: 10px 18px;
+
   border-radius: 8px;
+
   font-family: "Cinzel", serif;
-  transition: background 0.3s ease, transform 0.2s ease;
+
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
+
   display: inline-block;
+
   margin-top: 25px;
+
+  text-decoration: none;
 }
 
 .back-btn:hover {
   background: #5a4632;
+
   transform: translateY(-2px);
+
+  color: #fff;
+}
+
+
+/* ================================
+   📱 PERSON MODAL RESPONSIVE
+   ================================ */
+
+@media (max-width: 600px) {
+  .person-modal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .person-modal-avatar {
+    width: 100%;
+    height: 280px;
+  }
 }
