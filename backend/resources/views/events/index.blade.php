@@ -28,6 +28,7 @@
             <table class="table table-dark table-hover align-middle rounded-3 overflow-hidden">
                 <thead>
                     <tr class="text-light">
+                        <th>Immagine</th>
                         <th>Titolo</th>
                         <th>Periodo</th>
                         <th>Anno</th>
@@ -40,6 +41,14 @@
 
                     @foreach ($historicalEvents as $event)
                     <tr>
+                        <td class="fw-bold text-light">
+                            @if($event->image)
+                                <img src="{{ asset('storage/events/' . $event->image) }}"
+                                    class="img-fluid rounded-3 shadow"
+                                    style="width: 100px; height: 60px; object-fit: cover;"
+                                    alt="{{ $event->title }}">
+                            @endif
+                        </td>
                         <td class="fw-bold text-light">{{ $event->title }}</td>
 
                         <td class="text-light opacity-75">

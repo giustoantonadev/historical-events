@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('historical_event_id')->constrained()->onDelete('cascade');
             $table->foreignId('historical_person_id')->constrained('historical_people')->onDelete('cascade');
+            $table->unique(['historical_event_id', 'historical_person_id']);
             $table->timestamps();
         });
     }

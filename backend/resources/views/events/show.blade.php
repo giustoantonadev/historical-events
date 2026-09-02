@@ -15,75 +15,106 @@
     </div>
 
     {{-- CARD --}}
+    {{-- CARD --}}
     <div class="card bg-dark border-0 shadow-lg rounded-4 overflow-hidden">
-
-        {{-- IMMAGINE EVENTO --}}
-        @if($historicalEvent->image)
-            <img src="{{ asset('storage/' . $historicalEvent->image) }}"
-                 class="w-100"
-                 style="max-height: 350px; object-fit: cover;">
-        @endif
-
         <div class="card-body p-4">
 
-            {{-- PERIODO --}}
-            <div class="mb-3">
-                <h5 class="text-light mb-1">Periodo Storico</h5>
-                <span class="badge bg-primary fs-6">
-                    {{ $historicalEvent->period->name }}
-                </span>
-            </div>
+            <div class="row g-4">
 
-            {{-- ANNO --}}
-            <div class="mb-3">
-                <h5 class="text-light mb-1">Anno</h5>
-                <p class="text-light opacity-75 fs-5">{{ $historicalEvent->year }}</p>
-            </div>
+                {{-- IMMAGINE A SINISTRA --}}
+                <div class="col-md-4">
+                    @if($historicalEvent->image)
+                    <img src="{{ asset('storage/events/' . $historicalEvent->image) }}"
+                        class="img-fluid rounded-3 shadow"
+                        style="width: 100%; max-width: 300px; height: 200px; object-fit: cover;"
+                        alt="{{ $historicalEvent->title }}">
+                    @endif
+                </div>
 
-            {{-- DESCRIZIONE --}}
-            <div class="mb-4">
-                <h5 class="text-light mb-1">Descrizione</h5>
-                <p class="text-light opacity-75 fs-5">{{ $historicalEvent->description }}</p>
-            </div>
+                {{-- INFORMAZIONI A DESTRA --}}
+                <div class="col-md-8">
 
-            {{-- PERSONAGGI COLLEGATI --}}
-            <div class="mb-4">
-                <h5 class="text-light mb-2">Personaggi Coinvolti</h5>
+                    {{-- PERIODO --}}
+                    <div class="mb-3">
+                        <h5 class="text-light mb-2">Periodo Storico</h5>
 
-                @if($historicalEvent->historicalPeople->count() > 0)
-                    @foreach ($historicalEvent->historicalPeople as $person)
+                        <span class="badge bg-primary fs-6">
+                            {{ $historicalEvent->period->name }}
+                        </span>
+                    </div>
+
+                    {{-- ANNO --}}
+                    <div class="mb-3">
+                        <h5 class="text-light mb-1">Anno</h5>
+
+                        <p class="text-light opacity-75 fs-5 mb-0">
+                            {{ $historicalEvent->year }}
+                        </p>
+                    </div>
+
+                    {{-- DESCRIZIONE --}}
+                    <div class="mb-4">
+                        <h5 class="text-light mb-1">Descrizione</h5>
+
+                        <p class="text-light opacity-75 fs-5">
+                            {{ $historicalEvent->description }}
+                        </p>
+                    </div>
+
+                    {{-- PERSONAGGI --}}
+                    <div>
+                        <h5 class="text-light mb-2">Personaggi Coinvolti</h5>
+
+                        @if($historicalEvent->historicalPeople->count() > 0)
+
+                        @foreach ($historicalEvent->historicalPeople as $person)
                         <span class="badge bg-info text-dark fs-6 me-1 mb-2">
                             {{ $person->name }}
                         </span>
-                    @endforeach
-                @else
-                    <p class="text-light opacity-50">Nessun personaggio collegato.</p>
-                @endif
+                        @endforeach
+
+                        @else
+                        <p class="text-light opacity-50">
+                            Nessun personaggio collegato.
+                        </p>
+                        @endif
+                    </div>
+
+                </div>
             </div>
 
-            {{-- BOTTONI --}}
-            <div class="d-flex justify-content-between mt-4">
+            {{-- BOTTONI SOTTO --}}
+            <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top border-secondary">
 
-                <a href="{{ route('events.index') }}" class="btn btn-outline-light">
-                    <i class="bi bi-arrow-left me-1"></i> Torna agli Eventi
+                <a href="{{ route('events.index') }}"
+                    class="btn btn-outline-light">
+
+                    <i class="bi bi-arrow-left me-1"></i>
+                    Torna agli Eventi
                 </a>
 
                 <div>
                     <a href="{{ route('events.edit', $historicalEvent->id) }}"
-                       class="btn btn-warning me-2">
-                        <i class="bi bi-pencil me-1"></i> Modifica
+                        class="btn btn-warning me-2">
+
+                        <i class="bi bi-pencil me-1"></i>
+                        Modifica
                     </a>
 
                     <form action="{{ route('events.destroy', $historicalEvent->id) }}"
-                          method="POST"
-                          class="d-inline">
+                        method="POST"
+                        class="d-inline">
+
                         @csrf
                         @method('DELETE')
 
                         <button class="btn btn-danger"
-                                onclick="return confirm('Vuoi eliminare questo evento?')">
-                            <i class="bi bi-trash me-1"></i> Elimina
+                            onclick="return confirm('Vuoi eliminare questo evento?')">
+
+                            <i class="bi bi-trash me-1"></i>
+                            Elimina
                         </button>
+
                     </form>
                 </div>
 
