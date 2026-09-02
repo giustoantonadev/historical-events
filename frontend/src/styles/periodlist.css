@@ -1,85 +1,411 @@
-/* ================================
-   🌟 PERIOD LIST — PERGAMENA PREMIUM
-   ================================ */
-
-.periodlist-wrapper {
-  padding: 40px 0;
+.pe-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 70px 24px 90px;
 }
 
-.periodlist-title {
-  font-family: "Cinzel", serif;
-  font-size: 2.6rem;
+/* =========================
+   HERO
+========================= */
+
+.pe-hero {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.pe-hero-sub {
+  margin-bottom: 12px;
+  font-size: 0.82rem;
   font-weight: 700;
-  color: #5a4632;
-  text-align: center;
-  margin-bottom: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #9b7a4b;
 }
 
-.periodlist-subtitle {
-  font-family: "Cinzel", serif;
-  font-size: 1.2rem;
-  color: #8b6f47;
-  text-align: center;
-  margin-bottom: 40px;
+.pe-hero-title {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #23201c;
 }
 
-/* CARD */
+.pe-hero-evoke {
+  max-width: 620px;
+  margin: 22px auto 0;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: #746e66;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.pe-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
 .period-card {
-  background: rgba(255, 248, 230, 0.92);
-  border: 2px solid #d6c4a1;
-  border-radius: 14px;
-  padding: 25px;
-  font-family: "Cinzel", serif;
-  color: #5a4632;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  backdrop-filter: blur(6px);
   position: relative;
-  text-align: center;
-}
+  display: flex;
+  flex-direction: column;
 
-/* Cornice decorativa */
-.period-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px dashed #c2a878;
-  border-radius: 12px;
-  pointer-events: none;
+  min-height: 310px;
+  padding: 34px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(48, 42, 35, 0.1);
+  border-radius: 22px;
+
+  background: #f7f4ef;
+
+  box-shadow:
+    0 5px 20px rgba(40, 32, 25, 0.04);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .period-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+  transform: translateY(-7px);
+
+  box-shadow:
+    0 18px 45px rgba(40, 32, 25, 0.12);
+
+  border-color: rgba(155, 122, 75, 0.28);
 }
 
-/* Icona */
+
+/* linea decorativa superiore */
+
+.period-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 34px;
+  right: 34px;
+
+  height: 3px;
+
+  border-radius: 0 0 4px 4px;
+
+  background: #9b7a4b;
+}
+
+
+/* =========================
+   TESTATA CARD
+========================= */
+
+.period-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+
+/* =========================
+   ICONA
+========================= */
+
 .period-icon {
-  font-size: 2.6rem;
-  color: #8b6f47;
-  opacity: 0.85;
-  margin-bottom: 15px;
+  width: 58px;
+  height: 58px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(60, 50, 40, 0.08);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
 }
 
-/* Nome */
-.period-name {
+.period-card:hover .period-icon {
+  transform: scale(1.06) rotate(-2deg);
+  background: #ffffff;
+}
+
+.period-icon svg {
+  width: 30px;
+  height: 30px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =========================
+   META
+========================= */
+
+.period-meta {
+  min-width: 0;
+}
+
+.period-era {
+  margin-bottom: 5px;
+
+  font-size: 0.72rem;
   font-weight: 700;
-  font-size: 1.4rem;
-  margin-bottom: 20px;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  opacity: 0.55;
 }
 
-/* Pulsante */
-.period-btn {
-  background: #8b6f47;
-  color: #fff;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-family: "Cinzel", serif;
-  transition: background 0.3s ease, transform 0.2s ease;
-  display: inline-block;
+.period-name {
+  margin: 0;
+
+  font-size: 1.65rem;
+  font-weight: 650;
+  line-height: 1.15;
+
+  color: #25211d;
 }
 
-.period-btn:hover {
-  background: #5a4632;
-  transform: translateY(-2px);
+
+/* =========================
+   DESCRIZIONE
+========================= */
+
+.period-desc {
+  margin: 0 0 30px;
+
+  font-size: 0.98rem;
+  line-height: 1.75;
+
+  color: #655f58;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.card-actions {
+  margin-top: auto;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 11px 18px;
+
+  border: 1px solid rgba(80, 68, 55, 0.18);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.6);
+
+  color: #39332c;
+
+  font-size: 0.9rem;
+  font-weight: 650;
+
+  text-decoration: none;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.cta:hover {
+  transform: translateX(3px);
+
+  background: #29241f;
+  color: #ffffff;
+
+  border-color: #29241f;
+}
+
+
+/* =========================
+   COLORI DELLE EPOCHE
+========================= */
+
+.period-card--antichita {
+  background:
+    linear-gradient(
+      145deg,
+      #f6eee0,
+      #fbf8f2
+    );
+
+  color: #9b6532;
+}
+
+.period-card--antichita::before {
+  background: #b2763d;
+}
+
+
+.period-card--medioevo {
+  background:
+    linear-gradient(
+      145deg,
+      #e9eee8,
+      #f7f8f4
+    );
+
+  color: #526752;
+}
+
+.period-card--medioevo::before {
+  background: #60765d;
+}
+
+
+.period-card--rinascimento {
+  background:
+    linear-gradient(
+      145deg,
+      #f3e9e2,
+      #fbf7f4
+    );
+
+  color: #9b5f4c;
+}
+
+.period-card--rinascimento::before {
+  background: #ad6953;
+}
+
+
+.period-card--eta-moderna {
+  background:
+    linear-gradient(
+      145deg,
+      #e8edf1,
+      #f7f9fa
+    );
+
+  color: #527086;
+}
+
+.period-card--eta-moderna::before {
+  background: #5c7f97;
+}
+
+
+.period-card--eta-contemporanea {
+  background:
+    linear-gradient(
+      145deg,
+      #ece9f0,
+      #f8f7fa
+    );
+
+  color: #6e6480;
+}
+
+.period-card--eta-contemporanea::before {
+  background: #796d8f;
+}
+
+
+/* =========================
+   ULTIMA CARD
+========================= */
+
+/*
+   Avendo 5 periodi, facciamo occupare
+   all'ultima card tutta la larghezza.
+*/
+
+.period-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+  .pe-container {
+    padding: 45px 18px 65px;
+  }
+
+  .pe-hero {
+    margin-bottom: 40px;
+  }
+
+  .pe-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .period-card {
+    min-height: auto;
+    padding: 27px;
+  }
+
+  .period-card:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  .period-card::before {
+    left: 27px;
+    right: 27px;
+  }
+
+  .period-name {
+    font-size: 1.4rem;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .pe-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .period-head {
+    align-items: flex-start;
+  }
+
+  .period-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+  }
+
+  .period-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
 }

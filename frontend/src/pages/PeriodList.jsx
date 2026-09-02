@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import "../styles/periodi-storici.css";
+import "../styles/periodlist.css";
 import { API_BASE } from "../api/api";
 
 const FALLBACK_PERIODS = [
@@ -122,8 +122,16 @@ export default function PeriodList() {
               </div>
 
               <div className="period-meta">
-                <div className="period-era">{p.name}</div>
-                <h2 id={`${p.id}-title`} className="period-name">{p.name}</h2>
+                <div className="period-era">
+                  {t('periods.periodLabel', 'Aetates historicae')}
+                </div>
+
+                <h2
+                  id={`${p.id}-title`}
+                  className="period-name"
+                >
+                  {p.name}
+                </h2>
               </div>
             </div>
 
@@ -136,14 +144,6 @@ export default function PeriodList() {
         ))}
       </section>
 
-      <nav className="pe-timeline" aria-label={t('periods.timelineAria', 'Timeline dei periodi storici')}>
-        {periods.map(p => (
-          <div key={p.id} className="timeline-point" aria-hidden="true">
-            <div className="timeline-dot" />
-            <div className="timeline-label">{p.name}</div>
-          </div>
-        ))}
-      </nav>
     </div>
   );
 }

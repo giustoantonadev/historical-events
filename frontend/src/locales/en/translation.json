@@ -28,6 +28,7 @@
   "event": {
     "year": "Year",
     "details": "Details →",
+    "discover": "Discover the event →",
     "people": "People involved",
     "noPeople": "No characters recorded.",
     "relatedEvents": "Related events",
@@ -87,7 +88,12 @@
     "subtitle": "The figures who influenced events and shaped history."
   },
   "periods": {
-    "subtitle": "The great eras that shaped the history of humanity."
+    "subtitle": "The great eras that shaped the history of humanity.",
+    "museumLabel": "Museum section · Chronological journey",
+    "evoke": "A visual journey through the gestures, forms and transformations of time.",
+    "listLabel": "List of historical periods",
+    "periodLabel": "Historical period",
+    "detailsAria": "Details"
   },
   "about": {
     "title": "About",
