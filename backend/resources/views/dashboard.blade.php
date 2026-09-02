@@ -17,6 +17,22 @@
     {{-- KPI CARDS --}}
     <div class="row g-4 mb-5">
 
+        {{-- Eventi --}}
+        <div class="col-md-4">
+            <div class="p-4 rounded-4 shadow-lg"
+                style="background: linear-gradient(135deg, #1f1f1f, #292929); border: 1px solid rgba(255,255,255,0.06);">
+                <h4 class="text-light fw-bold mb-2">
+                    <i class="bi bi-flag me-2"></i> Eventi Storici
+                </h4>
+                <p class="text-light opacity-75 mb-3">
+                    Gestisci eventi e collegamenti.
+                </p>
+                <a href="{{ url('events') }}" class="btn btn-primary w-100">
+                    Vai agli Eventi
+                </a>
+            </div>
+        </div>
+
         {{-- Periodi --}}
         <div class="col-md-4">
             <div class="p-4 rounded-4 shadow-lg"
@@ -49,21 +65,6 @@
             </div>
         </div>
 
-        {{-- Eventi --}}
-        <div class="col-md-4">
-            <div class="p-4 rounded-4 shadow-lg"
-                style="background: linear-gradient(135deg, #1f1f1f, #292929); border: 1px solid rgba(255,255,255,0.06);">
-                <h4 class="text-light fw-bold mb-2">
-                    <i class="bi bi-flag me-2"></i> Eventi Storici
-                </h4>
-                <p class="text-light opacity-75 mb-3">
-                    Gestisci eventi e collegamenti.
-                </p>
-                <a href="{{ url('events') }}" class="btn btn-primary w-100">
-                    Vai agli Eventi
-                </a>
-            </div>
-        </div>
 
     </div>
 

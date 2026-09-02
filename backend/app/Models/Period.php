@@ -20,9 +20,6 @@ class Period extends Model
         'description_fr',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\HistoricalEvent, $this>
-     */
     public function events(): HasMany
     {
         return $this->hasMany(HistoricalEvent::class)->orderBy('year', 'asc');

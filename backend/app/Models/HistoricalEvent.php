@@ -6,17 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-/**
- * App\Models\HistoricalEvent
- *
- * @property int $id
- * @property string $title
- * @property int $year
- * @property string|null $image
- * @property \App\Models\Period|null $period
- * @property \Illuminate\Database\Eloquent\Collection<int, \App\Models\HistoricalPerson> $historicalPeople
- */
-
 class HistoricalEvent extends Model
 {
     protected $fillable = [
@@ -33,17 +22,11 @@ class HistoricalEvent extends Model
         'description_fr'
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Period, $this>
-     */
     public function period(): BelongsTo
     {
         return $this->belongsTo(Period::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\HistoricalPerson, $this>
-     */
     public function historicalPeople(): BelongsToMany
     {
         return $this->belongsToMany(HistoricalPerson::class, 'event_person', 'historical_event_id', 'historical_person_id');
