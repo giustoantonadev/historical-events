@@ -25,6 +25,10 @@
             @endif
 
             @if($m->attachment)
+            @if(in_array(pathinfo($m->attachment, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif']))
+            <p><strong>Preview:</strong></p>
+            <img src="{{ asset('storage/' . $m->attachment) }}" alt="Attachment preview" class="img-fluid mb-2">
+            @endif
             <p><strong>Attachment:</strong> <a href="{{ asset('storage/' . $m->attachment) }}" target="_blank">Download</a></p>
             @endif
 
