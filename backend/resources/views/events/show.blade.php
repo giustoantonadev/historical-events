@@ -24,7 +24,7 @@
                 {{-- IMMAGINE A SINISTRA --}}
                 <div class="col-md-4">
                     @if($historicalEvent->image)
-                    <img src="{{ asset('storage/events/' . $historicalEvent->image) }}"
+                    <img src="{{ asset('storage/' . $historicalEvent->image) }}"
                         class="img-fluid rounded-3 shadow"
                         style="width: 100%; max-width: 300px; height: 200px; object-fit: cover;"
                         alt="{{ $historicalEvent->title }}">

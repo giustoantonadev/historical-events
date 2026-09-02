@@ -43,7 +43,7 @@
                     <tr>
                         <td class="fw-bold text-light">
                             @if($event->image)
-                                <img src="{{ asset('storage/events/' . $event->image) }}"
+                                <img src="{{ asset('storage/' . $event->image) }}"
                                     class="img-fluid rounded-3 shadow"
                                     style="width: 100px; height: 60px; object-fit: cover;"
                                     alt="{{ $event->title }}">

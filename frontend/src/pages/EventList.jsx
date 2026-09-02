@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { API_BASE } from "../api/api";
 import "../styles/eventlist.css";
 import EventCard from "../components/EventCard";
 
@@ -14,7 +15,6 @@ export default function EventList() {
   const lang = (i18n.language || 'it').split('-')[0];
 
   useEffect(() => {
-    const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
     const url = `${API_BASE}/api/events?lang=${lang}`;
     const controller = new AbortController();
 

@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { API_BASE } from "../api/api";
 import "../styles/eventCard.css";
 
 function getIconForEvent(title) {
   const t = title.toLowerCase();
-  if (t.includes("battaglia")) return "⚔️";
-  if (t.includes("fondazione")) return "🏛️";
-  if (t.includes("regno")) return "👑";
-  if (t.includes("campagne")) return "⚔️";
-  if (t.includes("assassinio")) return "🗡️";
+  if (t.includes("battaglia") || t.includes("battle") || t.includes("bataille")) return "⚔️";
+  if (t.includes("campagne") || t.includes("campaign") || t.includes("campagne")) return "⚔️";
+  if (t.includes("guerra") || t.includes("war") || t.includes("guerre")) return "⚔️";
+  if (t.includes("assassinio") || t.includes("assassination") || t.includes("assassinat")) return "🗡️";
+  if (t.includes("indipendenza") || t.includes("independence") || t.includes("indépendance")) return "🗽";
+  if (t.includes("fondazione") || t.includes("founding") || t.includes("fondation")) return "🏛️";
+  if (t.includes("regno") || t.includes("reign") || t.includes("regne")) return "👑";
   return "📜";
 }
 
@@ -20,7 +23,7 @@ export default function EventCard({ event }) {
     if (path.startsWith('http')) return path;
     // ensure images stored under storage/events are referenced correctly
     const normalized = path.startsWith('events/') ? path : `events/${path}`;
-    return `http://localhost:8000/storage/${normalized}`;
+    return `${API_BASE}/storage/${normalized}`;
   };
   const imgSrc = resolveStorage(event.thumbnail) || resolveStorage(event.image) || `/images/events/placeholder.svg`;
   const [loaded, setLoaded] = useState(false);

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../styles/eventdetail.css";
+import { API_BASE } from "../api/api";
 
 export default function EventDetail() {
   const { id } = useParams();
@@ -13,7 +14,7 @@ export default function EventDetail() {
   const lang = (i18n.language || 'it').split('-')[0];
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/events/${id}?lang=${lang}`)
+    fetch(`${API_BASE}/api/events/${id}?lang=${lang}`)
       .then(res => res.json())
       .then(data => setEvent(data));
   }, [id, lang]);
@@ -29,7 +30,7 @@ export default function EventDetail() {
         <aside className="event-image-panel">
           <div className="event-img-wrap">
             <img
-              src={event.image ? `http://localhost:8000/storage/${event.image}` : `/images/events/placeholder.svg`}
+              src={event.image ? `${API_BASE}/storage/${event.image}` : `/images/events/placeholder.svg`}
               alt={event.title}
               className={`event-img ${imgLoaded ? 'loaded' : 'loading'}`}
               onLoad={() => setImgLoaded(true)}
@@ -89,7 +90,7 @@ export default function EventDetail() {
             <div className="person-modal-grid">
               <div className="person-modal-left">
                 {selectedPerson.image ? (
-                  <img src={`http://localhost:8000/storage/${selectedPerson.image}`} alt={selectedPerson.name} className="person-modal-avatar" />
+                  <img src={`${API_BASE}/storage/${selectedPerson.image}`} alt={selectedPerson.name} className="person-modal-avatar" />
                 ) : (
                   <div className="person-modal-avatar placeholder" />
                 )}

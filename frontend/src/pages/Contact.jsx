@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { API_BASE } from "../api/api";
 import "../styles/contact.css";
 
 export default function Contact() {
@@ -14,7 +15,7 @@ export default function Contact() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch('http://localhost:8000/api/contact', {
+        fetch(`${API_BASE}/api/contact`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(form)
